@@ -1,0 +1,35 @@
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Gate output — tools/gates.mjs --shot writes screenshots
+*.png
+!assets/img/*.png
+out.png
+shot*.png
+
+# Logs and scratch
+*.log
+npm-debug.log*
+.tmp/
+tmp/
+
+# Anything npx pulls in (Playwright, Lighthouse). The site itself has no
+# dependencies and no build step; nothing here is ever required to serve it.
+node_modules/
+package-lock.json
