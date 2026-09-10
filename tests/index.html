@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StatLab tests</title>
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    /* Runner-only styles; colors still come from tokens. */
+    /* Status colour is a marker bar only; the words PASS/FAIL carry the meaning
+       (--ok on --bg is 2.8:1, too low for text — D-016). */
+    #summary {
+      font-size: var(--fs-2); font-weight: 600; margin-bottom: var(--space-2);
+      padding-left: var(--space-1); border-left: var(--border-strong) solid var(--line);
+    }
+    #summary.pass { border-color: var(--ok); }
+    #summary.fail { border-color: var(--warn); }
+    #results { list-style: none; padding: 0; margin: 0; }
+    #results li {
+      padding: var(--space-1);
+      border-top: var(--border) solid var(--line);
+      border-left: var(--border-strong) solid var(--line);
+      font-family: var(--font-mono);
+      font-size: var(--fs-0);
+    }
+    #results li.pass { border-left-color: var(--ok); }
+    #results li.fail { border-left-color: var(--warn); }
+    #results li::before { display: inline-block; width: 2.5rem; font-weight: 600; color: var(--ink); }
+    #results li.pass::before { content: "PASS"; }
+    #results li.fail::before { content: "FAIL"; }
+    #results .detail { display: block; color: var(--ink-soft); margin-left: 2.5rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>StatLab numeric tests</h1>
+    <p class="muted">Every stats.js function is checked here against independently computed reference values (HANDBOOK §7.1). Reload to re-run.</p>
+    <p id="summary" role="status" aria-live="polite">Running…</p>
+    <ul id="results"></ul>
+  </main>
+
+  <!-- Harness. Classic (non-module) script so the page runs from file:// in every browser. -->
+  <script>
+    (function () {
+      "use strict";
+      var cases = [];
+
+      /** Register a test. fn throws (via the assert helpers) to fail. */
+      function test(name, fn) { cases.push({ name: name, fn: fn }); }
+
+      var assert = {
+        ok: function (cond, msg) {
+          if (!cond) throw new Error(msg || "expected truthy");
+        },
+        equal: function (actual, expected, msg) {
+          if (actual !== expected) {
+            throw new Error((msg ? msg + ": " : "") + "expected " + expected + ", got " + actual);
+          }
+        },
+        /** |actual − expected| ≤ tol. Default tol 1e-9 for closed forms (HANDBOOK §7.1). */
+        close: function (actual, expected, tol, msg) {
+          if (tol === undefined) tol = 1e-9;
+          var ok = typeof actual === "number" && isFinite(actual) && Math.abs(actual - expected) <= tol;
+          if (!ok) {
+            throw new Error((msg ? msg + ": " : "") + "expected " + expected + " ± " + tol + ", got " + actual);
+          }
+        }
+      };
+
+      function run() {
+        var list = document.getElementById("results");
+        var summary = document.getElementById("summary");
+        var passed = 0;
+        cases.forEach(function (c) {
+          var li = document.createElement("li");
+          try {
+            c.fn(assert);
+            li.className = "pass";
+            li.textContent = c.name;
+            passed += 1;
+          } catch (err) {
+            li.className = "fail";
+            li.textContent = c.name;
+            var detail = document.createElement("span");
+            detail.className = "detail";
+            detail.textContent = err && err.message ? err.message : String(err);
+            li.appendChild(detail);
+          }
+          list.appendChild(li);
+        });
+        var allPass = passed === cases.length;
+        summary.textContent = passed + " / " + cases.length + " passed";
+        summary.className = allPass ? "pass" : "fail";
+        document.title = (allPass ? "✓ " : "✗ ") + summary.textContent + " — StatLab tests";
+      }
+
+      window.StatLabTests = { test: test, assert: assert, run: run };
+      window.addEventListener("DOMContentLoaded", run);
+    })();
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      StatLabTests.test("harness: 1 + 1 equals 2", function (assert) {
+        assert.equal(1 + 1, 2);
+      });
+    });
+  </script>
+
+  <!-- Libraries under test, then their test cases (HANDBOOK Amendment H1 load order). -->
+  <script defer src="../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../assets/js/stats.js"></script>
+  <script defer src="../assets/js/ui.js"></script>
+  <script defer src="../assets/js/chapters.js"></script>
+  <script defer src="../assets/js/site.js"></script>
+  <script defer src="stats.test.js"></script>
+  <script defer src="ui.test.js"></script>
+  <script defer src="site.test.js"></script>
+  <script defer src="../assets/js/demos/probability-topics__coin-flip.js"></script>
+  <script defer src="../assets/js/demos/probability-topics__events.js"></script>
+  <script defer src="../assets/js/demos/probability-topics__conditional.js"></script>
+  <script defer src="../assets/js/demos/sampling-and-data__population-sample.js"></script>
+  <script defer src="../assets/js/demos/sampling-and-data__sampling-methods.js"></script>
+  <script defer src="../assets/js/demos/sampling-and-data__sample-variation.js"></script>
+  <script defer src="../assets/js/demos/descriptive-statistics__histogram.js"></script>
+  <script defer src="../assets/js/demos/descriptive-statistics__center.js"></script>
+  <script defer src="../assets/js/demos/descriptive-statistics__boxplot-skew.js"></script>
+  <script defer src="../assets/js/demos/descriptive-statistics__spread.js"></script>
+  <script defer src="../assets/js/demos/discrete-random-variables__expectation.js"></script>
+  <script defer src="../assets/js/demos/discrete-random-variables__rv-variance.js"></script>
+  <script defer src="../assets/js/demos/discrete-random-variables__discrete-distributions.js"></script>
+  <script defer src="../assets/js/demos/continuous-random-variables__density-area.js"></script>
+  <script defer src="../assets/js/demos/continuous-random-variables__exponential.js"></script>
+  <script defer src="../assets/js/demos/normal-distribution__z-scores.js"></script>
+  <script defer src="../assets/js/demos/normal-distribution__normal-areas.js"></script>
+  <script defer src="../assets/js/demos/central-limit-theorem__clt-means.js"></script>
+  <script defer src="../assets/js/demos/central-limit-theorem__standard-error.js"></script>
+  <script defer src="../assets/js/demos/central-limit-theorem__clt-sums.js"></script>
+  <script defer src="../assets/js/demos/confidence-intervals__ci-meaning.js"></script>
+  <script defer src="../assets/js/demos/confidence-intervals__t-distribution.js"></script>
+  <script defer src="../assets/js/demos/confidence-intervals__proportion-ci.js"></script>
+  <script defer src="../assets/js/demos/hypothesis-testing__error-types.js"></script>
+  <script defer src="../assets/js/demos/hypothesis-testing__p-value.js"></script>
+  <script defer src="../assets/js/demos/hypothesis-testing__full-test.js"></script>
+  <script defer src="../assets/js/demos/two-sample-tests__two-means.js"></script>
+  <script defer src="../assets/js/demos/two-sample-tests__two-proportions.js"></script>
+  <script defer src="../assets/js/demos/two-sample-tests__paired.js"></script>
+  <script defer src="../assets/js/demos/chi-square__goodness-of-fit.js"></script>
+  <script defer src="../assets/js/demos/chi-square__independence.js"></script>
+  <script defer src="../assets/js/demos/linear-regression__least-squares.js"></script>
+  <script defer src="../assets/js/demos/linear-regression__correlation.js"></script>
+  <script defer src="../assets/js/demos/linear-regression__line-estimate.js"></script>
+  <script defer src="../assets/js/demos/linear-regression__prediction-outliers.js"></script>
+  <script defer src="../assets/js/demos/anova__anova-idea.js"></script>
+  <script defer src="../assets/js/demos/anova__f-distribution.js"></script>
+  <script defer src="../assets/js/demos/counting__multiplication-rule.js"></script>
+  <script defer src="../assets/js/demos/counting__permutations-combinations.js"></script>
+  <script defer src="../assets/js/demos/bayesian-inference__bayes-theorem.js"></script>
+  <script defer src="../assets/js/demos/bayesian-inference__likelihood.js"></script>
+  <script defer src="../assets/js/demos/bayesian-inference__prior-posterior.js"></script>
+  <script defer src="../assets/js/demos/resampling__bootstrap.js"></script>
+  <script defer src="../assets/js/demos/resampling__permutation-test.js"></script>
+  <script defer src="../assets/js/demos/beyond-one-variable__simpsons-paradox.js"></script>
+  <script defer src="../assets/js/demos/beyond-one-variable__two-predictors.js"></script>
+  <script defer src="demos.test.js"></script>
+</body>
+</html>

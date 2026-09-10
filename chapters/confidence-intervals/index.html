@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 8 · Confidence Intervals — StatLab</title>
+  <meta name="description" content="What a 95% interval promises, and how to build one for a mean or a proportion.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="confidence-intervals" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 8 · OpenStax Ch 8</p>
+      <h1>Confidence Intervals</h1>
+      <p class="chapter__blurb">What a 95% interval promises, and how to build one for a mean or a proportion.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">8.1 What “95% confident” means</a></li>
+          <li><a href="#section-2">8.2 The t distribution</a></li>
+          <li><a href="#section-3">8.3 Intervals for proportions</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">8.1 What “95% confident” means</h2>
+        <p>A sample mean is a <strong>point estimate</strong> of \(\mu\), and it is almost never exactly right. A <strong>confidence interval</strong> wraps it in a margin that says how far off it could reasonably be. When \(\sigma\) is known, the interval is</p>
+        <p>\[\bar{x} \pm z^{*}\,\frac{\sigma}{\sqrt{n}},\]</p>
+        <p>where \(z^{*}\) cuts off the chosen tail area, so \(z^{*} = 1.96\) for 95 %. The <strong>confidence level</strong> is a promise about the method, not about one interval. Draw fifty samples. Each interval either contains \(\mu\) or it does not, and no interval knows which. The orange ones missed. In the long run about 95 % of them capture \(\mu\). Raise the level and the intervals widen. Raise \(n\) and they shrink. Confidence is bought with width or with data.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.1.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="confidence-intervals__ci-meaning"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">8.2 The t distribution</h2>
+        <p>In practice \(\sigma\) is unknown, so we estimate it with the sample standard deviation \(s\). That estimate is itself noisy, especially for small samples, and the noise costs certainty. William Gosset worked out the price in 1908. Replace the normal with the <strong>t distribution</strong>, whose <strong>degrees of freedom</strong> \(df = n - 1\) set how heavy its tails are. The interval becomes \(\bar{x} \pm t^{*}\, s/\sqrt{n}\).</p>
+        <p>With \(df = 4\) the shaded tails are far fatter than the normal's, and \(t^{*}\) is 2.78 instead of 1.96. Slide \(df\) up and the t curve melts into the normal. By 30 the difference is small. The lower panel takes one real sample and builds both intervals. The t-interval is usually wider. That width is honest, because it admits we had to guess \(\sigma\).</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="confidence-intervals__t-distribution"></div>
+    </section>
+
+    <section class="section" id="section-3" aria-labelledby="section-3-title">
+      <div class="section__text">
+        <h2 id="section-3-title">8.3 Intervals for proportions</h2>
+        <p>Polls estimate a <strong>proportion</strong>, the share \(p\) of voters who support something. Ask \(n\) voters, count \(x\) supporters, and the <strong>sample proportion</strong> is \(\hat{p} = x/n\). Because a count of successes is binomial and nearly normal for large \(n\), the interval has the familiar shape,</p>
+        <p>\[\hat{p} \pm z^{*}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.\]</p>
+        <p>Poll a hundred voters over and over. The intervals wobble around the true \(p\), and about 95 % of them capture it, exactly as in 8.1. Now drop \(n\) to 10 and push \(p\) toward 0.05. The capture rate falls short of the promise, because the normal approximation needs both \(n p\) and \(n(1-p)\) to be at least 5. Real polls quote a “margin of error” of about three points, which is this formula with \(n \approx 1000\).</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.3.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="confidence-intervals__proportion-ci"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../central-limit-theorem/index.html">← 7. The Central Limit Theorem</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../hypothesis-testing/index.html">9. Hypothesis Testing (One Sample) →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/confidence-intervals__ci-meaning.js"></script>
+  <script defer src="../../assets/js/demos/confidence-intervals__t-distribution.js"></script>
+  <script defer src="../../assets/js/demos/confidence-intervals__proportion-ci.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initCiMeaning(document.querySelector('[data-demo="confidence-intervals__ci-meaning"]'));
+      demos.initTDistribution(document.querySelector('[data-demo="confidence-intervals__t-distribution"]'));
+      demos.initProportionCi(document.querySelector('[data-demo="confidence-intervals__proportion-ci"]'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 17 · Beyond One Variable — StatLab</title>
+  <meta name="description" content="How a third variable can reverse a conclusion, and what a coefficient means with two predictors.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="beyond-one-variable" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 17 · Advanced Concepts</p>
+      <h1>Beyond One Variable</h1>
+      <p class="chapter__blurb">How a third variable can reverse a conclusion, and what a coefficient means with two predictors.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">17.1 Simpson’s paradox</a></li>
+          <li><a href="#section-2">17.2 Two predictors</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">17.1 Simpson’s paradox</h2>
+        <p>Every group in the data can slope one way while the pooled data slope the other. That is <strong>Simpson’s paradox</strong>, and nothing about it is a trick of arithmetic. Here the group decides two things at once. It sets where a point sits along \(x\), and how high its cloud sits in \(y\). Push the clouds apart and the pooled line has to run between their centres, which is downhill. Every point inside a cloud still trends uphill.</p>
+        <p>Press “Ignore the groups” and the colours vanish along with the information. The pooled line was always there. What changes is whether you can see the reason it lies. A <strong>lurking variable</strong> like this cannot be found in the numbers alone. You have to know it was recorded, and think to condition on it.</p>
+        <p class="muted">Reading: this section is beyond the OpenStax text. See any discussion of Simpson’s paradox and confounding.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="beyond-one-variable__simpsons-paradox"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">17.2 Two predictors</h2>
+        <p>Add a second predictor and the first one’s coefficient changes meaning. Fitting</p>
+        <p>\[\hat{y} = b_0 + b_1 x_1 + b_2 x_2\]</p>
+        <p>makes \(b_1\) the effect of \(x_1\) <em>holding \(x_2\) fixed</em>, which is a different quantity from the slope \(x_1\) gets on its own. When the two predictors move together, \(x_1\) fitted alone is credited with \(x_2\)’s effect as well as its own. Set the true \(\beta_1\) negative and \(\beta_2\) positive, then turn the correlation up. The lone slope comes out positive while the two-predictor \(b_1\) recovers the truth. Neither answer is a mistake. They answer different questions, and only one of them was asked.</p>
+        <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to multiple regression.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="beyond-one-variable__two-predictors"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../linear-regression/index.html">← Back to the trail: 12. Linear Regression and Correlation</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../../index.html">All chapters →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/beyond-one-variable__simpsons-paradox.js"></script>
+  <script defer src="../../assets/js/demos/beyond-one-variable__two-predictors.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initSimpsonsParadox(document.querySelector('[data-demo="beyond-one-variable__simpsons-paradox"]'));
+      demos.initTwoPredictors(document.querySelector('[data-demo="beyond-one-variable__two-predictors"]'));
+    });
+  </script>
+</body>
+</html>

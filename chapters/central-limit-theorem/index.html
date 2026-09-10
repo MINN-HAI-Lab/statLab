@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 7 · The Central Limit Theorem — StatLab</title>
+  <meta name="description" content="Why averages of almost anything look normal, and how their spread shrinks with n.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="central-limit-theorem" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 7 · OpenStax Ch 7</p>
+      <h1>The Central Limit Theorem</h1>
+      <p class="chapter__blurb">Why averages of almost anything look normal, and how their spread shrinks with n.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">7.1 CLT for sample means</a></li>
+          <li><a href="#section-2">7.2 The standard error</a></li>
+          <li><a href="#section-3">7.3 CLT for sums</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">7.1 CLT for sample means</h2>
+        <p>Pick an ugly parent distribution. Skewed, two-humped and U-shaped all work. Draw a sample of \(n\) values from it and compute their mean. Do it again, and again. The <strong>central limit theorem</strong> says the pile of sample means turns into a normal curve as \(n\) grows. The shape of the parent does not matter. Its centre is the parent mean \(\mu\), and its spread is \(\sigma/\sqrt{n}\).<sup>1</sup></p>
+        <p>Start with \(n = 1\), where the pile of “means” is just the parent again. Slide \(n\) to 5, then 30, and keep drawing. The orange curve is not fitted to the data. It is the theorem's prediction, drawn before a single sample is taken. Two humps, a long tail, a U shape. All melt into the same bell. That is why averages of almost anything are normal.</p>
+        <p class="muted"><sup>1</sup> The SD of sample means shown is the sample standard deviation, dividing by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Section 7.1.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-means"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">7.2 The standard error</h2>
+        <p>How much does a sample mean wander? The <strong>standard error</strong> of the mean is the standard deviation of the sampling distribution,</p>
+        <p>\[\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}},\]</p>
+        <p>so it shrinks with the <em>square root</em> of the sample size. Four times as much data buys only half the spread, and a hundred times as much buys a tenth. Lock a parent and press “Sweep all n”. Each dot is the standard deviation of two thousand simulated sample means at one value of \(n\), and the curve is \(\sigma/\sqrt{n}\). The dots sit on the curve for every parent, because the formula does not care about the shape, only about \(\sigma\). The lower chart shows the pile of means at the chosen \(n\) tightening around \(\mu\).</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 7.1, 7.3.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="central-limit-theorem__standard-error"></div>
+    </section>
+
+    <section class="section" id="section-3" aria-labelledby="section-3-title">
+      <div class="section__text">
+        <h2 id="section-3-title">7.3 CLT for sums</h2>
+        <p>Adding instead of averaging changes nothing about the shape. The <strong>sum</strong> of \(n\) draws is \(n\) times their mean. So it too becomes normal as \(n\) grows, with</p>
+        <p>\[\text{mean} = n\mu, \qquad \text{SD} = \sigma\sqrt{n}.\]</p>
+        <p>The sum's spread <em>grows</em> with \(n\), while the mean's spread shrinks, and both facts come from the same \(\sqrt{n}\). Roll ten dice and add them up, many times. Single rolls are flat from 1 to 6, yet the totals pile into a bell around 35. Slide \(n\) up and the axis widens to follow \(n\mu \pm 5\sigma\sqrt{n}\), but the bell keeps its shape. This is the theorem behind why measurement errors, which are sums of many small nudges, are so often normal.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 7.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-sums"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../normal-distribution/index.html">← 6. The Normal Distribution</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../confidence-intervals/index.html">8. Confidence Intervals →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/central-limit-theorem__clt-means.js"></script>
+  <script defer src="../../assets/js/demos/central-limit-theorem__standard-error.js"></script>
+  <script defer src="../../assets/js/demos/central-limit-theorem__clt-sums.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initCltMeans(document.querySelector('[data-demo="central-limit-theorem__clt-means"]'));
+      demos.initStandardError(document.querySelector('[data-demo="central-limit-theorem__standard-error"]'));
+      demos.initCltSums(document.querySelector('[data-demo="central-limit-theorem__clt-sums"]'));
+    });
+  </script>
+</body>
+</html>

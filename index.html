@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>StatLab</title>
+  <meta name="description" content="An interactive, visual introduction to probability and statistics for undergraduates.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="landing" data-root="">
+    <section class="hero">
+      <h1>StatLab</h1>
+      <p class="hero__lede">An interactive, visual introduction to probability and statistics. Drag, click, and sample. The mathematics responds in real time.</p>
+      <p>Each chapter pairs short explanations with a demo you can play with. The chapters follow the free OpenStax textbook, so you can read a section there and then come here to see it move. No account, no tracking, nothing to install.</p>
+    </section>
+    <div id="chapters" aria-label="Chapters">
+      <h2>Core Concepts</h2>
+      <p class="muted">Thirteen chapters in the order they build on each other. Advanced Concepts branch off the chapter they depend on.</p>
+      <ol class="journey">
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/sampling-and-data/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">1</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 1 · Core</span>
+              <span class="node__title">Sampling and Data</span>
+              <span class="node__blurb">How we get data, and why the way we sample decides what we can conclude.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/descriptive-statistics/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">2</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 2 · Core</span>
+              <span class="node__title">Descriptive Statistics</span>
+              <span class="node__blurb">Pictures and numbers that summarize the shape, center, and spread of a data set.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/probability-topics/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">3</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 3 · Core</span>
+              <span class="node__title">Probability Topics</span>
+              <span class="node__blurb">Probability as long-run frequency, and the rules for combining events.</span>
+            </span>
+          </a>
+          <ul class="journey__branches" aria-label="Advanced Concepts that branch off Probability Topics">
+            <li class="journey__branch">
+              <a class="node node--advanced" href="chapters/counting/">
+                <span class="node__marker" aria-hidden="true"><span class="node__marker-n">14</span></span>
+                <span class="node__body">
+                  <span class="node__kicker">Chapter 14 · Advanced</span>
+                  <span class="node__title">Counting</span>
+                  <span class="node__blurb">Multiplying choices, and telling permutations from combinations.</span>
+                </span>
+              </a>
+            </li>
+            <li class="journey__branch">
+              <a class="node node--advanced" href="chapters/bayesian-inference/">
+                <span class="node__marker" aria-hidden="true"><span class="node__marker-n">15</span></span>
+                <span class="node__body">
+                  <span class="node__kicker">Chapter 15 · Advanced</span>
+                  <span class="node__title">Bayesian Inference</span>
+                  <span class="node__blurb">Updating belief with data, through Bayes’ theorem, likelihood, and posteriors.</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/discrete-random-variables/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">4</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 4 · Core</span>
+              <span class="node__title">Discrete Random Variables</span>
+              <span class="node__blurb">Random variables that count things, their expected values, and the named distributions.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/continuous-random-variables/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">5</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 5 · Core</span>
+              <span class="node__title">Continuous Random Variables</span>
+              <span class="node__blurb">Densities, area as probability, and the exponential model of waiting times.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/normal-distribution/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">6</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 6 · Core</span>
+              <span class="node__title">The Normal Distribution</span>
+              <span class="node__blurb">The bell curve, z-scores, and the 68–95–99.7 rule.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/central-limit-theorem/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">7</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 7 · Core</span>
+              <span class="node__title">The Central Limit Theorem</span>
+              <span class="node__blurb">Why averages of almost anything look normal, and how their spread shrinks with n.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/confidence-intervals/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">8</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 8 · Core</span>
+              <span class="node__title">Confidence Intervals</span>
+              <span class="node__blurb">What a 95% interval promises, and how to build one for a mean or a proportion.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/hypothesis-testing/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">9</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 9 · Core</span>
+              <span class="node__title">Hypothesis Testing (One Sample)</span>
+              <span class="node__blurb">Null hypotheses, error types, and what a p-value really measures.</span>
+            </span>
+          </a>
+          <ul class="journey__branches" aria-label="Advanced Concepts that branch off Hypothesis Testing (One Sample)">
+            <li class="journey__branch">
+              <a class="node node--advanced" href="chapters/resampling/">
+                <span class="node__marker" aria-hidden="true"><span class="node__marker-n">16</span></span>
+                <span class="node__body">
+                  <span class="node__kicker">Chapter 16 · Advanced</span>
+                  <span class="node__title">Resampling</span>
+                  <span class="node__blurb">Bootstrap and permutation methods for when formulas run out.</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/two-sample-tests/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">10</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 10 · Core</span>
+              <span class="node__title">Hypothesis Testing (Two Samples)</span>
+              <span class="node__blurb">Comparing two means or two proportions, and why pairing helps.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/chi-square/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">11</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 11 · Core</span>
+              <span class="node__title">The Chi-Square Distribution</span>
+              <span class="node__blurb">Testing whether counts fit a claim, and whether two variables are independent.</span>
+            </span>
+          </a>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/linear-regression/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">12</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 12 · Core</span>
+              <span class="node__title">Linear Regression and Correlation</span>
+              <span class="node__blurb">Fitting a line, reading r, and knowing when prediction is safe.</span>
+            </span>
+          </a>
+          <ul class="journey__branches" aria-label="Advanced Concepts that branch off Linear Regression and Correlation">
+            <li class="journey__branch">
+              <a class="node node--advanced" href="chapters/beyond-one-variable/">
+                <span class="node__marker" aria-hidden="true"><span class="node__marker-n">17</span></span>
+                <span class="node__body">
+                  <span class="node__kicker">Chapter 17 · Advanced</span>
+                  <span class="node__title">Beyond One Variable</span>
+                  <span class="node__blurb">How a third variable can reverse a conclusion, and what a coefficient means with two predictors.</span>
+                </span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="journey__step">
+          <a class="node node--core" href="chapters/anova/">
+            <span class="node__marker" aria-hidden="true"><span class="node__marker-n">13</span></span>
+            <span class="node__body">
+              <span class="node__kicker">Chapter 13 · Core</span>
+              <span class="node__title">F Distribution and One-Way ANOVA</span>
+              <span class="node__blurb">Comparing several group means at once by weighing between-group against within-group variation.</span>
+            </span>
+          </a>
+        </li>
+      </ol>
+    </div>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="assets/js/chapters.js"></script>
+  <script defer src="assets/js/site.js"></script>
+</body>
+</html>

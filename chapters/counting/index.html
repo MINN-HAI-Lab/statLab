@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 14 · Counting — StatLab</title>
+  <meta name="description" content="Multiplying choices, and telling permutations from combinations.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="counting" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 14 · Advanced Concepts</p>
+      <h1>Counting</h1>
+      <p class="chapter__blurb">Multiplying choices, and telling permutations from combinations.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">14.1 The multiplication rule</a></li>
+          <li><a href="#section-2">14.2 Permutations and combinations</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">14.1 The multiplication rule</h2>
+        <p>Pick a shirt, then trousers, then shoes. If the choices do not constrain each other, the number of complete outfits is the product of the choices,</p>
+        <p>\[n_1 \times n_2 \times \cdots \times n_k.\]</p>
+        <p>The tree shows why. Adding a stage with \(n\) options does not add \(n\) paths. It replaces every path that already existed with \(n\) copies of itself. Three shirts and two pairs of trousers give six half-outfits, and two pairs of shoes turn each of those into two, so twelve. Change a slider and watch the last column grow by a factor, never by an amount. Most counting problems are this rule applied carefully, and the harder ones only look different because the stages are less obvious.</p>
+        <p class="muted">Reading: this section is beyond the OpenStax text. See any discrete mathematics introduction on the multiplication principle.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="counting__multiplication-rule"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">14.2 Permutations and combinations</h2>
+        <p>Choosing three people for a committee is not the same as choosing three for first, second and third place. A <strong>permutation</strong> counts arrangements, where the order is part of the answer. A <strong>combination</strong> counts selections, where it is not.</p>
+        <p>\[P(n, k) = \frac{n!}{(n-k)!}, \qquad C(n, k) = \frac{n!}{k!\,(n-k)!}.\]</p>
+        <p>The two differ by exactly \(k!\), the number of orders any one selection can be written in. Press “Order matters” and every row in the list fans out into \(k!\) rows, which is that division running backwards. The list is real. Count the rows and you get the formula's answer, until it grows too long to print.</p>
+        <p class="muted">Reading: this section is beyond the OpenStax text. See any discrete mathematics introduction on permutations and combinations.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="counting__permutations-combinations"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../probability-topics/index.html">← Back to the trail: 3. Probability Topics</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../../index.html">All chapters →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/counting__multiplication-rule.js"></script>
+  <script defer src="../../assets/js/demos/counting__permutations-combinations.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initMultiplicationRule(document.querySelector('[data-demo="counting__multiplication-rule"]'));
+      demos.initPermutationsCombinations(document.querySelector('[data-demo="counting__permutations-combinations"]'));
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 12 · Linear Regression and Correlation — StatLab</title>
+  <meta name="description" content="Fitting a line, reading r, and knowing when prediction is safe.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="linear-regression" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 12 · OpenStax Ch 12</p>
+      <h1>Linear Regression and Correlation</h1>
+      <p class="chapter__blurb">Fitting a line, reading r, and knowing when prediction is safe.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">12.1 Least squares</a></li>
+          <li><a href="#section-2">12.2 Correlation</a></li>
+          <li><a href="#section-3">12.3 The line is an estimate</a></li>
+          <li><a href="#section-4">12.4 Prediction and outliers</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">12.1 Least squares</h2>
+        <p>Given points \((x_i, y_i)\), a straight line \(\hat{y} = a + bx\) predicts a \(y\) for every \(x\). Each point misses the line by its <strong>residual</strong>, \(y_i - \hat{y}_i\). The demo draws every residual as a square whose area is the squared miss, and the <strong>sum of squared errors</strong> is their total,</p>
+        <p>\[\mathrm{SSE} = \sum (y_i - \hat{y}_i)^2.\]</p>
+        <p>The <strong>least-squares line</strong> is the one line that makes this total as small as possible. Its slope and intercept follow from the data alone,</p>
+        <p>\[b = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}, \qquad a = \bar{y} - b\bar{x},\]</p>
+        <p>so it always passes through the point of means \((\bar{x}, \bar{y})\). Move points and watch the line follow. Then switch modes and try to beat it. Your orange squares can match the blue ones, never undercut them.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.1 to 12.3.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="linear-regression__least-squares"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">12.2 Correlation</h2>
+        <p>The <strong>correlation coefficient</strong> measures how tightly points hug a straight line,</p>
+        <p>\[r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}},\]</p>
+        <p>always between \(-1\) and \(1\). Points above-right or below-left of the mean cross push \(r\) up, while the other two quadrants pull it down. Its square, the <strong>coefficient of determination</strong> \(r^2\), is the share of the variation in \(y\) that the line explains. Three cautions. The two “strong” presets have the same \(r\) with very different slopes, because \(r\) measures tightness rather than steepness. The curved preset follows a perfect pattern yet gives \(r \approx 0\), because \(r\) sees only straight-line association. And no value of \(r\) says that \(x\) causes \(y\).</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.2, 12.4.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="linear-regression__correlation"></div>
+    </section>
+
+    <section class="section" id="section-3" aria-labelledby="section-3-title">
+      <div class="section__text">
+        <h2 id="section-3-title">12.3 The line is an estimate</h2>
+        <p>The line you fit comes from one sample, and another sample would give another line. The grey cloud is a whole <strong>population</strong> of \((x, y)\) pairs with its own line, drawn dashed in orange. Each draw picks \(n\) of those points, fits them, and leaves the fitted line behind faintly. After a few dozen draws the lines form a band. Its width is the <strong>sampling variability</strong> of the slope, the same idea as the sampling distribution of a mean in Chapter 7. The spread of the slopes shrinks roughly like \(1/\sqrt{n}\), so raising \(n\) tightens the band around the population line. A slope printed to three decimals is still an estimate with a margin of error.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 12.4.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="linear-regression__line-estimate"></div>
+    </section>
+
+    <section class="section" id="section-4" aria-labelledby="section-4-title">
+      <div class="section__text">
+        <h2 id="section-4-title">12.4 Prediction and outliers</h2>
+        <p>A fitted line predicts \(\hat{y} = a + bx\) for any \(x\) you like, but the data only vouch for the range they cover. Inside that range the prediction is an <strong>interpolation</strong>. Outside it is an <strong>extrapolation</strong>, shaded here as a caution zone, where the relationship may bend, level off, or stop making sense. Slide the prediction point past the last observed \(x\) and the status line changes its tone. The orange point is an <strong>outlier</strong> waiting to happen. Near the other points it barely matters. Dragged far to the right it gains <strong>leverage</strong>. One point tilts the whole line and drags \(r\) with it. Compare the solid line with the dashed one fitted without it, and always look for such points before trusting a slope.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.5, 12.6.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="linear-regression__prediction-outliers"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../chi-square/index.html">← 11. The Chi-Square Distribution</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../anova/index.html">13. F Distribution and One-Way ANOVA →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/linear-regression__least-squares.js"></script>
+  <script defer src="../../assets/js/demos/linear-regression__correlation.js"></script>
+  <script defer src="../../assets/js/demos/linear-regression__line-estimate.js"></script>
+  <script defer src="../../assets/js/demos/linear-regression__prediction-outliers.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initLeastSquares(document.querySelector('[data-demo="linear-regression__least-squares"]'));
+      demos.initCorrelation(document.querySelector('[data-demo="linear-regression__correlation"]'));
+      demos.initLineEstimate(document.querySelector('[data-demo="linear-regression__line-estimate"]'));
+      demos.initPredictionOutliers(document.querySelector('[data-demo="linear-regression__prediction-outliers"]'));
+    });
+  </script>
+</body>
+</html>

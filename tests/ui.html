@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>StatLab UI gallery</title>
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../assets/css/theme.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    /* Gallery-only layout. */
+    .gallery { max-width: 60rem; }
+    .gallery section { margin-bottom: var(--space-3); }
+    .gallery ol { padding-left: var(--space-3); }
+  </style>
+</head>
+<body>
+  <main class="gallery">
+    <h1>StatLab UI gallery</h1>
+    <p class="muted">Hidden page (not linked from the site). Every shared component from <code>ui.js</code> appears here once so it can be checked by eye and by keyboard at 360 px and 1280 px.</p>
+
+    <section aria-labelledby="h-sliders">
+      <h2 id="h-sliders">Sliders</h2>
+      <div class="ui-panel" id="sliders"></div>
+    </section>
+
+    <section aria-labelledby="h-buttons">
+      <h2 id="h-buttons">Buttons</h2>
+      <div class="ui-panel" id="buttons"></div>
+    </section>
+
+    <section aria-labelledby="h-controls">
+      <h2 id="h-controls">Play / pause / reset group</h2>
+      <div class="ui-panel" id="controls"></div>
+    </section>
+
+    <section aria-labelledby="h-readouts">
+      <h2 id="h-readouts">Readouts</h2>
+      <div class="ui-panel" id="readouts"></div>
+    </section>
+
+    <section aria-labelledby="h-chart">
+      <h2 id="h-chart">Chart frame</h2>
+      <div class="ui-panel" id="chart"></div>
+      <p class="muted">Resize the window: the frame re-measures and redraws; axes update in place.</p>
+    </section>
+
+    <section aria-labelledby="h-keyboard">
+      <h2 id="h-keyboard">Keyboard walkthrough</h2>
+      <ol>
+        <li>Press Tab from the top. Focus moves through every slider and button in reading order with a visible ring.</li>
+        <li>On a slider, Left/Right arrows change the value by one step and the value readout follows.</li>
+        <li>On Play, Space or Enter starts the ticker and the label turns into Pause. Reset stops it and returns the count to 0.</li>
+        <li>No control is skipped, and nothing traps focus.</li>
+      </ol>
+    </section>
+  </main>
+
+  <script defer src="../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../assets/js/stats.js"></script>
+  <script defer src="../assets/js/ui.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      (function () {
+        "use strict";
+
+        /* Sliders */
+        var sliders = document.getElementById("sliders");
+        var live = ui.readout({ label: "Slider events", value: 0, decimals: 0 });
+        var count = 0;
+        var s1 = ui.slider({ label: "Sample size n", min: 1, max: 500, step: 1, value: 30, onChange: bump });
+        var s2 = ui.slider({ label: "Probability p", min: 0, max: 1, step: 0.01, value: 0.5, onChange: bump });
+        var s3 = ui.slider({ label: "Rate λ (custom format)", min: 0.1, max: 5, step: 0.1, value: 1.5, format: function (v) { return v.toFixed(1) + " per min"; }, onChange: bump });
+        var s4 = ui.slider({ label: "Disabled slider", min: 0, max: 10, step: 1, value: 4 });
+        s4.disable();
+        function bump() { count += 1; live.set(count); }
+        [s1, s2, s3, s4].forEach(function (s) { sliders.appendChild(s.el); });
+        sliders.appendChild(ui.readoutRow([live]));
+
+        /* Buttons */
+        var buttons = document.getElementById("buttons");
+        var clicks = ui.readout({ label: "Clicks", value: 0, decimals: 0 });
+        var n = 0;
+        var row = document.createElement("div");
+        row.className = "ui-controls";
+        row.appendChild(ui.button({ label: "Primary", kind: "primary", onClick: function () { clicks.set(++n); } }));
+        row.appendChild(ui.button({ label: "Secondary", kind: "secondary", onClick: function () { clicks.set(++n); } }));
+        var disabled = ui.button({ label: "Disabled" });
+        disabled.disabled = true;
+        row.appendChild(disabled);
+        buttons.appendChild(row);
+        buttons.appendChild(ui.readoutRow([clicks]));
+
+        /* Controls group with a ticker so play/pause/reset are visibly real */
+        var controlsBox = document.getElementById("controls");
+        var ticks = ui.readout({ label: "Ticks", value: 0, decimals: 0, accent: true });
+        var tickCount = 0, timer = null;
+        function tick() { tickCount += 1; ticks.set(tickCount); }
+        var controls = ui.controls({
+          onPlay: function () { timer = setInterval(tick, ui.prefersReducedMotion() ? 500 : 100); },
+          onPause: function () { clearInterval(timer); timer = null; },
+          onReset: function () { tickCount = 0; ticks.set(0); },
+          extra: [ui.button({ label: "Tick once", onClick: tick })]
+        });
+        controlsBox.appendChild(controls.el);
+        controlsBox.appendChild(ui.readoutRow([ticks]));
+
+        /* Readouts */
+        var readouts = document.getElementById("readouts");
+        readouts.appendChild(ui.readoutRow([
+          ui.readout({ label: "Mean", value: 3.14159, decimals: 3 }),
+          ui.readout({ label: "Count", value: 1200, decimals: 0 }),
+          ui.readout({ label: "Empty (NaN)", value: NaN }),
+          ui.readout({ label: "Percent", value: 0.6827, format: function (v) { return (v * 100).toFixed(1) + " %"; } }),
+          ui.readout({ label: "Accent", value: 1.96, accent: true })
+        ]));
+
+        /* Chart frame: normal density curve, shaded area, sampled points */
+        var chart = ui.chart(document.getElementById("chart"), { ariaLabel: "Standard normal density with 60 sampled points" });
+        stats.seed(2026);
+        var points = [];
+        for (var i = 0; i < 60; i++) points.push(stats.sampleNormal(0, 1));
+        var xs = d3.range(-4, 4.001, 0.05);
+        chart.onResize(function (f) {
+          var x = d3.scaleLinear().domain([-4, 4]).range([0, f.width]);
+          var y = d3.scaleLinear().domain([0, 0.45]).range([f.height, 0]);
+          f.yGrid(y);
+          f.xAxis(x, { label: "z" });
+          f.yAxis(y, { label: "density", ticks: 5 });
+          var area = d3.area().x(function (d) { return x(d); }).y0(f.height).y1(function (d) { return y(stats.normalPdf(d)); });
+          var line = d3.line().x(function (d) { return x(d); }).y(function (d) { return y(stats.normalPdf(d)); });
+          var shade = f.plot.selectAll("path.area").data([xs.filter(function (d) { return d >= -1 && d <= 1; })]);
+          shade.enter().append("path").attr("class", "area").merge(shade).attr("d", area);
+          var curve = f.plot.selectAll("path.line").data([xs]);
+          curve.enter().append("path").attr("class", "line").merge(curve).attr("d", line);
+          var dots = f.plot.selectAll("circle.mark").data(points);
+          dots.enter().append("circle").attr("class", "mark").attr("r", 3).merge(dots)
+            .attr("cx", function (d) { return x(d); }).attr("cy", f.height - 6);
+        });
+      })();
+    });
+  </script>
+</body>
+</html>

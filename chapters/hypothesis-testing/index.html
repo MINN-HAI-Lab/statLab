@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 9 · Hypothesis Testing (One Sample) — StatLab</title>
+  <meta name="description" content="Null hypotheses, error types, and what a p-value really measures.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="hypothesis-testing" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 9 · OpenStax Ch 9</p>
+      <h1>Hypothesis Testing (One Sample)</h1>
+      <p class="chapter__blurb">Null hypotheses, error types, and what a p-value really measures.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">9.1 Hypotheses and error types</a></li>
+          <li><a href="#section-2">9.2 The p-value</a></li>
+          <li><a href="#section-3">9.3 The full test, honestly run</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">9.1 Hypotheses and error types</h2>
+        <p>A hypothesis test starts with a claim to doubt, the <strong>null hypothesis</strong> \(H_0\). Here it claims the mean is 50. The <strong>alternative</strong> \(H_1\) is what we would conclude instead. We draw a sample, and if its mean lands past a <strong>decision cutoff</strong> we reject \(H_0\). Two things can go wrong. Rejecting a true \(H_0\) is a <strong>Type I error</strong>, and its probability is \(\alpha\), the orange tail. Failing to reject when the effect is real is a <strong>Type II error</strong>, probability \(\beta\), the blue tail. The test's <strong>power</strong> is \(1 - \beta\).</p>
+        <p>Drag the cutoff. Lowering \(\alpha\) always raises \(\beta\). The two errors trade off, and choosing \(\alpha = 0.05\) is a convention rather than a law. Only two things shrink both tails at once. A larger sample narrows both curves, and a larger real effect pulls them apart.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 9.1, 9.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="hypothesis-testing__error-types"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">9.2 The p-value</h2>
+        <p>The <strong>p-value</strong> answers one question. If \(H_0\) were true, how often would a sample mean land at least this far from 50? It is the shaded tail area,</p>
+        <p>\[p = 2\,P\!\left(Z \ge |z|\right), \qquad z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}.\]</p>
+        <p>A small p-value says the data would be surprising under \(H_0\). It does <em>not</em> say how likely \(H_0\) is. Run a hundred tests with \(H_0\) true and look at the pile of p-values. It is flat. Small p-values are exactly as common as large ones, and one test in twenty crosses 0.05 by chance alone. Now make \(H_0\) false. The pile crowds toward zero, and the share below 0.05 is the power of the test.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 9.3, 9.4.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="hypothesis-testing__p-value"></div>
+    </section>
+
+    <section class="section" id="section-3" aria-labelledby="section-3-title">
+      <div class="section__text">
+        <h2 id="section-3-title">9.3 The full test, honestly run</h2>
+        <p>Real tests rarely know \(\sigma\), so they use \(s\)<sup>1</sup> and the t distribution. The steps never change. State \(H_0\) and \(H_1\). Draw the sample. Compute the <strong>test statistic</strong> \(t = (\bar{x} - \mu_0)/(s/\sqrt{n})\) with \(df = n - 1\). Find the p-value, compare it with \(\alpha\), and decide. The panel runs every step on a fresh sample each time you press the button.</p>
+        <p>Read the decision line carefully. “Fail to reject” means the data are compatible with \(H_0\), not that \(H_0\) is true. A small sample fails to reject almost everything. Set the true mean to 55 and run a hundred tests. Many fail to reject, and each of those is a missed real difference. Set it back to 50 and about \(\alpha\) of the tests reject anyway. Neither is a flaw in the method. It is what \(\alpha\) and \(\beta\) mean.</p>
+        <p class="muted"><sup>1</sup> \(s\) divides by \(n - 1\), as everywhere on this site. Reading: OpenStax <em>Introductory Statistics</em>, Section 9.5.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="hypothesis-testing__full-test"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../confidence-intervals/index.html">← 8. Confidence Intervals</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../two-sample-tests/index.html">10. Hypothesis Testing (Two Samples) →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/hypothesis-testing__error-types.js"></script>
+  <script defer src="../../assets/js/demos/hypothesis-testing__p-value.js"></script>
+  <script defer src="../../assets/js/demos/hypothesis-testing__full-test.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initErrorTypes(document.querySelector('[data-demo="hypothesis-testing__error-types"]'));
+      demos.initPValue(document.querySelector('[data-demo="hypothesis-testing__p-value"]'));
+      demos.initFullTest(document.querySelector('[data-demo="hypothesis-testing__full-test"]'));
+    });
+  </script>
+</body>
+</html>

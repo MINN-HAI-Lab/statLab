@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 13 · F Distribution and One-Way ANOVA — StatLab</title>
+  <meta name="description" content="Comparing several group means at once by weighing between-group against within-group variation.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="anova" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 13 · OpenStax Ch 13</p>
+      <h1>F Distribution and One-Way ANOVA</h1>
+      <p class="chapter__blurb">Comparing several group means at once by weighing between-group against within-group variation.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">13.1 The idea of ANOVA</a></li>
+          <li><a href="#section-2">13.2 The F distribution and the decision</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">13.1 The idea of ANOVA</h2>
+        <p>Comparing two means took one \(t\) test. Three or more takes a single test on all of them. The question becomes whether the group means sit further apart than the scatter inside the groups can explain. <strong>Analysis of variance</strong> answers it with a ratio of two averaged squared distances,</p>
+        <p>\[F = \frac{MS_{\text{between}}}{MS_{\text{within}}}, \qquad MS_{\text{between}} = \frac{\sum n_j (\bar{x}_j - \bar{x})^2}{k - 1}, \qquad MS_{\text{within}} = \frac{\sum (x_{ij} - \bar{x}_j)^2}{n - k}.\]</p>
+        <p>The top measures how far the group means sit from the <strong>grand mean</strong>. The bottom measures how far the points sit from their own group's mean. Drag the means apart and the top bar grows while the bottom stays put, so \(F\) climbs. Widen the groups instead and the bottom bar grows, so the same gaps stop being impressive. Neither quantity means anything alone.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 13.1, 13.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="anova__anova-idea"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">13.2 The F distribution and the decision</h2>
+        <p>When every group really does come from the same distribution, \(F\) still varies from study to study. Its values follow the <strong>F distribution</strong> with \(k - 1\) and \(n - k\) degrees of freedom.<sup>1</sup> Leave the gap at zero and run study after study. The bars fill the orange curve, and about one study in twenty lands beyond the critical value even though nothing separates the groups. That is the 5 % significance level in action. Give the means a real gap and the whole pile slides right, past the line, more often as \(n\) grows. The test is one-tailed by construction, because only a large \(F\) is evidence against equal means.</p>
+        <p class="muted"><sup>1</sup> The F distribution is right-skewed and never negative, being a ratio of two variances. Reading: OpenStax <em>Introductory Statistics</em>, Sections 13.2, 13.3.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="anova__f-distribution"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../linear-regression/index.html">← 12. Linear Regression and Correlation</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../../index.html">All chapters →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/anova__anova-idea.js"></script>
+  <script defer src="../../assets/js/demos/anova__f-distribution.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initAnovaIdea(document.querySelector('[data-demo="anova__anova-idea"]'));
+      demos.initFDistribution(document.querySelector('[data-demo="anova__f-distribution"]'));
+    });
+  </script>
+</body>
+</html>

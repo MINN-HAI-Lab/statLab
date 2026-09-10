@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 2 · Descriptive Statistics — StatLab</title>
+  <meta name="description" content="Pictures and numbers that summarize the shape, center, and spread of a data set.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="descriptive-statistics" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 2 · OpenStax Ch 2</p>
+      <h1>Descriptive Statistics</h1>
+      <p class="chapter__blurb">Pictures and numbers that summarize the shape, center, and spread of a data set.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">2.1 Histograms</a></li>
+          <li><a href="#section-2">2.2 Center and location</a></li>
+          <li><a href="#section-3">2.3 Box plots and skewness</a></li>
+          <li><a href="#section-4">2.4 Spread</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">2.1 Histograms</h2>
+        <p>A <strong>histogram</strong> sorts data into equal-width intervals called <strong>bins</strong> and draws a bar for each, as tall as the number of values inside. It is the quickest way to see the <strong>shape</strong> of a data set. The bars show where values pile up, where they thin out, and whether there is one hump or two.</p>
+        <p>The 80 commute times here never change. Drag the bin-width slider and watch the picture change anyway. Very narrow bins show every bump and look ragged. Wide bins look smooth but can hide the two groups of commuters entirely. Somewhere in between, the story is clearest. The <strong>frequency polygon</strong> joins the bar tops with a line, which makes comparing two histograms easier. When you read a histogram, always ask what bin width was used.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.1, 2.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="descriptive-statistics__histogram"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">2.2 Center and location</h2>
+        <p>Three numbers describe the “middle” of data, and they answer different questions. The <strong>mean</strong> \(\bar{x} = \frac{1}{n}\sum x_i\) is the balance point. If the dots were weights on a plank, the triangle is where it would balance. The <strong>median</strong> is the splitter, with half the dots on each side. The <strong>mode</strong> is the most common value, if any value repeats.</p>
+        <p>Drag one dot far to the right, or press the button. The mean chases it, because a far-away weight tips the plank. The median barely moves, because it only counts how many dots are on each side, not how far away they are. Values like this one are called <strong>outliers</strong>, and the median is <strong>resistant</strong> to them. For incomes and house prices, the median is usually the honest “typical” number.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.3, 2.5.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="descriptive-statistics__center"></div>
+    </section>
+
+    <section class="section" id="section-3" aria-labelledby="section-3-title">
+      <div class="section__text">
+        <h2 id="section-3-title">2.3 Box plots and skewness</h2>
+        <p>The <strong>quartiles</strong> cut sorted data into four equal parts. A quarter of the values lie below \(Q_1\), half below the median, and three quarters below \(Q_3\).<sup>1</sup> A <strong>box plot</strong> draws a box from \(Q_1\) to \(Q_3\), a line at the median, and whiskers out to the smallest and largest values. The box width, \(Q_3 - Q_1\), is the <strong>interquartile range</strong>.</p>
+        <p>Slide the skew control. With the slider in the middle the data are symmetric and the mean sits on the median. Push it right and a tail of large values grows. The upper whisker stretches, and the mean is dragged above the median. That is a <strong>right-skewed</strong> distribution. Push it left for the mirror image. The gap between mean and median is a quick test for skew.</p>
+        <p class="muted"><sup>1</sup> Quartiles on this site use the Weibull rule, position \((n+1)p\) in the sorted data. Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.4, 2.6.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="descriptive-statistics__boxplot-skew"></div>
+    </section>
+
+    <section class="section" id="section-4" aria-labelledby="section-4-title">
+      <div class="section__text">
+        <h2 id="section-4-title">2.4 Spread</h2>
+        <p>Each stick is one value's <strong>deviation</strong> from the mean, \(x_i - \bar{x}\). Deviations always add to zero, so to measure spread we square them first. Press “Show squares”: each stick becomes a square whose area is the squared deviation. The <strong>variance</strong> is the average square.<sup>2</sup> The <strong>standard deviation</strong> is its square root,</p>
+        <p>\[s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}}.\]</p>
+        <p>Taking the square root brings the number back to the original units, so \(s\) reads as a typical distance from the mean. Drag the dots apart and the squares grow fast. A point twice as far contributes four times as much. Press “Bunch up” and \(s\) shrinks. The mean does not care about spread. The standard deviation cares about nothing else.</p>
+        <p class="muted"><sup>2</sup> The sample variance divides by \(n - 1\), not \(n\), because the mean was estimated from the same data. Reading: OpenStax <em>Introductory Statistics</em>, Section 2.7.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="descriptive-statistics__spread"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../sampling-and-data/index.html">← 1. Sampling and Data</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../probability-topics/index.html">3. Probability Topics →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/descriptive-statistics__histogram.js"></script>
+  <script defer src="../../assets/js/demos/descriptive-statistics__center.js"></script>
+  <script defer src="../../assets/js/demos/descriptive-statistics__boxplot-skew.js"></script>
+  <script defer src="../../assets/js/demos/descriptive-statistics__spread.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initHistogram(document.querySelector('[data-demo="descriptive-statistics__histogram"]'));
+      demos.initCenter(document.querySelector('[data-demo="descriptive-statistics__center"]'));
+      demos.initBoxplotSkew(document.querySelector('[data-demo="descriptive-statistics__boxplot-skew"]'));
+      demos.initSpread(document.querySelector('[data-demo="descriptive-statistics__spread"]'));
+    });
+  </script>
+</body>
+</html>

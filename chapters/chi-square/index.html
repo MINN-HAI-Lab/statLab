@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 11 · The Chi-Square Distribution — StatLab</title>
+  <meta name="description" content="Testing whether counts fit a claim, and whether two variables are independent.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="chi-square" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 11 · OpenStax Ch 11</p>
+      <h1>The Chi-Square Distribution</h1>
+      <p class="chapter__blurb">Testing whether counts fit a claim, and whether two variables are independent.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">11.1 Goodness of fit</a></li>
+          <li><a href="#section-2">11.2 Test of independence</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">11.1 Goodness of fit</h2>
+        <p>Someone claims a die is fair, or claims any set of probabilities for its faces. Roll it \(n\) times and compare what you <strong>observed</strong> in each category with what the claim <strong>expected</strong>, \(E = n p\). The mismatch is summed into one number,</p>
+        <p>\[\chi^2 = \sum \frac{(O - E)^2}{E},\]</p>
+        <p>which is zero for a perfect match and grows as the counts drift from the claim. Under a true claim, \(\chi^2\) follows the <strong>chi-square distribution</strong> with \(k - 1\) degrees of freedom, six faces giving five. The table shows each face's contribution, and a few faces usually carry most of it. Repeat the test with the fair claim and the pile of statistics fills the orange curve, with 5 % beyond the critical value. Change the claim and the pile slides right. Every expected count should be at least 5 for the curve to be trusted.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 11.1, 11.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="chi-square__goodness-of-fit"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">11.2 Test of independence</h2>
+        <p>Survey people about two things, whether they exercise and how well they sleep, and sort them into a <strong>contingency table</strong>. If the two are <strong>independent</strong>, every row splits across the columns in the same proportions, and the count independence expects in each cell is</p>
+        <p>\[E = \frac{\text{row total} \times \text{column total}}{n}.\]</p>
+        <p>The same \(\chi^2\) sum over the six cells measures how far the table strays from that, now with \((r - 1)(c - 1) = 2\) degrees of freedom. With the association slider at zero the two stacked bars match and the statistic behaves like the orange curve. One survey in twenty rejects by chance. Slide the association up and the rows part company, \(\chi^2\) climbs, and the p-value falls. Independence is the null hypothesis here. Rejecting it says the two variables are related, though not which causes which.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 11.3 to 11.5.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="chi-square__independence"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../two-sample-tests/index.html">← 10. Hypothesis Testing (Two Samples)</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../linear-regression/index.html">12. Linear Regression and Correlation →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/chi-square__goodness-of-fit.js"></script>
+  <script defer src="../../assets/js/demos/chi-square__independence.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initGoodnessOfFit(document.querySelector('[data-demo="chi-square__goodness-of-fit"]'));
+      demos.initIndependence(document.querySelector('[data-demo="chi-square__independence"]'));
+    });
+  </script>
+</body>
+</html>

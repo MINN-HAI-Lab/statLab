@@ -1,0 +1,526 @@
+/*
+  components.css — shared controls, readouts, panels, and chart styling.
+  Every color, size, and font comes from theme.css tokens (HANDBOOK §5).
+  Class names: block__element--modifier. JS factories in ui.js create these.
+*/
+
+/* ---- Panel (a demo or section card) ---------------------------------- */
+.ui-panel {
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+/* ---- Slider ---------------------------------------------------------- */
+.ui-slider {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  column-gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+.ui-slider__label { font-size: var(--fs-0); color: var(--ink-soft); }
+.ui-slider__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-0);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  text-align: right;
+}
+.ui-slider__input {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: var(--touch);          /* the whole strip is the touch target */
+  margin: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: grab;
+}
+.ui-slider__input:active { cursor: grabbing; }
+.ui-slider__input:disabled { cursor: not-allowed; opacity: 0.5; }
+
+/* Track: filled part in accent up to --ui-fill (set by ui.js), rest in --line. */
+.ui-slider__input::-webkit-slider-runnable-track {
+  height: var(--track);
+  border-radius: var(--track);
+  background: linear-gradient(to right, var(--accent) var(--ui-fill, 0%), var(--line) var(--ui-fill, 0%));
+}
+.ui-slider__input::-moz-range-track {
+  height: var(--track);
+  border-radius: var(--track);
+  background: var(--line);
+}
+.ui-slider__input::-moz-range-progress {
+  height: var(--track);
+  border-radius: var(--track);
+  background: var(--accent);
+}
+
+/* Thumb: --thumb wide, centered on the track. */
+.ui-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--thumb);
+  height: var(--thumb);
+  margin-top: calc((var(--track) - var(--thumb)) / 2);
+  border-radius: 50%;
+  background: var(--accent);
+  border: var(--border) solid var(--surface);
+  box-shadow: 0 0 0 var(--border) var(--accent-strong);
+  transition: background-color 150ms ease-out;
+}
+.ui-slider__input::-moz-range-thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: 50%;
+  background: var(--accent);
+  border: var(--border) solid var(--surface);
+  box-shadow: 0 0 0 var(--border) var(--accent-strong);
+}
+.ui-slider__input:hover::-webkit-slider-thumb,
+.ui-slider__input:active::-webkit-slider-thumb { background: var(--accent-strong); }
+.ui-slider__input:hover::-moz-range-thumb,
+.ui-slider__input:active::-moz-range-thumb { background: var(--accent-strong); }
+
+/* ---- Buttons --------------------------------------------------------- */
+.ui-button {
+  min-height: var(--touch);
+  min-width: var(--touch);
+  padding: 0 var(--space-2);
+  font-family: var(--font);
+  font-size: var(--fs-1);
+  font-weight: 600;
+  line-height: 1;
+  border-radius: var(--radius);
+  border: var(--border) solid transparent;
+  cursor: pointer;
+  transition: background-color 150ms ease-out, color 150ms ease-out, border-color 150ms ease-out;
+}
+/* Filled controls use --accent-strong: white on --accent is 4.4:1, under AA (D-016). */
+.ui-button--primary {
+  background: var(--accent-strong);
+  color: var(--surface);
+  border-color: var(--accent-strong);
+}
+.ui-button--primary:hover { background: var(--ink); border-color: var(--ink); }
+.ui-button--secondary {
+  background: var(--surface);
+  color: var(--accent-strong);
+  border-color: var(--accent);
+}
+.ui-button--secondary:hover { background: var(--accent-soft); }
+.ui-button:active { transform: translateY(var(--border)); }
+.ui-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ---- Control group (play/pause, reset, extras) ------------------------ */
+.ui-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+
+/* ---- Readouts -------------------------------------------------------- */
+.ui-readouts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin-bottom: var(--space-2);
+}
+.ui-readout {
+  display: inline-flex;
+  flex-direction: column;
+  min-width: 6rem;
+  padding: var(--space-1) var(--space-2);
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+}
+.ui-readout__label { font-size: var(--fs-0); color: var(--ink-soft); }
+.ui-readout__value {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.ui-readout--accent .ui-readout__value { color: var(--accent-strong); }
+
+/* ---- Chart frame ----------------------------------------------------- */
+.ui-chart { display: block; width: 100%; }
+.ui-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font);
+  font-size: var(--fs-0);
+  overflow: visible;
+}
+.ui-chart .domain { stroke: var(--line); }
+.ui-chart .tick line { stroke: var(--line); }
+.ui-chart .tick text { fill: var(--ink-soft); }
+.ui-chart .ui-chart__axis-label { fill: var(--ink); font-size: var(--fs-0); }
+.ui-chart .ui-chart__grid line { stroke: var(--line); stroke-dasharray: 2 3; }
+.ui-chart .ui-chart__grid .domain { stroke: none; }
+
+/* Common data-mark classes so every demo draws alike. */
+.ui-chart .mark { fill: var(--accent); stroke: none; }
+.ui-chart .mark--strong { fill: var(--accent-strong); }
+.ui-chart .line { fill: none; stroke: var(--accent); stroke-width: 2; }
+.ui-chart .line--strong { stroke: var(--accent-strong); }
+.ui-chart .line--reference { stroke: var(--ink-soft); stroke-dasharray: 4 3; }
+.ui-chart .area { fill: var(--accent-soft); stroke: none; }
+.ui-chart .cat-1 { fill: var(--cat-1); } .ui-chart .cat-2 { fill: var(--cat-2); }
+.ui-chart .cat-3 { fill: var(--cat-3); } .ui-chart .cat-4 { fill: var(--cat-4); }
+.ui-chart .cat-5 { fill: var(--cat-5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ui-button, .ui-slider__input::-webkit-slider-thumb { transition: none; }
+}
+
+/* ====================================================================
+   Page layout (Phase 3): site header/footer, landing grid, chapter pages.
+   ==================================================================== */
+
+/* Chapter pages and the landing page are wider than the reading measure;
+   text columns inside them still cap at --measure. */
+main.landing, main.chapter { max-width: 72rem; }
+
+.site-header { max-width: 72rem; margin: 0 auto var(--space-3); }
+.site-header__nav { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-2); border-bottom: var(--border) solid var(--line); padding-bottom: var(--space-1); }
+.site-header__brand { font-weight: 600; text-decoration: none; color: var(--ink); }
+.site-header__link { font-size: var(--fs-0); }
+
+.site-footer { max-width: 72rem; margin: var(--space-4) auto 0; border-top: var(--border) solid var(--line); padding-top: var(--space-2); }
+.site-footer__text { font-size: var(--fs-0); color: var(--ink-soft); max-width: var(--measure); }
+
+/* ---- Theme toggle ------------------------------------------------------ */
+/* Shows the icon for the theme it switches TO: a moon while light, a sun while dark. */
+.theme-toggle {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch);
+  height: var(--touch);
+  padding: 0;
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); border-color: var(--ink-soft); }
+.theme-toggle__sun { display: none; }
+[data-theme="dark"] .theme-toggle__sun { display: block; }
+[data-theme="dark"] .theme-toggle__moon { display: none; }
+
+/* ---- Landing: the learning-journey path -------------------------------- */
+/* A vertical trail of chapter nodes in prerequisite order, with advanced chapters
+   branching off the node they need (S1, D-040). Calm and academic: no mascots, no
+   streaks, and no progress state of any kind — every node is always open. */
+.hero { max-width: var(--measure); margin-bottom: var(--space-3); }
+.hero__lede { font-size: var(--fs-2); }
+
+.journey { list-style: none; margin: var(--space-3) 0 0; padding: 0; }
+
+.journey__step { position: relative; padding-bottom: var(--space-3); }
+/* the connector down to the next node, drawn behind the markers */
+.journey__step::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--touch) / 2);
+  top: var(--touch);
+  bottom: 0;
+  width: var(--border);
+  background: var(--path-line);
+}
+.journey__step:last-child::before { display: none; }
+
+.node {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-2) var(--space-1) 0;
+  min-height: var(--touch);
+  text-decoration: none;
+  color: var(--ink);
+  border-radius: var(--radius);
+}
+.node:hover { color: var(--ink); background: var(--surface); }
+.node:hover .node__title { text-decoration: underline; }
+
+/* Shape carries the tier as well as colour: circle = core, diamond = advanced. */
+.node__marker {
+  flex: 0 0 var(--touch);
+  width: var(--touch);
+  height: var(--touch);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-0);
+  font-weight: 600;
+  border: var(--border-strong) solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+.node--core .node__marker { border-radius: 50%; }
+/* The diamond is the marker rotated; the number is counter-rotated so it stays upright. */
+.node--advanced .node__marker {
+  border-color: var(--accent-2);
+  background: var(--accent-2-soft);
+  color: var(--accent-2);
+  border-radius: var(--radius);
+  transform: rotate(45deg) scale(0.86);
+}
+.node--advanced .node__marker-n { transform: rotate(-45deg); }
+
+.node__body { display: flex; flex-direction: column; gap: 0.15rem; padding-top: 0.35rem; }
+.node__kicker { font-size: var(--fs-0); color: var(--ink-soft); }
+.node__title { font-size: var(--fs-2); font-weight: 600; line-height: 1.25; }
+.node__blurb { font-size: var(--fs-0); color: var(--ink-soft); max-width: 46ch; }
+
+/* Branches sit under their prerequisite, joined by a lighter dashed connector. */
+/* The branch stem starts exactly on the trail line, so the dependency is visible. */
+.journey__branches {
+  list-style: none;
+  margin: var(--space-1) 0 0;
+  padding: 0 0 0 calc(var(--touch) / 2);
+}
+.journey__branch { position: relative; padding-left: var(--space-3); }
+.journey__branch::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 50%;
+  width: var(--border);
+  border-left: var(--border) dashed var(--path-line);
+}
+.journey__branch::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: var(--space-3);
+  border-top: var(--border) dashed var(--path-line);
+}
+.journey__branch .node__title { font-size: var(--fs-1); }
+
+/* Phone: one column, branches still inline under their prerequisite. */
+@media (max-width: 30rem) {
+  .node { gap: var(--space-1); }
+  .node__blurb { max-width: none; }
+  .journey__branches { padding-left: calc(var(--touch) / 2); }
+  .journey__branch { padding-left: var(--space-2); }
+  .journey__branch::after { width: var(--space-2); }
+  .journey__step::before { left: calc(var(--touch) / 2); }
+}
+
+/* ---- Chapter page ----------------------------------------------------- */
+.chapter__header { max-width: var(--measure); margin-bottom: var(--space-3); }
+.chapter__kicker { font-size: var(--fs-0); color: var(--ink-soft); margin: 0 0 var(--space-1); }
+.chapter__blurb { font-size: var(--fs-2); }
+.chapter__sections ol { padding-left: var(--space-3); margin: 0; }
+.chapter__sections li { margin-bottom: var(--space-1); }
+
+.section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  margin-bottom: var(--space-3);
+  border-top: var(--border) solid var(--line);
+  scroll-margin-top: var(--space-2);   /* anchor links land with breathing room */
+}
+.section__text { max-width: var(--measure); }
+.section__text h2 { margin-top: 0; }
+/* Reserved so a demo filling its panel after first paint does not shove the rest of
+   the page down (D-039). 26rem sits under the shortest panel measured across all
+   17 chapters (481 px, the counting chapter's arrangement list at its smallest),
+   so no panel ends up with dead space. The rest of the shift cannot be reserved
+   away: a panel's real height is decided by its chart at run time. */
+.section__demo { margin-bottom: 0; min-height: 30rem; }
+.demo-placeholder { display: flex; align-items: center; justify-content: center; }
+.placeholder { color: var(--ink-soft); }
+@media (min-width: 60rem) {
+  .section { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--space-3); }
+}
+
+.chapter__nav { display: flex; justify-content: space-between; gap: var(--space-2); flex-wrap: wrap; padding-top: var(--space-3); border-top: var(--border) solid var(--line); }
+.chapter__nav-link { text-decoration: none; }
+.chapter__nav-link--next { margin-left: auto; text-align: right; }
+
+/* ---- Math (SPEC D8) --------------------------------------------------
+   KaTeX output inherits the text colour; nothing else to style. If KaTeX never
+   loads, site.js adds `no-katex` to <body> and the raw \( … \) source stays
+   visible in the running text. */
+.katex-display { overflow-x: auto; overflow-y: hidden; }
+
+/* ====================================================================
+   Demo marks shared by demos (Phase 4+). Meaning is never colour-only:
+   pair filled/hollow shapes or labels with the colour.
+   ==================================================================== */
+.ui-chart .mark--hollow, .coin-strip .mark--hollow { fill: var(--surface); stroke: var(--ink-soft); stroke-width: var(--border); }
+.coin-strip .mark { fill: var(--accent); }
+.coin-strip .mark--strong { fill: var(--accent-strong); }
+.mark-label { fill: var(--ink); font-family: var(--font); font-size: var(--fs-0); font-weight: 600; }
+.mark-label--light { fill: var(--surface); }
+.coin-strip { width: 100%; margin: var(--space-1) 0 var(--space-2); }
+.coin-strip svg { display: block; max-width: 100%; height: auto; margin-left: auto; }
+.demo__note { margin-top: var(--space-1); }
+
+/* ---- §3.2 events field ---------------------------------------------- */
+.ui-chart .space { fill: var(--surface); stroke: var(--line); }
+.ui-chart .space--open { fill: none; }   /* outline only: lets a canvas layer beneath show through */
+.draggable { cursor: grab; touch-action: none; }
+.draggable:active { cursor: grabbing; }
+.event .event__disc { fill-opacity: 0.18; stroke-width: 2; }
+.event--a .event__disc { fill: var(--cat-1); stroke: var(--cat-1); }
+.event--b .event__disc { fill: var(--cat-2); stroke: var(--cat-2); stroke-dasharray: 6 4; }
+.event__label { fill: var(--ink); font-weight: 600; font-size: var(--fs-1); pointer-events: none; }
+.ui-chart .pt { fill: var(--surface); stroke: var(--ink-soft); }
+.ui-chart .pt--a { fill: var(--cat-1); stroke: none; }
+.ui-chart .pt--b { fill: var(--cat-2); stroke: none; }
+.ui-chart .pt--ab { fill: var(--accent-strong); stroke: var(--surface); stroke-width: 1.5; }
+.demo__status { font-size: var(--fs-0); color: var(--ink-soft); margin: 0; }
+
+/* ---- §3.3 branching board and contingency table --------------------- */
+.ui-chart .board-edge { stroke: var(--line); stroke-width: 3; fill: none; }
+.ui-chart .board-node circle { fill: var(--surface); stroke: var(--ink-soft); stroke-width: 2; }
+.ui-chart .board-node.is-focus circle { stroke: var(--accent-strong); fill: var(--accent-soft); }
+.ui-chart .board-label { fill: var(--ink); font-size: var(--fs-0); }
+.ui-chart .board-count { font-weight: 600; font-family: var(--font-mono); }
+.ui-chart .ball { fill: var(--accent-strong); }
+.is-dimmed { opacity: 0.3; }
+.ui-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-2);
+  font-size: var(--fs-0);
+  font-variant-numeric: tabular-nums;
+}
+.ui-table caption { text-align: left; color: var(--ink-soft); padding-bottom: var(--space-1); }
+.ui-table th, .ui-table td { border: var(--border) solid var(--line); padding: var(--space-1); text-align: right; }
+.ui-table th { color: var(--ink-soft); font-weight: 600; }
+.ui-table th[scope="row"] { text-align: left; }
+.ui-table td { font-family: var(--font-mono); }
+.ui-table .is-focus { background: var(--accent-soft); }
+
+/* ---- Canvas layer (Phase 6, D-007) ----------------------------------- */
+.ui-chart--layered { position: relative; }
+.ui-chart--layered svg { position: relative; }
+.ui-chart__canvas { position: absolute; display: block; pointer-events: none; }
+.field-clickable { cursor: pointer; }
+
+/* ---- Chapter 1 marks -------------------------------------------------- */
+.ui-chart .bar { fill: var(--accent); stroke: var(--surface); stroke-width: 1; }
+.ui-chart .mark--trail { fill: var(--ink-soft); }
+.ui-chart .marker-label { fill: var(--ink); font-size: var(--fs-0); font-weight: 600; }
+.ui-chart .marker-label--soft { fill: var(--ink-soft); font-weight: 400; }
+.ui-chart .region { fill: none; stroke: var(--accent-strong); stroke-dasharray: 6 4; stroke-width: 2; }
+.ui-chart .entrance { fill: var(--warn); }
+.ui-chart .entrance-label { fill: var(--ink); font-size: var(--fs-0); font-weight: 600; }
+.ui-controls[role="group"] .ui-button[aria-pressed="true"] { background: var(--accent-strong); color: var(--surface); border-color: var(--accent-strong); }
+
+/* ---- Chapter 2 marks -------------------------------------------------- */
+.ui-chart .lane-line { stroke: var(--line); }
+.ui-chart .point .hit { fill: var(--surface); fill-opacity: 0; }   /* 44 px touch target, invisible */
+.ui-chart .point .dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
+.ui-chart .point:hover .dot, .ui-chart .point:focus-visible .dot { fill: var(--accent-strong); }
+.ui-chart .stick { stroke: var(--accent-strong); stroke-width: 3; stroke-linecap: round; }
+.ui-chart .square { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; fill-opacity: 0.6; }
+.ui-chart .polygon { fill: none; stroke: var(--cat-2); stroke-width: 2.5; stroke-linejoin: round; }
+.ui-chart .box { fill: var(--accent-soft); stroke: var(--accent-strong); stroke-width: 2; }
+.ui-chart .whisker { stroke: var(--accent-strong); stroke-width: 2; }
+.ui-chart .median-line { stroke: var(--ink); stroke-width: 3; }
+
+/* ---- Chapter 4 marks -------------------------------------------------- */
+.ui-chart .bar--theory { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+.ui-chart .bar--empirical { fill: var(--accent-strong); stroke: none; }
+.weights, .params { margin-bottom: var(--space-1); }
+
+/* ---- Chapter 5 marks -------------------------------------------------- */
+.ui-chart .bar--density { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1; }
+.ui-chart .handle .hit { fill: var(--surface); fill-opacity: 0; }
+.ui-chart .handle__line { stroke: var(--accent-strong); stroke-width: 1.5; stroke-dasharray: 3 3; }
+.ui-chart .handle:hover .mark, .ui-chart .handle:focus-visible .mark { fill: var(--ink); }
+.ui-chart .tick-mark { stroke: var(--accent-strong); stroke-width: 2; }
+
+/* ---- Chapter 6 marks -------------------------------------------------- */
+.ui-chart .zmark line { stroke-width: 2; }
+.section__demo h3 { margin-top: var(--space-2); font-size: var(--fs-1); color: var(--ink-soft); }
+
+/* ---- Chapter 7 marks -------------------------------------------------- */
+.ui-chart .line--overlay { stroke: var(--cat-2); stroke-width: 2.5; }
+.ui-chart .dot--sample { fill: var(--accent-strong); stroke: var(--surface); stroke-width: 1; }
+
+/* ---- Chapter 8 marks -------------------------------------------------- */
+.ui-chart .ci-line { stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; }
+.ui-chart .ci-line--miss { stroke: var(--warn); stroke-dasharray: 5 4; }
+.ui-chart .ci-line--overlay { stroke: var(--cat-2); }
+.ui-chart .ci-dot { fill: var(--accent-strong); }
+.ui-chart .ci-dot--miss { fill: var(--warn); }
+
+/* ---- Chapter 9 marks -------------------------------------------------- */
+.ui-chart .area--alpha { fill: var(--cat-2); fill-opacity: 0.35; }
+.ui-chart .area--beta { fill: var(--accent); fill-opacity: 0.25; }
+.ui-chart .region-label--alpha { fill: var(--warn); }
+.ui-chart .region-label--beta { fill: var(--accent-strong); }
+.test-steps { padding-left: var(--space-3); margin: 0 0 var(--space-2); font-size: var(--fs-0); }
+.test-steps li { margin-bottom: var(--space-1); }
+
+/* ---- Phase 14 grayscale audit: a second curve on the same chart is dashed ---- */
+.ui-chart .line--dashed { stroke-dasharray: 7 5; }
+
+/* ---- Chapter 10 marks ------------------------------------------------- */
+.chart-pair { display: grid; grid-template-columns: 1fr; gap: var(--space-2); }
+@media (min-width: 40rem) { .chart-pair { grid-template-columns: 1fr 1fr; } }
+.chart-pair__item { min-width: 0; }
+.ui-chart .pair-link { stroke: var(--ink-soft); stroke-width: 1.5; stroke-opacity: 0.6; }
+
+/* ---- Chapter 11 marks ------------------------------------------------- */
+.ui-chart .row-label { font-weight: 400; }
+
+/* ---- Wide content scrolls inside its panel, never the page (SPEC §6) ---- */
+.section__demo { overflow-x: auto; }
+@media (max-width: 30rem) {
+  .ui-table th, .ui-table td { padding: var(--space-1) calc(var(--space-1) / 2); }
+}
+
+/* Chapter 12 (Phase 17): residual squares for the student's line, locked and hollow dots, faint sample lines, extrapolation zones */
+.ui-chart .square--manual { fill: var(--cat-2); stroke: var(--cat-2); fill-opacity: 0.3; }
+.ui-chart .point.is-inert { pointer-events: none; cursor: default; }
+.ui-chart .point.is-inert .dot { fill: var(--ink-soft); }
+.ui-chart .point .dot--hollow { fill: var(--surface); stroke: var(--accent-strong); stroke-width: 2; }
+.ui-chart .point--new .dot { fill: var(--cat-2); stroke: var(--surface); stroke-width: 2; }
+.ui-chart .point--new:hover .dot, .ui-chart .point--new:focus-visible .dot { fill: var(--warn); }
+.ui-chart .line--faint { stroke: var(--accent); stroke-width: 1; stroke-opacity: 0.22; }
+.ui-chart .zone--caution { fill: var(--warn); fill-opacity: 0.1; stroke: none; }
+
+/* Chapter 13 (Phase 18): the two mean-square bars of the ANOVA idea demo */
+.ui-chart .bar--between { fill: var(--accent); fill-opacity: 0.85; }
+.ui-chart .bar--within { fill: var(--cat-2); fill-opacity: 0.85; }
+
+/* Chapter 14 (Phase 20): the decision tree and the arrangement list */
+.ui-chart .tree-edge { stroke: var(--line); stroke-width: 1; }
+.ui-chart .tree-edge--lit { stroke: var(--accent-strong); stroke-width: 2; }
+.ui-chart .tree-node { fill: var(--ink-soft); }
+.ui-chart .tree-node--leaf { fill: var(--accent); }
+.ui-chart .tree-node--lit { fill: var(--cat-2); stroke: var(--surface); stroke-width: 1; }
+.arrangement-list { display: flex; flex-wrap: wrap; gap: var(--space-1); margin-top: var(--space-2); }
+.arrangement { font-family: var(--font-mono); font-size: var(--fs-0); letter-spacing: 0.08em; color: var(--ink);
+  background: var(--accent-soft); border-radius: var(--radius); padding: 0.2rem 0.5rem; white-space: nowrap; }
+
+/* Chapter 15 (Phase 21): a third dash pattern, so prior, likelihood and posterior differ without colour */
+.ui-chart .line--dotted { stroke-dasharray: 2 4; stroke-linecap: round; }
+
+/* Chapter 16 (Phase 22): histogram bars at or beyond the observed difference */
+.ui-chart .bar--extreme { fill: var(--cat-2); stroke: var(--cat-2); fill-opacity: 0.55; }
+.ui-chart .ci-line--formula { stroke: var(--cat-2); stroke-dasharray: 7 5; }
+
+/* Chapter 17 (Phase 23): pooled points lose their group identity */
+.ui-chart .is-pooled { fill: var(--ink-soft); stroke: var(--surface); stroke-width: 1; }

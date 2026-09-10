@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 5 · Continuous Random Variables — StatLab</title>
+  <meta name="description" content="Densities, area as probability, and the exponential model of waiting times.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="continuous-random-variables" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 5 · OpenStax Ch 5</p>
+      <h1>Continuous Random Variables</h1>
+      <p class="chapter__blurb">Densities, area as probability, and the exponential model of waiting times.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">5.1 Density and area</a></li>
+          <li><a href="#section-2">5.2 The exponential distribution</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">5.1 Density and area</h2>
+        <p>A <strong>continuous random variable</strong> can take any value in a range, such as a waiting time, a height, or a distance. There are too many values to list, so instead of a probability for each one we draw a <strong>probability density function</strong> \(f(x)\). Probability is now <strong>area</strong> under the curve,</p>
+        <p>\[P(a \le X \le b) = \int_a^b f(x)\,dx = F(b) - F(a),\]</p>
+        <p>where \(F\) is the cumulative distribution function. The whole area is 1. Drag the two handles and watch the shaded area and the probability move together. Then press “Shrink interval to a point”: the area of a line is zero, so \(P(X = x) = 0\) for every single value. Draw some values and the bars settle onto the curve, and that is what a density is, the shape a histogram approaches. Switch to the <strong>exponential</strong> and see the same rules on a curve that is not flat.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 5.1, 5.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="continuous-random-variables__density-area"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">5.2 The exponential distribution</h2>
+        <p>Suppose arrivals happen at random with an average <strong>rate</strong> \(\lambda\) per minute. Then the wait between one arrival and the next has the <strong>exponential distribution</strong>, \(f(w) = \lambda e^{-\lambda w}\), with mean \(1/\lambda\). Short waits are common and long waits are rare, which the histogram shows as soon as a few dozen arrivals have come in.</p>
+        <p>The exponential has a strange property. It is <strong>memoryless</strong>. Slide “already waited” to two minutes. The dashed curve for the wait still ahead of you is the original curve, just moved along. Formally, \(P(W > t + s \mid W > t) = P(W > s)\). The readouts compare the two, in theory and in the data. Waiting has bought you nothing, because the next arrival is as far away as it was when you started. Buses run on schedules. Radioactive atoms do not.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 5.3.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="continuous-random-variables__exponential"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../discrete-random-variables/index.html">← 4. Discrete Random Variables</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../normal-distribution/index.html">6. The Normal Distribution →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/continuous-random-variables__density-area.js"></script>
+  <script defer src="../../assets/js/demos/continuous-random-variables__exponential.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initDensityArea(document.querySelector('[data-demo="continuous-random-variables__density-area"]'));
+      demos.initExponential(document.querySelector('[data-demo="continuous-random-variables__exponential"]'));
+    });
+  </script>
+</body>
+</html>

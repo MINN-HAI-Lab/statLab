@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chapter 10 · Hypothesis Testing (Two Samples) — StatLab</title>
+  <meta name="description" content="Comparing two means or two proportions, and why pairing helps.">
+  <script>
+    /* Theme before first paint, so nothing flashes in the wrong one (H2, D-041/D-042). */
+    (function () {
+      var t = null;
+      try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
+      if (t !== "light" && t !== "dark") {
+        t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
+      }
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg">
+  <link rel="stylesheet" href="../../assets/css/theme.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.css" integrity="sha384-JctiRyLzXCrSoOOzFlSoWLdyzQl7OrrRnhyeBmzB6ZWtcjccUyc8lCQJqIbs3uQX" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/katex.min.js" integrity="sha384-+7Keh381hSkXmXqnjC0JBM/kzsN6TFj+wMKychSLjTvJ8/0ElMde2uKl8i6p6Buj" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.7/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header class="site-header" data-site-header></header>
+  <main class="chapter" data-slug="two-sample-tests" data-root="../../">
+    <header class="chapter__header" id="chapter-header">
+      <p class="chapter__kicker">Chapter 10 · OpenStax Ch 10</p>
+      <h1>Hypothesis Testing (Two Samples)</h1>
+      <p class="chapter__blurb">Comparing two means or two proportions, and why pairing helps.</p>
+      <nav class="chapter__sections" aria-label="Sections in this chapter">
+        <ol>
+          <li><a href="#section-1">10.1 Comparing two means</a></li>
+          <li><a href="#section-2">10.2 Comparing two proportions</a></li>
+          <li><a href="#section-3">10.3 Paired samples</a></li>
+        </ol>
+      </nav>
+    </header>
+
+    <section class="section" id="section-1" aria-labelledby="section-1-title">
+      <div class="section__text">
+        <h2 id="section-1-title">10.1 Comparing two means</h2>
+        <p>Two groups, two sample means, and one question. Is the gap between them bigger than chance alone would produce? The <strong>two-sample t-test</strong> divides the observed difference by its own noise,</p>
+        <p>\[t = \frac{\bar{x}_A - \bar{x}_B}{\sqrt{s_A^2/n_A + s_B^2/n_B}},\]</p>
+        <p>and asks how often a \(t\) this large would appear if the populations were really equal.<sup>1</sup> Drag the two means together and sample. The differences pile up around zero and most p-values are large. Pull the means apart and the pile shifts, but with \(n = 15\) many samples still fail to reach 0.05, because two overlapping populations produce overlapping samples. Raise \(n\) and the same gap becomes unmistakable. Overlap in the curves and significance in the test are different things.</p>
+        <p class="muted"><sup>1</sup> This is Welch's version, which does not assume equal spreads. Its degrees of freedom come from the Welch–Satterthwaite formula. \(s\) divides by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Sections 10.1, 10.2.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="two-sample-tests__two-means"></div>
+    </section>
+
+    <section class="section" id="section-2" aria-labelledby="section-2-title">
+      <div class="section__text">
+        <h2 id="section-2-title">10.2 Comparing two proportions</h2>
+        <p>Two versions of a sign-up page are shown to \(n\) visitors each. Version A converts 10 % of them, version B 13 %. Is B really better, or did it get luckier visitors? The <strong>two-proportion z-test</strong> pools both samples into one overall rate \(\hat{p}_c\) and judges the gap against the noise that rate implies,</p>
+        <p>\[z = \frac{\hat{p}_A - \hat{p}_B}{\sqrt{\hat{p}_c (1 - \hat{p}_c)\left(\frac{1}{n_A} + \frac{1}{n_B}\right)}}.\]</p>
+        <p>Run the test a hundred times with 200 visitors per version and look at the pile of p-values. The three-point gap is real, yet most runs miss it. Slide \(n\) to 2 000 and the pile crowds toward zero. Small real differences are detectable, but only by large experiments. That is why online tests run for weeks.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 10.3.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="two-sample-tests__two-proportions"></div>
+    </section>
+
+    <section class="section" id="section-3" aria-labelledby="section-3-title">
+      <div class="section__text">
+        <h2 id="section-3-title">10.3 Paired samples</h2>
+        <p>Twelve students take a test, get a week of coaching, and take it again. Students differ from each other far more than coaching changes any one of them. Treating the before and after scores as two unrelated groups buries a real improvement under that between-student spread.</p>
+        <p>The fix is to test the <strong>differences</strong>, one per subject, so \(d_i = \text{after}_i - \text{before}_i\). A <strong>paired t-test</strong> is just a one-sample t-test on those differences, \(t = \bar{d} / (s_d / \sqrt{n})\), and it never sees the between-student spread at all. Press “Treat as pairs”. The lines join each student to their own second score. The standard deviation collapses from the spread between students to the spread of the changes, and the p-value drops, for exactly the same numbers. Whenever data come in natural pairs, pair them.</p>
+        <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 10.4.</p>
+      </div>
+      <div class="section__demo ui-panel" data-demo="two-sample-tests__paired"></div>
+    </section>
+
+    <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
+      <a class="chapter__nav-link chapter__nav-link--prev" href="../hypothesis-testing/index.html">← 9. Hypothesis Testing (One Sample)</a>
+      <a class="chapter__nav-link chapter__nav-link--next" href="../chi-square/index.html">11. The Chi-Square Distribution →</a>
+    </nav>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+
+  <script defer src="../../assets/vendor/d3.v7.min.js"></script>
+  <script defer src="../../assets/js/stats.js"></script>
+  <script defer src="../../assets/js/ui.js"></script>
+  <script defer src="../../assets/js/chapters.js"></script>
+  <script defer src="../../assets/js/site.js"></script>
+  <script defer src="../../assets/js/demos/two-sample-tests__two-means.js"></script>
+  <script defer src="../../assets/js/demos/two-sample-tests__two-proportions.js"></script>
+  <script defer src="../../assets/js/demos/two-sample-tests__paired.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      demos.initTwoMeans(document.querySelector('[data-demo="two-sample-tests__two-means"]'));
+      demos.initTwoProportions(document.querySelector('[data-demo="two-sample-tests__two-proportions"]'));
+      demos.initPaired(document.querySelector('[data-demo="two-sample-tests__paired"]'));
+    });
+  </script>
+</body>
+</html>

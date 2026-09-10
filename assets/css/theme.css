@@ -1,0 +1,132 @@
+/*
+  theme.css — StatLab design tokens + base styles.
+  Tokens are LOCKED (docs/HANDBOOK.md Amendment H2, which supersedes the
+  Section 5 token block). Never hard-code a colour, size, or font anywhere else in the site —
+  always var(--…).
+
+  Two themes. :root carries light; [data-theme="dark"] on <html> overrides it.
+  Every page sets data-theme in a tiny inline script in <head>, before this file
+  paints, so there is no flash of the wrong theme. Names are identical in both
+  blocks: a component never asks which theme is running.
+*/
+
+:root {
+  color-scheme: light;
+
+  /* Calm neutral palette — muted, low-saturation, WCAG AA on --bg and --surface */
+  --bg:            #FAF8F4;  /* warm off-white page background */
+  --surface:       #FFFFFF;  /* cards, demo panels */
+  --ink:           #282725;  /* body text, axis text */
+  --ink-soft:      #6B6560;  /* secondary text, captions */
+  --line:          #E4E0DA;  /* borders, gridlines */
+
+  --accent:        #2E7D6B;  /* muted teal: interactive elements, primary data, core tier */
+  --accent-strong: #1F5A4D;  /* hover/active, emphasized data, link text */
+  --accent-soft:   #D9EBE5;  /* fills, selected backgrounds */
+
+  /* Given as #7C5CAB; darkened by one step because the node number sets --accent-2
+     on --accent-2-soft, which was 4.08:1, under AA. Now 4.51:1 (D-041). */
+  --accent-2:      #7555A5;  /* advanced-tier nodes on the journey path */
+  --accent-2-soft: #E7DFF2;
+
+  /* Categorical series (max 5; all muted, distinguishable in grayscale by order/label) */
+  --cat-1: #2E7D6B;  --cat-2: #B5763F;  --cat-3: #4E7DA6;
+  --cat-4: #9A5D8F;  --cat-5: #8A8F3C;
+
+  --ok:            #4C8B57;  /* confirmations, CI "captured" */
+  --warn:          #C06A2E;  /* cautions, CI "missed" */
+
+  --path-line:     #CFC9C0;  /* journey connectors */
+
+  /* Type & spacing — unchanged by H2 */
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --fs-0: 0.875rem; --fs-1: 1rem; --fs-2: 1.25rem; --fs-3: 1.6rem; --fs-4: 2.1rem;
+  --space-1: 0.5rem; --space-2: 1rem; --space-3: 2rem; --space-4: 4rem;
+  --radius: 6px;
+  --measure: 68ch;  /* max text column width */
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:            #1B1A19;
+  --surface:       #252423;
+  --ink:           #EAE7E2;
+  --ink-soft:      #A6A19A;
+  --line:          #3B3936;
+
+  --accent:        #57B79F;
+  --accent-strong: #7BCDB8;
+  --accent-soft:   #1F3B34;
+
+  --accent-2:      #AE93D8;
+  --accent-2-soft: #312A40;
+
+  --cat-1: #57B79F;  --cat-2: #D19A64;  --cat-3: #7FABD0;
+  --cat-4: #C08AB4;  --cat-5: #B4BA6A;
+
+  --ok:            #79B584;
+  --warn:          #D98F52;
+
+  --path-line:     #4A4744;
+}
+
+/* Component sizing — added Phase 2 (D-016). The locked palette/type block above
+   is unchanged; these are the only other sizes components may use. */
+:root {
+  --touch: 44px;          /* minimum touch/click target (SPEC §6) */
+  --thumb: 1.5rem;        /* slider thumb diameter */
+  --track: 0.375rem;      /* slider track height */
+  --border: 1px;
+  --border-strong: 3px;   /* status markers, selected outlines */
+}
+
+/* ---- Base ---------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: var(--fs-1);
+  line-height: 1.55;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: var(--space-3) var(--space-2) var(--space-4);
+}
+
+main { max-width: var(--measure); margin: 0 auto; }
+
+h1, h2, h3 { line-height: 1.2; margin: 0 0 var(--space-2); }
+h1 { font-size: var(--fs-4); font-weight: 600; }
+h2 { font-size: var(--fs-3); font-weight: 600; margin-top: var(--space-3); }
+h3 { font-size: var(--fs-2); font-weight: 600; margin-top: var(--space-2); }
+
+p { margin: 0 0 var(--space-2); }
+small, .muted { color: var(--ink-soft); font-size: var(--fs-0); }
+code { font-family: var(--font-mono); font-size: var(--fs-0); }
+
+/* Links use the strong accent, which clears AA in both themes: 7.5:1 on light,
+   9.3:1 on dark (D-041). Plain --accent is 4.65:1 on light, so it stays for marks
+   and fills rather than text (D-016). */
+a { color: var(--accent-strong); }
+a:hover { color: var(--ink); }
+
+/* Keyboard focus must always be visible (SPEC §6). */
+:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: 2px; }
+
+hr { border: 0; border-top: 1px solid var(--line); margin: var(--space-3) 0; }
+
+/* Nothing animates on page load; motion is opt-in per component (HANDBOOK §5). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
