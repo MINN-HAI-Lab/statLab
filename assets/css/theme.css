@@ -4,10 +4,10 @@
   Section 5 token block). Never hard-code a colour, size, or font anywhere else in the site —
   always var(--…).
 
-  Two themes. :root carries light; [data-theme="dark"] on <html> overrides it.
-  Every page sets data-theme in a tiny inline script in <head>, before this file
-  paints, so there is no flash of the wrong theme. Names are identical in both
-  blocks: a component never asks which theme is running.
+  Three themes. :root carries light; [data-theme="paper"] and [data-theme="dark"]
+  on <html> override it. Every page sets data-theme in a tiny inline script in <head>,
+  before this file paints, so there is no flash of the wrong theme. Names are identical
+  in every block: a component never asks which theme is running.
 */
 
 :root {
@@ -70,6 +70,38 @@
   --warn:          #D98F52;
 
   --path-line:     #4A4744;
+}
+
+/*
+  Paper (H3, D-050). A warm reading-room theme: aged book stock rather than a
+  screen white, with brown-black ink instead of neutral. It is a third first-class
+  theme, not a filter over light — every value was chosen against this ground and
+  checked with the same contrast pairs the other two pass. color-scheme stays light
+  so form controls and scrollbars render light-side.
+*/
+[data-theme="paper"] {
+  color-scheme: light;
+
+  --bg:            #F4ECD8;  /* aged paper */
+  --surface:       #FBF5E6;  /* a fresher sheet for cards and demo panels */
+  --ink:           #3A322A;  /* warm brown-black */
+  --ink-soft:      #6A5D4C;
+  --line:          #DFD2B6;
+
+  --accent:        #2A6F5E;  /* teal deepened one step to hold against cream */
+  --accent-strong: #1C5044;
+  --accent-soft:   #D6E5DC;
+
+  --accent-2:      #6B4C94;
+  --accent-2-soft: #E3D9F0;
+
+  --cat-1: #2A6F5E;  --cat-2: #A2652F;  --cat-3: #436F96;
+  --cat-4: #8A4F80;  --cat-5: #767B2E;
+
+  --ok:            #45804F;
+  --warn:          #B05F26;
+
+  --path-line:     #CBBB9A;
 }
 
 /* Component sizing — added Phase 2 (D-016). The locked palette/type block above

@@ -10,7 +10,7 @@
     (function () {
       var t = null;
       try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
-      if (t !== "light" && t !== "dark") {
+      if (t !== "light" && t !== "paper" && t !== "dark") {
         t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
       }
       document.documentElement.setAttribute("data-theme", t);
@@ -55,7 +55,7 @@
     <p>The full source, including the syllabus and the numeric test page, is on GitHub at <a href="https://github.com/MINN-HAI-Lab/statLab">github.com/MINN-HAI-Lab/statLab</a>. Found a bug or a confusing demo? Open an issue there.</p>
 
     <h2>Privacy</h2>
-    <p>The site is static files only. There are no accounts, no cookies, no analytics, and no third-party trackers. Your choice of light or dark theme is the one thing kept, in your own browser, under the key <code>statlab-theme</code>. Nothing is sent anywhere, and blocking storage only means the theme resets on the next page. The only external resource is the KaTeX library for typesetting formulas; if it does not load, formulas appear as plain LaTeX and everything else still works.</p>
+    <p>The site is static files only. There are no accounts, no cookies, no analytics, and no third-party trackers. Your choice of light, paper, or dark theme is the one thing kept, in your own browser, under the key <code>statlab-theme</code>. Nothing is sent anywhere, and blocking storage only means the theme resets on the next page. The only external resource is the KaTeX library for typesetting formulas; if it does not load, formulas appear as plain LaTeX and everything else still works.</p>
 
     <h2>Conventions</h2>
     <p>Quantiles use the Weibull method, position <em>(n + 1)p</em>. Sample variance divides by <em>n − 1</em>. Capital letters denote random variables and lowercase letters their observed values. These choices are stated in a footnote the first time each chapter uses them.</p>

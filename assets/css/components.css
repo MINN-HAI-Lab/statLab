@@ -213,9 +213,14 @@ main.landing, main.chapter { max-width: 72rem; }
   cursor: pointer;
 }
 .theme-toggle:hover { color: var(--ink); border-color: var(--ink-soft); }
-.theme-toggle__sun { display: none; }
+/* The button shows the icon of the theme it would switch TO, walking the cycle
+   light -> paper -> dark -> light (H3, D-050). Exactly one icon is ever shown. */
+.theme-toggle__icon { display: none; }
+.theme-toggle__paper { display: block; }
+[data-theme="paper"] .theme-toggle__paper { display: none; }
+[data-theme="paper"] .theme-toggle__moon { display: block; }
+[data-theme="dark"] .theme-toggle__paper { display: none; }
 [data-theme="dark"] .theme-toggle__sun { display: block; }
-[data-theme="dark"] .theme-toggle__moon { display: none; }
 
 /* ---- Landing: the learning-journey path -------------------------------- */
 /* A vertical trail of chapter nodes in prerequisite order, with advanced chapters

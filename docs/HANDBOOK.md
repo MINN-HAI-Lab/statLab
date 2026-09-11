@@ -1,5 +1,9 @@
 # HANDBOOK.md — Engineering Handbook
 
+> **⚠ Amendment H3 in force (2026-09-12):** H2 Section 1 ("Two themes") is superseded by
+> Amendment H3 at the end of this file (a third theme, `paper`; the token set and the single
+> storage key are otherwise unchanged). Original text preserved unchanged per Section 1.5.
+>
 > **⚠ Amendment H2 in force (2026-09-10):** the Section 5 token block is superseded by Amendment H2 at the end of this file (two themes, three new tokens, one storage key). Original text preserved unchanged per Section 1.5.
 >
 > **⚠ Amendment H1 in force (2026-09-08):** §2 "native ES modules" and the §6 global-variable rule are superseded by Amendment H1 at the end of this file (classic scripts, namespace globals). Original text preserved unchanged per §1.5.
@@ -227,3 +231,48 @@ A demo may never bake a colour. In practice:
 
 Gate rule: the HANDBOOK Section 7 gates are run **in both themes**, and the extremes check includes
 toggling the theme while a demo is animating.
+
+---
+
+# Amendment H3 — 2026-09-12 (D-050)
+
+Maintainer-ordered. **H3 supersedes H2 Section 1 only.** The H2 token tables for light and dark
+are unchanged and still binding, as is every other part of H2 and of Section 5.
+
+## H3 Section 1 — Three themes (supersedes "H2 Section 1 — Two themes")
+
+A third theme, `paper`, joins light and dark. It is selected by `[data-theme="paper"]` on `<html>`
+and defines the **same token names** as the other two, so no component learns that it exists. It is
+a first-class theme rather than a filter over light: every value below was chosen against the paper
+ground and checked against the same contrast pairs light and dark are held to.
+
+`color-scheme` stays `light` for paper, so form controls and scrollbars render light-side.
+
+**Paper (`[data-theme="paper"]`)**
+
+| Token | Value | Token | Value |
+|---|---|---|---|
+| `--bg` | `#F4ECD8` | `--accent-2` | `#6B4C94` |
+| `--surface` | `#FBF5E6` | `--accent-2-soft` | `#E3D9F0` |
+| `--ink` | `#3A322A` | `--cat-1` | `#2A6F5E` |
+| `--ink-soft` | `#6A5D4C` | `--cat-2` | `#A2652F` |
+| `--line` | `#DFD2B6` | `--cat-3` | `#436F96` |
+| `--accent` | `#2A6F5E` | `--cat-4` | `#8A4F80` |
+| `--accent-strong` | `#1C5044` | `--cat-5` | `#767B2E` |
+| `--accent-soft` | `#D6E5DC` | `--ok` | `#45804F` |
+| `--path-line` | `#CBBB9A` | `--warn` | `#B05F26` |
+
+## H3 Section 2 — The control is a cycle, not a flip
+
+The header button walks `light → paper → dark → light` and shows the icon of the theme it would
+move **to**, with an `aria-label` naming that destination. Exactly one of its three icons is visible
+in any theme, decided by CSS.
+
+`paper` is never selected automatically. The pre-paint script still honours a stored choice first
+and otherwise falls back to `prefers-color-scheme`, which only distinguishes light from dark, so
+paper is only ever reached deliberately.
+
+## H3 Section 3 — Storage is unchanged
+
+Still exactly one key, `statlab-theme` (D-042), still wrapped in `try`/`catch`, now holding one of
+three values instead of two. No second key was added and none may be.

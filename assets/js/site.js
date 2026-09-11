@@ -80,30 +80,35 @@
    */
   var THEME_KEY = "statlab-theme";
   var themeButtons = [];
+  /* The cycle order the toggle walks, lightest to darkest (H3, D-050). */
+  var THEMES = ["light", "paper", "dark"];
+  var THEME_NAME = { light: "light", paper: "paper", dark: "dark" };
+
+  function validTheme(value) { return THEMES.indexOf(value) >= 0 ? value : null; }
 
   site.theme = {
     get: function () {
-      return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      return validTheme(document.documentElement.getAttribute("data-theme")) || "light";
     },
-    /** Preferred theme before any choice was made. */
+    /** Preferred theme before any choice was made. Paper is never automatic: it is a
+        deliberate choice, and the system preference only knows light from dark. */
     preferred: function () {
       return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
     },
     stored: function () {
-      try {
-        var v = window.localStorage.getItem(THEME_KEY);
-        return v === "dark" || v === "light" ? v : null;
-      } catch (e) { return null; }
+      try { return validTheme(window.localStorage.getItem(THEME_KEY)); } catch (e) { return null; }
     },
     set: function (value) {
-      var theme = value === "dark" ? "dark" : "light";
+      var theme = validTheme(value) || "light";
       document.documentElement.setAttribute("data-theme", theme);
       try { window.localStorage.setItem(THEME_KEY, theme); } catch (e) { /* storage unavailable: this session only */ }
       themeButtons.forEach(labelThemeButton);
       document.dispatchEvent(new CustomEvent("themechange", { detail: { theme: theme } }));
       return theme;
     },
-    toggle: function () { return site.theme.set(site.theme.get() === "dark" ? "light" : "dark"); }
+    /** Advance one step through THEMES, wrapping. */
+    next: function (from) { return THEMES[(THEMES.indexOf(validTheme(from) || "light") + 1) % THEMES.length]; },
+    toggle: function () { return site.theme.set(site.theme.next(site.theme.get())); }
   };
 
   function svgIcon(className, shapes) {
@@ -128,12 +133,12 @@
   }
 
   function labelThemeButton(button) {
-    var dark = site.theme.get() === "dark";
-    button.setAttribute("aria-label", dark ? "Switch to the light theme" : "Switch to the dark theme");
-    button.setAttribute("title", dark ? "Light theme" : "Dark theme");
+    var to = site.theme.next(site.theme.get());
+    button.setAttribute("aria-label", "Switch to the " + THEME_NAME[to] + " theme");
+    button.setAttribute("title", THEME_NAME[to].charAt(0).toUpperCase() + THEME_NAME[to].slice(1) + " theme");
   }
 
-  /** The sun/moon toggle. Shows the icon for the theme it would switch TO. */
+  /** The theme cycle button. Shows the icon for the theme it would switch TO. */
   site.themeToggle = function () {
     var button = make("button", "theme-toggle");
     button.type = "button";
@@ -143,6 +148,10 @@
     ]));
     button.appendChild(svgIcon("theme-toggle__icon theme-toggle__moon", [
       { tag: "path", d: "M20.4 14.9A8.6 8.6 0 0 1 9.1 3.6a8.6 8.6 0 1 0 11.3 11.3Z" }
+    ]));
+    button.appendChild(svgIcon("theme-toggle__icon theme-toggle__paper", [
+      { tag: "path", d: "M6.5 3.2h7.2L18.5 8v12.8H6.5Z" },
+      { tag: "path", d: "M13.4 3.4V8h4.9M9.3 12h5.4M9.3 15.5h5.4" }
     ]));
     labelThemeButton(button);
     button.addEventListener("click", function () { site.theme.toggle(); });

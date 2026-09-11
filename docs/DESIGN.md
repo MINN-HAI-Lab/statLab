@@ -56,7 +56,8 @@ These are the default fingerprints of AI-generated UI. None may appear in StatLa
   (interval captured / missed). Never for general emphasis.
 - Every chart must survive grayscale: encode meaning in position, shape, or label first,
   color second (SPEC §6).
-- Both themes are first-class. Dark mode is not a filter — verify each chart separately.
+- All three themes are first-class. Neither dark nor paper is a filter over light — verify
+  each chart in each of them separately (H3, D-050).
 
 ## 6. Motion
 

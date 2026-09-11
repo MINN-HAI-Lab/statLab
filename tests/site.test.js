@@ -135,7 +135,7 @@
     a.ok(toggle, "the header carries the theme toggle");
     a.equal(toggle.type, "button");
     a.ok(/Switch to the (light|dark) theme/.test(toggle.getAttribute("aria-label")), "toggle is labelled for screen readers");
-    a.equal(toggle.querySelectorAll("svg").length, 2, "a sun and a moon, one shown per theme by CSS");
+    a.equal(toggle.querySelectorAll("svg").length, 3, "a sun, a moon and a sheet of paper, one shown per theme by CSS (H3)");
     site.renderFooter(f, "");
     a.ok(f.textContent.indexOf("StatLab by Dr. Sein Minn and Kaung Hein Htet") === 0, "both authors are credited, in order (D-045)");
     a.ok(f.textContent.indexOf("\u00A9 2026") >= 0, "the footer carries the copyright year");
@@ -154,11 +154,12 @@
     a.equal(site.theme.get(), "dark");
     a.equal(site.theme.set("light"), "light");
     a.equal(site.theme.get(), "light");
+    a.equal(site.theme.toggle(), "paper", "the cycle runs light then paper then dark (H3, D-050)");
     a.equal(site.theme.toggle(), "dark");
-    a.equal(site.theme.toggle(), "light");
-    a.equal(seen.join(","), "dark,light,dark,light", "every change is announced once");
+    a.equal(site.theme.toggle(), "light", "and wraps back to light");
+    a.equal(seen.join(","), "dark,light,paper,dark,light", "every change is announced once");
 
-    a.equal(site.theme.set("nonsense"), "light", "anything but dark falls back to light");
+    a.equal(site.theme.set("nonsense"), "light", "an unrecognised theme falls back to light");
     a.ok(site.theme.preferred() === "light" || site.theme.preferred() === "dark");
 
     // the one permitted key, and only that one
@@ -177,6 +178,41 @@
     a.ok(!threw, "no exception escapes when storage is unavailable");
 
     document.removeEventListener("themechange", listen);
+    site.theme.set(started);
+  });
+
+  test("site.theme: paper is a first-class third theme with its own tokens (H3, D-050)", function (a) {
+    var started = site.theme.get();
+    function bg(theme) {
+      site.theme.set(theme);
+      return getComputedStyle(document.documentElement).getPropertyValue("--bg").trim().toLowerCase();
+    }
+    var light = bg("light"), paper = bg("paper"), dark = bg("dark");
+    a.ok(light && paper && dark, "every theme resolves --bg");
+    a.ok(paper !== light && paper !== dark, "paper is not a relabelling of light or dark");
+    a.ok(light !== dark, "light and dark still differ");
+
+    // paper must define the whole token set, not inherit a half-set from :root
+    site.theme.set("paper");
+    var cs = getComputedStyle(document.documentElement);
+    ["--bg", "--surface", "--ink", "--ink-soft", "--line", "--accent", "--accent-strong",
+     "--accent-soft", "--accent-2", "--accent-2-soft", "--ok", "--warn", "--path-line",
+     "--cat-1", "--cat-2", "--cat-3", "--cat-4", "--cat-5"].forEach(function (token) {
+      a.ok(cs.getPropertyValue(token).trim() !== "", "paper defines " + token);
+    });
+
+    a.equal(site.theme.stored(), "paper", "paper round-trips through the one permitted key");
+    a.equal(site.theme.next("paper"), "dark", "paper sits between light and dark in the cycle");
+    a.equal(site.theme.next("dark"), "light");
+    a.equal(site.theme.next("light"), "paper");
+
+    // the button names the theme it moves TO, so a screen reader hears the destination
+    var button = site.themeToggle();
+    site.theme.set("paper");
+    a.ok(/dark/.test(button.getAttribute("aria-label")), "on paper the button offers dark");
+    site.theme.set("light");
+    a.ok(/paper/.test(button.getAttribute("aria-label")), "on light the button offers paper");
+
     site.theme.set(started);
   });
 

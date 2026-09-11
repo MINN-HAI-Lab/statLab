@@ -10,7 +10,7 @@
     (function () {
       var t = null;
       try { t = window.localStorage.getItem("statlab-theme"); } catch (e) { t = null; }
-      if (t !== "light" && t !== "dark") {
+      if (t !== "light" && t !== "paper" && t !== "dark") {
         t = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
       }
       document.documentElement.setAttribute("data-theme", t);
