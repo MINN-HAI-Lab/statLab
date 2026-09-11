@@ -62,10 +62,12 @@ Cross-browser: Firefox and WebKit run through Playwright's browser builds, insta
 
 ## Releases
 
-| Tag | Date | Scope |
+These are the build milestones the project passed through, not git tags. The repository moved accounts on 2026-09-10 and its history was squashed to a single initial commit, so there is no separate commit for either milestone to point at (`docs/DECISIONS.md` D-047). Tagging resumes at v1.0 after the student pilot.
+
+| Milestone | Date | Scope |
 |---|---|---|
-| `v0.5` | 2026-09-09 | Chapters 1–9 (Part A through one-sample hypothesis testing), landing and About pages, 26 demos, 142 numeric and behaviour tests. Hardening sweep per PLAN A1 Phase 14. |
-| `v0.9` | 2026-09-10 | All 17 chapters and 46 demos, 207 numeric and behaviour tests. Site-wide hardening per PLAN A1 Phase 24: SPEC §10 satisfied. Verified in Chrome, Firefox and WebKit at 1280 and 360 px, under reduced motion and in grayscale; Lighthouse accessibility 100 on every page. Feature complete, awaiting the student pilot. |
+| v0.5 | 2026-09-09 | Chapters 1–9 (Part A through one-sample hypothesis testing), landing and About pages, 26 demos, 142 numeric and behaviour tests. Hardening sweep per PLAN A1 Phase 14. |
+| v0.9 | 2026-09-10 | All 17 chapters and 46 demos, 207 numeric and behaviour tests. Site-wide hardening per PLAN A1 Phase 24: SPEC §10 satisfied. Verified in Chrome, Firefox and WebKit at 1280 and 360 px, under reduced motion and in grayscale; Lighthouse accessibility 100 on every page. Feature complete, awaiting the student pilot. |
 
 ## Project documents
 
