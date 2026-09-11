@@ -2,6 +2,13 @@
 
 Interactive statistics website for undergraduates. Vanilla HTML/CSS/JS + D3 v7 + KaTeX. No build step, no npm, no frameworks. Deploys as-is to GitHub Pages.
 
+## Design
+docs/DESIGN.md is binding for all UI work — read it before any styling, layout, or
+motion change, and run its §7 self-audit before reporting done. Use the frontend-design
+skill for implementation craft, but DESIGN.md overrides it wherever they disagree:
+this project is deliberately quiet, and generic "premium UI" moves (gradients, glass,
+scroll animation, hero sections) are defects here, not improvements.
+
 ## Governing documents (read before any work)
 Priority on conflict: SPEC > HANDBOOK > SYLLABUS > PLAN. Flag conflicts; never silently choose.
 
