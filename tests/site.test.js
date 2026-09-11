@@ -137,12 +137,10 @@
     a.ok(/Switch to the (light|dark) theme/.test(toggle.getAttribute("aria-label")), "toggle is labelled for screen readers");
     a.equal(toggle.querySelectorAll("svg").length, 2, "a sun and a moon, one shown per theme by CSS");
     site.renderFooter(f, "");
-    a.ok(f.textContent.indexOf("CC BY 4.0") >= 0);
     a.ok(f.textContent.indexOf("StatLab by Dr. Sein Minn and Kaung Hein Htet") === 0, "both authors are credited, in order (D-045)");
-    a.equal(f.querySelector("a").getAttribute("href"), "about.html");
-    var credits = f.querySelectorAll("a")[1];
-    a.equal(credits.textContent, "Credits");
-    a.equal(credits.getAttribute("href"), "about.html#credits");
+    a.ok(f.textContent.indexOf("\u00A9 2026") >= 0, "the footer carries the copyright year");
+    a.ok(f.textContent.indexOf("Code MIT, text CC BY 4.0") >= 0, "both licences are named");
+    a.equal(f.querySelectorAll("a").length, 0, "the footer carries no links; About sits in the header of every page (D-048)");
   });
 
   test("site.theme: toggles the attribute, survives blocked storage, and announces the change (D-041, D-042)", function (a) {

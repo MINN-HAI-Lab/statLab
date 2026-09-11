@@ -172,17 +172,7 @@
   site.renderFooter = function (container, root) {
     container.textContent = "";
     var p = make("p", "site-footer__text");
-    p.appendChild(document.createTextNode("StatLab by Dr. Sein Minn and Kaung Hein Htet. Code MIT, text CC BY 4.0. Follows OpenStax "));
-    p.appendChild(make("em", null, "Introductory Statistics"));
-    p.appendChild(document.createTextNode(" (Illowsky & Dean, CC BY 4.0). "));
-    var about = make("a", null, "About and how to cite");
-    about.href = root + "about.html";
-    p.appendChild(about);
-    p.appendChild(document.createTextNode(". "));
-    var credits = make("a", null, "Credits");
-    credits.href = root + "about.html#credits";
-    p.appendChild(credits);
-    p.appendChild(document.createTextNode("."));
+    p.appendChild(document.createTextNode("StatLab by Dr. Sein Minn and Kaung Hein Htet. \u00A9 2026. Code MIT, text CC BY 4.0."));
     container.appendChild(p);
     return container;
   };
