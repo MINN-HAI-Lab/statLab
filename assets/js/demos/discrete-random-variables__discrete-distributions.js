@@ -229,8 +229,21 @@
       var ks = [];
       for (var k = state.kMin; k <= state.kMax; k++) ks.push(k);
       x.domain([state.kMin - 0.5, state.kMax + 0.5]);
+      // The axis has to hold everything this chart draws, not just the theory
+      // bars. Early on a handful of draws can put a proportion well above the
+      // tallest probability (five of ten draws on one k is 0.5 against a 0.4
+      // axis), and the empirical bar was then drawn at a negative y, escaping
+      // the frame and painting over the buttons above it (D-053). Quantising to
+      // tenths keeps the axis still except when the data genuinely outgrow it.
       var pmax = Math.max.apply(null, t.probs.slice(0, ks.length));
-      y.domain([0, Math.min(1, Math.ceil(pmax * 10 + 0.5) / 10)]);
+      var emax = 0;
+      if (state.draws) {
+        for (var ei = 0; ei < ks.length; ei++) {
+          var share = (state.counts[ks[ei]] || 0) / state.draws;
+          if (share > emax) emax = share;
+        }
+      }
+      y.domain([0, Math.min(1, Math.ceil(Math.max(pmax, emax) * 10 + 0.5) / 10)]);
       frame.xAxis(x, { label: "k", ticks: Math.min(ks.length, 12), format: d3.format("d") });
       frame.yGrid(y, 4);
       frame.yAxis(y, { label: "probability / proportion", ticks: 4 });

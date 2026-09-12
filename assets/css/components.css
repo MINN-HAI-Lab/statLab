@@ -174,7 +174,13 @@
   height: auto;
   font-family: var(--font);
   font-size: var(--fs-0);
-  overflow: visible;
+  /* A runaway mark must never paint over the page's text or buttons (D-053).
+     Clipped a little beyond the box rather than at it, so the few marks that
+     legitimately overhang by 2-6 px — a dot's radius at the top edge, an
+     invisible 44 px touch target — survive, while anything larger is cut at
+     the chart's own edge instead of reaching the controls. */
+  overflow: clip;
+  overflow-clip-margin: 8px;
 }
 .ui-chart .domain { stroke: var(--line); }
 .ui-chart .tick line { stroke: var(--line); }
