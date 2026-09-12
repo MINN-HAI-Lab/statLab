@@ -19,6 +19,7 @@
   grid-template-columns: 1fr auto;
   align-items: center;
   column-gap: var(--space-2);
+  margin-top: var(--space-1);
   margin-bottom: var(--space-1);
 }
 .ui-slider__label { font-size: var(--fs-0); color: var(--ink-soft); }
@@ -89,7 +90,7 @@
 .ui-button {
   min-height: var(--touch);
   min-width: var(--touch);
-  padding: 0 var(--space-2);
+  padding: var(--space-1) var(--space-2);
   font-family: var(--font);
   font-size: var(--fs-1);
   font-weight: 600;
@@ -118,7 +119,7 @@
 /* ---- Control group (play/pause, reset, extras) ------------------------ */
 /* Option group: one value from a short list, where a range input would spread
    two or three steps across a whole track and feel stuck (D-051). */
-.ui-optiongroup { margin-bottom: var(--space-2); }
+.ui-optiongroup { margin-bottom: calc(var(--space-2) + var(--space-1)); }
 .ui-optiongroup__label {
   display: block;
   font-size: var(--fs-0);
@@ -136,6 +137,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-1);
+  margin-top: var(--space-2);      /* never let text sit flush on the buttons */
   margin-bottom: var(--space-2);
 }
 
@@ -407,7 +409,10 @@ main.landing, main.chapter { max-width: 72rem; }
 .ui-chart .pt--a { fill: var(--cat-1); stroke: none; }
 .ui-chart .pt--b { fill: var(--cat-2); stroke: none; }
 .ui-chart .pt--ab { fill: var(--accent-strong); stroke: var(--surface); stroke-width: 1.5; }
-.demo__status { font-size: var(--fs-0); color: var(--ink-soft); margin: 0; }
+/* A real margin, never bare line-height: the optical air inside a line box
+   differs by font, so 'margin: 0' read fine on macOS and congested on
+   Windows. Spacing must not depend on which system font is installed (D-052). */
+.demo__status { font-size: var(--fs-0); color: var(--ink-soft); margin: var(--space-1) 0 0; }
 
 /* ---- §3.3 branching board and contingency table --------------------- */
 .ui-chart .board-edge { stroke: var(--line); stroke-width: 3; fill: none; }
