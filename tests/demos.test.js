@@ -2109,6 +2109,10 @@
   }
   function pressed(host) { var out = []; host.querySelectorAll("[aria-pressed=true]").forEach(function (b) { out.push(b.textContent); }); return out; }
 
+  /* The three count pickers render buttons too, so reach the stage controls
+     through their own row rather than by a global button index (D-051). */
+  function stageBtn(host, i) { return host.querySelector(".ui-controls").querySelectorAll(".ui-button")[i]; }
+
   /* ---- 14.1 ---- */
   test("multiplication-rule: the tree drawn has exactly as many leaves as the product says (D3, D5)", function (a) {
     var h = host(), api = demos.initMultiplicationRule(h), K = api.constants, s = api.state();
@@ -2135,15 +2139,15 @@
     api.setCount(0, 99); a.equal(api.state().counts[0], K.MAX_COUNT);
     api.setCount(0, -5); a.equal(api.state().counts[0], K.MIN_COUNT);
     a.equal(api.state().total, 2 * 2 * 2);
-    a.ok(h.querySelectorAll(".ui-button")[1].disabled, "cannot add a fourth stage");
+    a.ok(stageBtn(h, 1).disabled, "cannot add a fourth stage");
     a.ok(!h.querySelector(".demo__note").hidden, "the cap is explained");
     api.removeStage();
     s = api.state();
     a.equal(s.stages, 2); a.equal(s.total, 4); a.equal(s.active.length, 2);
-    a.ok(!h.querySelectorAll(".ui-button")[1].disabled); a.ok(h.querySelector(".demo__note").hidden);
+    a.ok(!stageBtn(h, 1).disabled); a.ok(h.querySelector(".demo__note").hidden);
     api.removeStage();
     a.equal(api.state().stages, K.MIN_STAGES);
-    a.ok(h.querySelectorAll(".ui-button")[2].disabled, "cannot go below one stage");
+    a.ok(stageBtn(h, 2).disabled, "cannot go below one stage");
     a.equal(api.state().total, 2, "a single stage is just its own count");
     api.addStage(); api.addStage(); api.addStage();
     a.equal(api.state().stages, K.MAX_STAGES);

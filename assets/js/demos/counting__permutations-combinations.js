@@ -7,7 +7,7 @@
 
   Public:  demos.initPermutationsCombinations(containerEl) → api { setN(n), setK(k),
            setOrdered(flag), reset(), state() }
-  Uses:    stats.choose, stats.permutations, stats.factorial;  ui.slider, ui.button,
+  Uses:    stats.choose, stats.permutations, stats.factorial;  ui.optionGroup, ui.button,
            ui.readout, ui.readoutRow;  no chart — the arrangements ARE the picture.
 
   Pattern per D-019 / D-020 §3 (two-state toggle with aria-pressed). The list is
@@ -27,6 +27,7 @@
   var DEFAULT_ORDERED = false;
 
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+  function rangeOf(lo, hi) { var out = []; for (var i = lo; i <= hi; i++) out.push(i); return out; }
 
   window.demos.initPermutationsCombinations = function (container) {
     var state = { n: DEFAULT_N, k: DEFAULT_K, ordered: DEFAULT_ORDERED };
@@ -39,8 +40,12 @@
     modeGroup.appendChild(chooseButton); modeGroup.appendChild(arrangeButton);
     var resetButton = ui.button({ label: "Reset", onClick: reset });
     modeGroup.appendChild(resetButton);
-    var nSlider = ui.slider({ label: "Items to choose from, n", min: MIN_N, max: MAX_N, step: 1, value: DEFAULT_N, onChange: setN });
-    var kSlider = ui.slider({ label: "Items chosen, k", min: MIN_K, max: MAX_N, step: 1, value: DEFAULT_K, onChange: setK });
+    /* Pickers rather than sliders (D-051). Seven and fewer values sit too far apart
+       on a range track to drag, and k's range depends on n, which a range input
+       could not show honestly: its painted fill was computed from the max it was
+       built with, so the thumb and the fill disagreed whenever n was below 8. */
+    var nPicker = ui.optionGroup({ label: "Items to choose from, n", values: rangeOf(MIN_N, MAX_N), value: DEFAULT_N, onChange: setN });
+    var kPicker = ui.optionGroup({ label: "Items chosen, k", values: rangeOf(MIN_K, DEFAULT_N), value: DEFAULT_K, onChange: setK });
 
     var cOut = ui.readout({ label: "Combinations C(n, k)", decimals: 0, accent: true });
     var pOut = ui.readout({ label: "Permutations P(n, k)", decimals: 0, accent: true });
@@ -50,8 +55,8 @@
     var status = document.createElement("p"); status.className = "demo__status"; status.setAttribute("role", "status");
     var note = document.createElement("p"); note.className = "demo__status demo__note"; note.hidden = true;
 
-    container.appendChild(nSlider.el);
-    container.appendChild(kSlider.el);
+    container.appendChild(nPicker.el);
+    container.appendChild(kPicker.el);
     container.appendChild(modeGroup);
     container.appendChild(ui.readoutRow([cOut, pOut, factOut, shownOut]));
     container.appendChild(equation);
@@ -68,18 +73,23 @@
     /* ---- updates ------------------------------------------------------- */
     function setN(v) {
       state.n = clamp(Math.round(v), MIN_N, MAX_N);
-      if (state.k > state.n) { state.k = state.n; kSlider.set(state.k, true); }
+      nPicker.set(state.n, true);
+      // k can only ever be 1..n, so the choices themselves change with n and
+      // k drops to the largest one that survives.
+      state.k = kPicker.setValues(rangeOf(MIN_K, state.n), true);
       render();
     }
     function setK(v) {
       state.k = clamp(Math.round(v), MIN_K, state.n);
-      kSlider.set(state.k, true);
+      kPicker.set(state.k, true);
       render();
     }
     function setOrdered(flag) { state.ordered = !!flag; render(); }
     function reset() {
       state.n = DEFAULT_N; state.k = DEFAULT_K; state.ordered = DEFAULT_ORDERED;
-      nSlider.set(DEFAULT_N, true); kSlider.set(DEFAULT_K, true);
+      nPicker.set(DEFAULT_N, true);
+      kPicker.setValues(rangeOf(MIN_K, DEFAULT_N), true);
+      kPicker.set(DEFAULT_K, true);
       render();
     }
 
@@ -117,7 +127,6 @@
     function render() {
       var c = stats.choose(state.n, state.k), p = stats.permutations(state.n, state.k), f = stats.factorial(state.k);
       var totalRows = state.ordered ? p : c, list = rows();
-      kSlider.el.querySelector("input").max = state.n;
       chooseButton.setAttribute("aria-pressed", String(!state.ordered));
       arrangeButton.setAttribute("aria-pressed", String(state.ordered));
       cOut.set(c); pOut.set(p); factOut.set(f); shownOut.set(list.length);
@@ -150,8 +159,8 @@
     /* ---- api ------------------------------------------------------------ */
     return {
       el: container,
-      setN: function (v) { nSlider.set(v, true); setN(v); },
-      setK: function (v) { kSlider.set(v, true); setK(v); },
+      setN: setN,
+      setK: setK,
       setOrdered: setOrdered, reset: reset,
       rows: rows,
       state: function () {

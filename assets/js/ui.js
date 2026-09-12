@@ -90,6 +90,95 @@
     };
   };
 
+  /* ---- Option group ----------------------------------------------------
+     ui.optionGroup({ label, values, value, format, ariaLabel, onChange })
+     One value picked from a short list, drawn as a row of buttons with radio
+     semantics. Prefer this over ui.slider whenever there are only a handful of
+     choices. A range input spreads its steps across the whole track, so with
+     two or three steps each step needs a drag of hundreds of pixels and the
+     control reads as broken even though it works (D-051).
+
+     Keyboard: the group is one tab stop; arrows move between options, Home and
+     End jump to the ends, which is the same shape of control the arrow keys
+     gave on the slider this replaces.
+  ---------------------------------------------------------------------- */
+  ui.optionGroup = function (options) {
+    var values = (options.values || []).slice();
+    var onChange = options.onChange || function () {};
+    var format = options.format || function (v) { return String(v); };
+    var current = options.value === undefined ? values[0] : options.value;
+
+    var wrap = make("div", "ui-optiongroup");
+    var label = make("span", "ui-optiongroup__label", options.label);
+    var group = make("div", "ui-optiongroup__options");
+    group.setAttribute("role", "radiogroup");
+    group.setAttribute("aria-label", options.ariaLabel || options.label);
+    wrap.appendChild(label);
+    wrap.appendChild(group);
+    var buttons = [];
+
+    function paint() {
+      buttons.forEach(function (b) {
+        var on = b.optionValue === current;
+        b.setAttribute("aria-checked", on ? "true" : "false");
+        b.tabIndex = on ? 0 : -1;   // roving tabindex: the group is one tab stop
+      });
+    }
+    function move(delta) {
+      var i = values.indexOf(current);
+      var next = values[Math.max(0, Math.min(values.length - 1, i + delta))];
+      api.set(next);
+      var b = buttons[values.indexOf(next)];
+      if (b) b.focus();
+    }
+    function build() {
+      group.textContent = "";
+      buttons = values.map(function (v) {
+        var b = ui.button({ label: format(v), ariaLabel: options.label + ": " + format(v) });
+        b.setAttribute("role", "radio");
+        b.optionValue = v;
+        b.addEventListener("click", function () { api.set(v); });
+        b.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); move(1); }
+          else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); move(-1); }
+          else if (e.key === "Home") { e.preventDefault(); api.set(values[0]); buttons[0].focus(); }
+          else if (e.key === "End") { e.preventDefault(); api.set(values[values.length - 1]); buttons[buttons.length - 1].focus(); }
+        });
+        group.appendChild(b);
+        return b;
+      });
+      paint();
+    }
+    var api = {
+      el: wrap,
+      get value() { return current; },
+      buttons: function () { return buttons.slice(); },
+      /** Replace the choices. Keeps the current value when it survives, else
+          drops to the nearest surviving value below it. */
+      setValues: function (next, silent) {
+        values = next.slice();
+        var fell = values.indexOf(current) < 0;
+        if (fell) {
+          var below = values.filter(function (v) { return v <= current; });
+          current = below.length ? below[below.length - 1] : values[0];
+        }
+        build();
+        if (fell && !silent) onChange(current);
+        return current;
+      },
+      set: function (v, silent) {
+        if (values.indexOf(v) < 0) return current;
+        var changed = v !== current;
+        current = v;
+        paint();
+        if (changed && !silent) onChange(current);
+        return current;
+      }
+    };
+    build();
+    return api;
+  };
+
   /* ---- Button ----------------------------------------------------------
      ui.button({ label, kind: "primary" | "secondary", onClick, ariaLabel })
      Returns the <button> element itself.

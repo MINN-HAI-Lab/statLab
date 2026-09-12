@@ -116,6 +116,22 @@
 .ui-button:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 /* ---- Control group (play/pause, reset, extras) ------------------------ */
+/* Option group: one value from a short list, where a range input would spread
+   two or three steps across a whole track and feel stuck (D-051). */
+.ui-optiongroup { margin-bottom: var(--space-2); }
+.ui-optiongroup__label {
+  display: block;
+  font-size: var(--fs-0);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-1);
+}
+.ui-optiongroup__options { display: flex; flex-wrap: wrap; gap: var(--space-1); }
+.ui-optiongroup .ui-button[aria-checked="true"] {
+  background: var(--accent-strong);
+  color: var(--surface);
+  border-color: var(--accent-strong);
+}
+
 .ui-controls {
   display: flex;
   flex-wrap: wrap;

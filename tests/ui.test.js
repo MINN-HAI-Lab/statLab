@@ -251,4 +251,53 @@
       a.ok(c.tabIndex >= 0, "in tab order: " + c.className);
     });
   });
+  test("ui.optionGroup: picks one value, keyboard-operable, and re-ranges without drifting (D-051)", function (a) {
+    var picked = [];
+    var g = ui.optionGroup({ label: "Items chosen, k", values: [1, 2, 3, 4], value: 2, onChange: function (v) { picked.push(v); } });
+    sandbox.appendChild(g.el);
+
+    var opts = g.el.querySelector(".ui-optiongroup__options");
+    a.equal(opts.getAttribute("role"), "radiogroup", "a mutually exclusive set is a radio group, not toggles");
+    a.equal(g.buttons().length, 4);
+    a.equal(g.value, 2);
+    a.equal(g.buttons()[1].getAttribute("aria-checked"), "true", "the current value is the checked one");
+    a.equal(g.buttons()[0].getAttribute("aria-checked"), "false");
+
+    // exactly one tab stop, on the current value
+    a.equal(g.buttons().filter(function (b) { return b.tabIndex === 0; }).length, 1, "roving tabindex: one stop");
+    a.equal(g.buttons()[1].tabIndex, 0);
+
+    g.buttons()[3].click();
+    a.equal(g.value, 4); a.equal(picked.join(","), "4", "clicking reports once");
+    a.equal(g.buttons()[3].getAttribute("aria-checked"), "true");
+    a.equal(g.buttons()[1].getAttribute("aria-checked"), "false", "the old value is released");
+
+    // arrows move, and stop at the ends rather than wrapping
+    g.buttons()[3].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+    a.equal(g.value, 3);
+    g.buttons()[2].dispatchEvent(new KeyboardEvent("keydown", { key: "Home", bubbles: true }));
+    a.equal(g.value, 1);
+    g.buttons()[0].dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowLeft", bubbles: true }));
+    a.equal(g.value, 1, "the first option does not wrap to the last");
+    g.buttons()[0].dispatchEvent(new KeyboardEvent("keydown", { key: "End", bubbles: true }));
+    a.equal(g.value, 4);
+
+    // every button is a real touch target (SPEC section 6)
+    g.buttons().forEach(function (b) { a.ok(b.getBoundingClientRect().height >= 44, "44 px tall"); });
+
+    // re-ranging: the value survives when it still exists, else falls to the nearest below
+    picked = [];
+    a.equal(g.setValues([1, 2, 3, 4, 5], true), 4, "a surviving value is kept");
+    a.equal(g.buttons().length, 5);
+    a.equal(g.setValues([1, 2], true), 2, "a value that fell off drops to the largest that remains");
+    a.equal(g.value, 2);
+    a.equal(picked.length, 0, "a silent re-range reports nothing");
+    a.equal(g.setValues([1, 2, 3]), 2, "still 2, so nothing is announced");
+    a.equal(picked.length, 0);
+
+    a.equal(g.set(99), 2, "a value outside the list is refused");
+    a.equal(g.set(2), 2); a.equal(picked.length, 0, "setting the value it already has announces nothing");
+    a.equal(g.set(3), 3); a.equal(picked.join(","), "3");
+  });
+
 })();

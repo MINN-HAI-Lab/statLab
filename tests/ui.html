@@ -36,6 +36,11 @@
       <div class="ui-panel" id="sliders"></div>
     </section>
 
+    <section aria-labelledby="h-optiongroups">
+      <h2 id="h-optiongroups">Option groups</h2>
+      <div class="ui-panel" id="optiongroups"></div>
+    </section>
+
     <section aria-labelledby="h-buttons">
       <h2 id="h-buttons">Buttons</h2>
       <div class="ui-panel" id="buttons"></div>
@@ -77,6 +82,15 @@
         "use strict";
 
         /* Sliders */
+        var groups = document.getElementById("optiongroups");
+        var groupLive = ui.readout({ label: "Picked", decimals: 0 });
+        var g1 = ui.optionGroup({ label: "Stages to draw", values: [2, 3, 4], value: 3, onChange: function (v) { groupLive.set(v); } });
+        var g2 = ui.optionGroup({ label: "Items to choose from, n", values: [2, 3, 4, 5, 6, 7, 8], value: 4, onChange: function (v) { groupLive.set(v); } });
+        groups.appendChild(g1.el);
+        groups.appendChild(g2.el);
+        groups.appendChild(ui.readoutRow([groupLive]));
+        groupLive.set(g1.value);
+
         var sliders = document.getElementById("sliders");
         var live = ui.readout({ label: "Slider events", value: 0, decimals: 0 });
         var count = 0;

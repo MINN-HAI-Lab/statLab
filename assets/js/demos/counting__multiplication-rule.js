@@ -7,7 +7,7 @@
 
   Public:  demos.initMultiplicationRule(containerEl) → api { setCount(i, n), addStage(),
            removeStage(), trace(), reset(), state() }
-  Uses:    ui.slider, ui.button, ui.readout, ui.readoutRow, ui.chart;  d3 selection.
+  Uses:    ui.optionGroup, ui.button, ui.readout, ui.readoutRow, ui.chart;  d3 selection.
 
   Pattern per D-019. The tree is drawn left to right: one root, then one column
   of nodes per stage, and the leaves in the last column. Leaf spacing is derived
@@ -42,8 +42,12 @@
     var resetButton = ui.button({ label: "Reset", onClick: reset });
     var controls = document.createElement("div"); controls.className = "ui-controls";
     controls.appendChild(traceButton); controls.appendChild(addButton); controls.appendChild(removeButton); controls.appendChild(resetButton);
-    var sliders = STAGES.map(function (s, i) {
-      return ui.slider({ label: s.name + " to choose from", min: MIN_COUNT, max: MAX_COUNT, step: 1, value: DEFAULT_COUNTS[i], onChange: function (v) { setCount(i, v); } });
+    /* Two to four options is a picker, not a slider: on a range input those three
+       values sit ~319 px apart, so any ordinary drag moves nothing (D-051). */
+    var COUNT_VALUES = [];
+    for (var c = MIN_COUNT; c <= MAX_COUNT; c++) COUNT_VALUES.push(c);
+    var pickers = STAGES.map(function (s, i) {
+      return ui.optionGroup({ label: s.name + " to choose from", values: COUNT_VALUES, value: DEFAULT_COUNTS[i], onChange: function (v) { setCount(i, v); } });
     });
 
     var totalOut = ui.readout({ label: "Different outfits", decimals: 0, accent: true });
@@ -53,7 +57,7 @@
     var note = document.createElement("p"); note.className = "demo__status demo__note"; note.hidden = true;
     note.textContent = "Three stages is the most this tree draws. Past that the leaves stop being countable by eye.";
 
-    sliders.forEach(function (s) { container.appendChild(s.el); });
+    pickers.forEach(function (p) { container.appendChild(p.el); });
     container.appendChild(controls);
 
     /* ---- chart ----------------------------------------------------------- */
@@ -90,7 +94,7 @@
     }
     function reset() {
       state.counts = DEFAULT_COUNTS.slice(); state.stages = DEFAULT_STAGES; state.path = null;
-      sliders.forEach(function (s, i) { s.set(DEFAULT_COUNTS[i], true); });
+      pickers.forEach(function (p, i) { p.set(DEFAULT_COUNTS[i], true); });
       render();
     }
     /** Every root-to-leaf path, as an array of option indices per stage. */
@@ -110,7 +114,7 @@
     /* ---- render ---------------------------------------------------------- */
     function render() {
       var counts = active(), all = paths(), n = all.length;
-      sliders.forEach(function (s, i) { s.el.hidden = i >= state.stages; });
+      pickers.forEach(function (p, i) { p.el.hidden = i >= state.stages; });
       addButton.disabled = state.stages >= MAX_STAGES;
       removeButton.disabled = state.stages <= MIN_STAGES;
       note.hidden = state.stages < MAX_STAGES;
@@ -178,7 +182,7 @@
     /* ---- api ------------------------------------------------------------ */
     return {
       el: container,
-      setCount: function (i, v) { if (sliders[i]) sliders[i].set(v, true); setCount(i, v); },
+      setCount: function (i, v) { if (pickers[i]) pickers[i].set(clamp(Math.round(v), MIN_COUNT, MAX_COUNT), true); setCount(i, v); },
       addStage: addStage, removeStage: removeStage, trace: trace, reset: reset,
       paths: paths,
       state: function () { return { stages: state.stages, counts: state.counts.slice(), active: active(), total: total(), path: state.path ? state.path.slice() : null }; },
