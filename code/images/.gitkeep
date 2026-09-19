@@ -1,0 +1,5 @@
+Figures you save from the notebooks land here.
+
+    plt.savefig("images/my-chart.png", dpi=150, bbox_inches="tight")
+
+Kept in git so the folder exists on a fresh clone.
