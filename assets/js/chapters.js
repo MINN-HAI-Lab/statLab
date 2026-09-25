@@ -1,6 +1,6 @@
 /*
   chapters.js — the single source of truth for chapter order, slugs, titles,
-  blurbs, and section titles (mirrors docs/SYLLABUS.md v3; slugs are the
+  blurbs, and section titles (mirrors docs/SYLLABUS.md v4; slugs are the
   folder names under /chapters/). Exposes one global, `chapters` (HANDBOOK H1).
   `phase` is the PLAN A1 build phase that delivers each chapter/section.
   `tier` is "core" (the 13-chapter main trail) or "advanced" (a side branch), and
@@ -21,6 +21,7 @@ window.chapters = [
     "book": "Ch 1",
     "phase": 6,
     "blurb": "How we get data, and why the way we sample decides what we can conclude.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -55,6 +56,7 @@ window.chapters = [
     "book": "Ch 2",
     "phase": 7,
     "blurb": "Pictures and numbers that summarize the shape, center, and spread of a data set.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -96,6 +98,7 @@ window.chapters = [
     "book": "Ch 3",
     "phase": 5,
     "blurb": "Probability as long-run frequency, and the rules for combining events.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -130,6 +133,7 @@ window.chapters = [
     "book": "Ch 4",
     "phase": 8,
     "blurb": "Random variables that count things, their expected values, and the named distributions.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -164,6 +168,7 @@ window.chapters = [
     "book": "Ch 5",
     "phase": 9,
     "blurb": "Densities, area as probability, and the exponential model of waiting times.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -191,6 +196,7 @@ window.chapters = [
     "book": "Ch 6",
     "phase": 10,
     "blurb": "The bell curve, z-scores, and the 68–95–99.7 rule.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -218,6 +224,34 @@ window.chapters = [
     "book": "Ch 7",
     "phase": 11,
     "blurb": "Why averages of almost anything look normal, and how their spread shrinks with n.",
+    // One optional short video per chapter (SPEC S2). Only the shell is baked into
+    // the page; site.js turns `url` into a <source> only once it is a real https
+    // address, so this placeholder never becomes a request (D-055).
+    // TODO(maintainer): render the Chapter 7 scene (the pipeline README says how), upload the
+    // CRF-23 landscape mp4 as an asset on a GitHub Release of this repository, and
+    // paste the asset URL here, e.g.
+    //   https://github.com/MINN-HAI-Lab/statLab/releases/download/v1.0/ch07-standard-error-landscape.mp4
+    // (GitHub serves the bytes from objects.githubusercontent.com — the one media
+    // origin HANDBOOK H4 permits.)
+    "video": {
+      "title": "Why the standard error is \u03c3/\u221an",
+      "url": "PLACEHOLDER_GITHUB_RELEASE_ASSET_URL",
+      "poster": "assets/video/ch07/poster.webp",
+      "captions": "assets/video/ch07/captions.vtt",
+      "transcript": [
+        "Why the standard error is \u03c3/\u221an.",
+        "Take n independent draws from one population. Each draw has variance \u03c3\u00b2.",
+        "Variances of independent draws add. Var(X\u2081 + \u22ef + X\u2099) = \u03c3\u00b2 + \u22ef + \u03c3\u00b2 = n\u03c3\u00b2.",
+        "The mean is the sum divided by n. Dividing by n divides the variance by n\u00b2. Var(X\u0304) = n\u03c3\u00b2/n\u00b2 = \u03c3\u00b2/n.",
+        "Take the square root. The spread of the mean is \u03c3 over root n. SD(X\u0304) = \u03c3/\u221an.",
+        "Here are 2000 sample means at each n, drawn from a flat population. The pile narrows.",
+        "n = 1: SD of means 2.88, \u03c3/\u221an 2.89.",
+        "n = 4: SD of means 1.45, \u03c3/\u221an 1.44.",
+        "n = 16: SD of means 0.74, \u03c3/\u221an 0.72.",
+        "n = 64: SD of means 0.36, \u03c3/\u221an 0.36.",
+        "Quadruple n and the spread halves. The square root is why."
+      ]
+    },
     "sections": [
       {
         "id": "section-1",
@@ -252,6 +286,7 @@ window.chapters = [
     "book": "Ch 8",
     "phase": 12,
     "blurb": "What a 95% interval promises, and how to build one for a mean or a proportion.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -286,6 +321,7 @@ window.chapters = [
     "book": "Ch 9",
     "phase": 13,
     "blurb": "Null hypotheses, error types, and what a p-value really measures.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -320,6 +356,7 @@ window.chapters = [
     "book": "Ch 10",
     "phase": 15,
     "blurb": "Comparing two means or two proportions, and why pairing helps.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -354,6 +391,7 @@ window.chapters = [
     "book": "Ch 11",
     "phase": 16,
     "blurb": "Testing whether counts fit a claim, and whether two variables are independent.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -381,6 +419,7 @@ window.chapters = [
     "book": "Ch 12",
     "phase": 17,
     "blurb": "Fitting a line, reading r, and knowing when prediction is safe.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -422,6 +461,7 @@ window.chapters = [
     "book": "Ch 13",
     "phase": 18,
     "blurb": "Comparing several group means at once by weighing between-group against within-group variation.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -449,6 +489,7 @@ window.chapters = [
     "book": null,
     "phase": 20,
     "blurb": "Multiplying choices, and telling permutations from combinations.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -476,6 +517,7 @@ window.chapters = [
     "book": null,
     "phase": 21,
     "blurb": "Updating belief with data, through Bayes’ theorem, likelihood, and posteriors.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -510,6 +552,7 @@ window.chapters = [
     "book": null,
     "phase": 22,
     "blurb": "Bootstrap and permutation methods for when formulas run out.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",
@@ -537,6 +580,7 @@ window.chapters = [
     "book": null,
     "phase": 23,
     "blurb": "How a third variable can reverse a conclusion, and what a coefficient means with two predictors.",
+    "video": null,
     "sections": [
       {
         "id": "section-1",

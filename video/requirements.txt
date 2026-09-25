@@ -1,0 +1,4 @@
+# Pinned to what rendered the pilot on 2026-09-25 (Apple Silicon, Python 3.13).
+manim==0.21.0
+numpy==2.5.3
+scipy==1.18.1

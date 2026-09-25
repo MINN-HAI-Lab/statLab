@@ -181,6 +181,56 @@
     site.theme.set(started);
   });
 
+  test("site.renderChapter: an optional video renders only where chapters.js gives one, and never requests a placeholder (S2, D-055)", function (a) {
+    var saved = document.title;
+    var main = document.createElement("main");
+    // root is "../" here, not the "../../" a real chapter page uses: the poster is a
+    // genuine image load, and from tests/ "../" is what reaches assets/, so the
+    // test page stays console-clean. The assertion below still proves the poster
+    // is root-relative.
+    main.className = "chapter"; main.dataset.slug = "central-limit-theorem"; main.dataset.root = "../";
+    main.innerHTML = '<header id="chapter-header"></header><section id="chapter-video" class="chapter__video"></section><nav id="chapter-nav"></nav>';
+    sandbox.appendChild(main);
+    var c = site.renderChapter(main);
+    a.ok(c.video, "chapter 7 declares a video");
+    var v = main.querySelector("#chapter-video video");
+    a.ok(v, "the shell is rendered into an empty host");
+    a.equal(main.querySelector("#chapter-video-title").textContent, c.video.title);
+    a.ok(v.hasAttribute("controls"), "native controls");
+    a.equal(v.getAttribute("preload"), "metadata");
+    a.ok(v.hasAttribute("playsinline"));
+    a.ok(!v.hasAttribute("autoplay") && !v.autoplay && !v.hasAttribute("loop") && !v.loop, "never autoplay, never loop");
+    a.equal(v.getAttribute("poster"), "../" + c.video.poster, "poster is root-relative");
+    a.equal(v.querySelectorAll("source, track").length, 0, "the placeholder URL never becomes a <source>, and the captions track only travels with it, so nothing is requested");
+    a.ok(/\.vtt$/.test(c.video.captions), "captions are a committed .vtt named by chapters.js");
+    a.equal(site.reconcileVideoSource(main.querySelector("#chapter-video"), c.video, "../"), null, "reconciling a placeholder adds nothing");
+    a.equal(v.querySelectorAll("source, track").length, 0);
+    var d = main.querySelector("#chapter-video details.chapter__transcript");
+    a.ok(d && d.querySelector("summary").textContent === "Transcript", "a Transcript disclosure");
+    a.equal(d.querySelectorAll("p").length, c.video.transcript.length, "the whole transcript is inline, not fetched");
+    a.equal(d.querySelectorAll("p")[0].textContent, c.video.transcript[0]);
+
+    // the rule that decides whether a URL is real lives in one pure function
+    a.equal(site.videoSource({ url: "PLACEHOLDER_GITHUB_RELEASE_ASSET_URL" }), null);
+    a.equal(site.videoSource({ url: "" }), null);
+    a.equal(site.videoSource(null), null);
+    a.equal(site.videoSource({ url: "http://example.com/a.mp4" }), null, "only https is ever loaded");
+    a.equal(site.videoSource({ url: "https://objects.githubusercontent.com/x/a.mp4" }), "https://objects.githubusercontent.com/x/a.mp4");
+
+    // a chapter with video: null renders nothing at all into the host
+    var other = document.createElement("main");
+    other.className = "chapter"; other.dataset.slug = "probability-topics"; other.dataset.root = "../";
+    other.innerHTML = '<header id="chapter-header"></header><section id="chapter-video" class="chapter__video"></section><nav id="chapter-nav"></nav>';
+    sandbox.appendChild(other);
+    var o = site.renderChapter(other);
+    a.equal(o.video, null);
+    a.equal(other.querySelector("#chapter-video").children.length, 0, "no video, no block");
+
+    // every chapter declares the field, so a page can rely on it
+    site.chapters().forEach(function (ch) { a.ok("video" in ch, ch.slug + " declares video"); });
+    document.title = saved;
+  });
+
   test("site.theme: paper is a first-class third theme with its own tokens (H3, D-050)", function (a) {
     var started = site.theme.get();
     function bg(theme) {

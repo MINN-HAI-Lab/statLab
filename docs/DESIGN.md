@@ -81,7 +81,23 @@ Answer each in the delivery report, honestly:
    Delete it. Reduction is the default move.
 6. Does the page look like it belongs in the same book as the other pages?
 
-## 8. When in doubt
+## 8. Video
+
+A chapter may carry one short reinforcement video (SPEC Amendment S2). It is a page element, not
+an embed, and it follows this file like everything else on the page.
+
+- StatLab's palette only, read from `theme.css` into `video/statlab_theme.py` and diffable by
+  hand. Never Manim's dark default, never a second brand.
+- Section 4's hierarchy and Section 6's motion rules apply: no overshoot, nothing moves that is
+  not carrying information, nothing animates before the first idea.
+- No narration music, no logo sting, no countdown or title-card intro. The first frame is the
+  first idea; the last frame is the conclusion.
+- Every number on screen is computed and cross-checked, never typed (SPEC D3).
+- On the page: a native `<video>` in the reading column with a `--line` border and `--radius`
+  corners, no shadow, never autoplay, never loop, with captions and an inline transcript so the
+  page reads complete without the file.
+
+## 9. When in doubt
 
 Remove something. StatLab's differentiator is clarity under pressure — a student on a
 phone, in a lecture, with 40 seconds. Every decorative element spends attention that

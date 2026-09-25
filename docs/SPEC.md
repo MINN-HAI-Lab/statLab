@@ -122,3 +122,27 @@ gradients, no shadow stacking, no parallax, no autoplaying motion. Two things ar
    are locked in HANDBOOK Amendment H2. The viewer's system preference decides the first load; a
    header toggle switches it; the choice is remembered in one storage key that the About page
    discloses.
+
+---
+
+# Amendment S2 — 2026-09-25 (D-054, D-055)
+
+Maintainer-authorised. S2 extends Section 4 and Section 7; Section 3 is unchanged.
+
+## S2 Section 1 — One optional short video per chapter, as reinforcement
+
+A chapter page may carry **at most one** short video, after its sections and before the chapter
+navigation. It is reinforcement: it shows a piece of reasoning that a manipulable demo cannot, such
+as an algebraic derivation unfolding in time. A video **never replaces a demo**, and it **never
+carries information that exists nowhere else on the page**: whatever it says is also in the
+section text, the demo, or the video's own inline transcript, so a reader who cannot or does not
+play it loses nothing.
+
+The video is a native `<video>` with a committed poster, committed captions and a visible
+transcript on the page. It never autoplays and never loops. It is driven from `chapters.js`
+(`video: {…} | null`); a chapter with `null` renders nothing at all.
+
+## S2 Section 2 — Non-goals hold
+
+Section 3 stands as written: no third-party embeds, no iframes, no analytics, no trackers. The one
+permitted media origin and its limits are in HANDBOOK Amendment H4.

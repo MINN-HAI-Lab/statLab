@@ -246,6 +246,63 @@
   };
 
   /* ---- Chapter page chrome ------------------------------------------- */
+  /* ---- Chapter video (SPEC S2, D-054 / D-055) ------------------------- */
+  /** The one place the rule "is this URL real yet?" lives. chapters.js ships a
+      placeholder until the maintainer pastes a GitHub Release asset URL; the
+      placeholder never becomes a request, so an unpublished video leaves the
+      page console-clean and standing on its poster and transcript. */
+  site.videoSource = function (video) {
+    return video && /^https:\/\//.test(video.url || "") ? video.url : null;
+  };
+
+  /** The shell: heading, native <video> with its poster, and the transcript.
+      No <source> and no <track> here, see reconcileVideoSource: Chrome refuses a
+      captions track from a file: origin and logs it as an error, so the track
+      can only travel with the video it captions. Baked into the page like the
+      header (D-039) so it never shifts layout; this is the fallback for a page
+      that ships the host empty. */
+  site.renderVideo = function (container, chapter, root) {
+    var v = chapter.video;
+    container.textContent = "";
+    var h2 = make("h2", null, v.title);
+    h2.id = "chapter-video-title";
+    container.appendChild(h2);
+    var video = make("video", "chapter__video-player");
+    video.setAttribute("controls", "");
+    video.setAttribute("preload", "metadata");
+    video.setAttribute("playsinline", "");
+    video.setAttribute("poster", root + v.poster);
+    container.appendChild(video);
+    var details = make("details", "chapter__transcript");
+    details.appendChild(make("summary", null, "Transcript"));
+    v.transcript.forEach(function (line) { details.appendChild(make("p", null, line)); });
+    container.appendChild(details);
+    return container;
+  };
+
+  /** Add the captions <track> and the <source> exactly once, and only for a
+      real https URL. Until then the element has neither, so nothing at all is
+      fetched and a file:// open stays console-clean. Inserting a <source> into
+      a <video> that has none starts its resource selection, so no load() call
+      is needed. */
+  site.reconcileVideoSource = function (container, video, root) {
+    var el = container.querySelector("video");
+    var url = site.videoSource(video);
+    if (!el || !url || el.querySelector("source")) return null;
+    var track = make("track");
+    track.setAttribute("kind", "captions");
+    track.setAttribute("srclang", "en");
+    track.setAttribute("label", "English");
+    track.setAttribute("src", (root || "") + video.captions);
+    track.setAttribute("default", "");
+    el.appendChild(track);
+    var source = make("source");
+    source.setAttribute("src", url);
+    source.setAttribute("type", "video/mp4");
+    el.appendChild(source);
+    return source;
+  };
+
   site.renderChapter = function (main) {
     var slug = main.dataset.slug;
     var root = main.dataset.root || "";
@@ -288,6 +345,11 @@
       else { next.href = root + "index.html"; next.textContent = "All chapters →"; }
       nav.appendChild(prev);
       nav.appendChild(next);
+    }
+    var videoHost = main.querySelector("#chapter-video");
+    if (videoHost && chapter.video) {
+      if (!videoHost.firstElementChild) site.renderVideo(videoHost, chapter, root);
+      site.reconcileVideoSource(videoHost, chapter.video, root);
     }
     document.title = "Chapter " + chapter.number + " · " + chapter.title + " — StatLab";
     return chapter;

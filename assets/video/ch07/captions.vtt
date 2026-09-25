@@ -1,0 +1,36 @@
+WEBVTT
+NOTE StatLab, Section 7.2 "Why the standard error is σ/√n". No narration: these
+NOTE cues carry the on-screen text. Times come from the scene's printed timeline
+NOTE (video/scenes/ch07_standard_error.py, seed 20260925).
+
+1
+00:00.000 --> 00:02.000
+Why the standard error is σ/√n
+
+2
+00:02.000 --> 00:05.400
+Take n independent draws from one population. Each draw has variance σ².
+
+3
+00:05.400 --> 00:10.800
+Variances of independent draws add. Var(X₁ + ⋯ + Xₙ) = σ² + ⋯ + σ² = nσ².
+
+4
+00:10.800 --> 00:16.600
+The mean is the sum divided by n. Dividing by n divides the variance by n². Var(X̄) = nσ²/n² = σ²/n.
+
+5
+00:16.600 --> 00:19.800
+Take the square root. The spread of the mean is σ over root n. SD(X̄) = σ/√n.
+
+6
+00:19.800 --> 00:25.000
+Here are 2000 sample means at each n, drawn from a flat population. The pile narrows.
+
+7
+00:25.000 --> 00:28.400
+n = 1: SD 2.88, σ/√n 2.89. n = 4: 1.45, 1.44. n = 16: 0.74, 0.72. n = 64: 0.36, 0.36.
+
+8
+00:28.400 --> 00:32.200
+Quadruple n and the spread halves. The square root is why.

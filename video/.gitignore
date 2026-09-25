@@ -1,0 +1,6 @@
+# Rendered output is never committed (HANDBOOK H4). Finished mp4s are uploaded
+# as GitHub Release assets by the maintainer; only their URL enters chapters.js.
+media/
+*.mp4
+__pycache__/
+.venv/

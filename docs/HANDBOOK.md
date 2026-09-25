@@ -1,5 +1,11 @@
 # HANDBOOK.md — Engineering Handbook
 
+> **⚠ Amendment H4 in force (2026-09-25):** a development-only Manim pipeline lives under
+> `/video/`, quarantined from the site, and one additional network origin is permitted for media
+> only: GitHub Release assets, referenced from a native `<video>`. Section 3 ("nothing else") and
+> Section 7 gate 5 are amended by H4 at the end of this file to that extent and no further. Rendered
+> mp4s are never committed. Original text preserved unchanged per Section 1.5.
+>
 > **⚠ Amendment H3 in force (2026-09-12):** H2 Section 1 ("Two themes") is superseded by
 > Amendment H3 at the end of this file (a third theme, `paper`; the token set and the single
 > storage key are otherwise unchanged). Original text preserved unchanged per Section 1.5.
@@ -276,3 +282,58 @@ paper is only ever reached deliberately.
 
 Still exactly one key, `statlab-theme` (D-042), still wrapped in `try`/`catch`, now holding one of
 three values instead of two. No second key was added and none may be.
+
+---
+
+# Amendment H4 — 2026-09-25 (D-054, D-055)
+
+Maintainer-authorised in writing on 2026-09-25. **H4 amends Section 3 and Section 7 gate 5 to the
+extent stated here and no further.** Everything else in this file stays binding.
+
+## H4 Section 1 — The `/video/` pipeline is quarantined
+
+A development-only Manim/Python pipeline lives under `/video/`. It renders the short reinforcement
+videos a chapter page may carry (SPEC S2). These rules are mandatory, verbatim from the authorising
+brief:
+
+- Nothing under `/video/` is imported or referenced by any site file.
+- Deleting `/video/` entirely must leave a fully working, deployable site. Verify by temporarily
+  moving the folder aside and report the result.
+- Rendered mp4s are NEVER committed. They are uploaded as GitHub Release assets by the maintainer;
+  only their URLs enter the repo.
+- `/video/` is excluded from the deployed site.
+- Python venv, not a global install. README states the Homebrew prerequisites (ffmpeg, a LaTeX
+  distribution) for Apple Silicon.
+
+`/video/.gitignore` refuses `media/`, `*.mp4`, `.venv/` and `__pycache__/`. On "excluded from the
+deployed site": GitHub Pages serves the whole branch and Jekyll is off (`.nojekyll`), so the
+folder's source files are reachable by URL if someone types one. No page links there and no media
+exists there to serve, so the quarantine holds in effect; true exclusion means moving the folder
+to its own repository, which is the maintainer's call and is recorded as open in STATUS.
+
+## H4 Section 2 — One media origin, for native `<video>` only
+
+Section 3 says "nothing else" and gate 5 says "no network requests besides the two KaTeX URLs".
+H4 adds exactly one exception:
+
+- A chapter's video file may be fetched from a **GitHub Release asset of this repository**. The
+  URL pasted into `chapters.js` is of the form
+  `https://github.com/MINN-HAI-Lab/statLab/releases/download/<tag>/<file>.mp4`, and GitHub serves
+  the bytes from `objects.githubusercontent.com`. Those two hosts, for that purpose, are the whole
+  exception.
+- The file is referenced only from a **native `<video>` element** with `controls`,
+  `preload="metadata"` and `playsinline`, never `autoplay`, never `loop`.
+- **Not approved:** any `<iframe>`, any third-party player or hosted embed (YouTube, Vimeo or any
+  other), any video JavaScript library, any tracker or analytics, any script from any new origin.
+  No runtime dependency is added to the site.
+- The poster (WebP, under 60 KB), the captions (`.vtt`) and the transcript text are committed in
+  the repo and served from it, so the page renders complete with nothing fetched.
+- Until the maintainer pastes a real `https://` URL, `chapters.js` carries a placeholder and
+  `site.js` turns nothing into a request: the page stays console-clean and stands on its poster
+  and transcript.
+
+## H4 Section 3 — mp4s are never committed
+
+Not in `/video/`, not in `/assets/`, not anywhere. A rendered file is delivered by upload to a
+Release; the repository holds its URL, its poster, its captions and its transcript, and nothing
+else about it.

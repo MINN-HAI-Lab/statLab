@@ -383,6 +383,33 @@ main.landing, main.chapter { max-width: 72rem; }
 .chapter__nav-link { text-decoration: none; }
 .chapter__nav-link--next { margin-left: auto; text-align: right; }
 
+/* ---- Chapter video (SPEC S2, D-054 / D-055) ----------------------------
+   One optional short video per chapter, after the sections and before the nav.
+   It sits in the reading column and is styled as page, not as an embed: a
+   --line border, --radius corners, no shadow, native controls only. The
+   aspect-ratio holds the poster's box before any metadata arrives, so the
+   block never shifts the layout (D-039), and looks the same whether or not the
+   file loads. */
+.chapter__video {
+  max-width: var(--measure);
+  padding-top: var(--space-3);
+  margin-bottom: var(--space-3);
+  border-top: var(--border) solid var(--line);
+}
+.chapter__video h2 { margin-top: 0; }
+.chapter__video-player {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--surface);
+  border: var(--border) solid var(--line);
+  border-radius: var(--radius);
+}
+.chapter__transcript { margin-top: var(--space-2); font-size: var(--fs-0); color: var(--ink-soft); }
+.chapter__transcript summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+.chapter__transcript p { margin: var(--space-1) 0 0; }
+
 /* ---- Math (SPEC D8) --------------------------------------------------
    KaTeX output inherits the text colour; nothing else to style. If KaTeX never
    loads, site.js adds `no-katex` to <body> and the raw \( … \) source stays

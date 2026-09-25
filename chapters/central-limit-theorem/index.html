@@ -71,6 +71,25 @@
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-sums"></div>
     </section>
 
+    <section class="chapter__video" id="chapter-video" aria-labelledby="chapter-video-title">
+      <h2 id="chapter-video-title">Why the standard error is σ/√n</h2>
+      <video class="chapter__video-player" controls preload="metadata" playsinline poster="../../assets/video/ch07/poster.webp"></video>
+      <details class="chapter__transcript">
+        <summary>Transcript</summary>
+        <p>Why the standard error is σ/√n.</p>
+        <p>Take n independent draws from one population. Each draw has variance σ².</p>
+        <p>Variances of independent draws add. Var(X₁ + ⋯ + Xₙ) = σ² + ⋯ + σ² = nσ².</p>
+        <p>The mean is the sum divided by n. Dividing by n divides the variance by n². Var(X̄) = nσ²/n² = σ²/n.</p>
+        <p>Take the square root. The spread of the mean is σ over root n. SD(X̄) = σ/√n.</p>
+        <p>Here are 2000 sample means at each n, drawn from a flat population. The pile narrows.</p>
+        <p>n = 1: SD of means 2.88, σ/√n 2.89.</p>
+        <p>n = 4: SD of means 1.45, σ/√n 1.44.</p>
+        <p>n = 16: SD of means 0.74, σ/√n 0.72.</p>
+        <p>n = 64: SD of means 0.36, σ/√n 0.36.</p>
+        <p>Quadruple n and the spread halves. The square root is why.</p>
+      </details>
+    </section>
+
     <nav class="chapter__nav" id="chapter-nav" aria-label="Chapter navigation">
       <a class="chapter__nav-link chapter__nav-link--prev" href="../normal-distribution/index.html">← 6. The Normal Distribution</a>
       <a class="chapter__nav-link chapter__nav-link--next" href="../confidence-intervals/index.html">8. Confidence Intervals →</a>

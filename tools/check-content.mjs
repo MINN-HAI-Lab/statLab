@@ -7,7 +7,7 @@
   name; <title> contains the chapter title; no extra sections. Exit 1 on any
   mismatch, printing each one.
 */
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, statSync } from "node:fs";
 import { pathToFileURL } from "node:url";
 import { resolve } from "node:path";
 
@@ -91,6 +91,37 @@ for (let i = 0; i < chapters.length; i++) {
   if (!decode(nav).includes(nextText)) problems.push(`${file}: baked next link is not "${nextText}"`);
   if (!nav.includes(`href="${prevHref}"`)) problems.push(`${file}: baked previous href is not ${prevHref}`);
   if (!nav.includes(`href="${nextHref}"`)) problems.push(`${file}: baked next href is not ${nextHref}`);
+
+  // Optional chapter video (SPEC S2, D-054 / D-055). Every chapter declares the
+  // field; only a non-null one bakes a block. The shell is baked like the header,
+  // but the source URL lives in chapters.js alone, so the baked block must carry
+  // no <source>: site.js adds one at runtime once the URL is a real https address.
+  if (!("video" in c)) problems.push(`chapters.js: ${c.slug} does not declare video (null or an object)`);
+  const vid = (html.match(/<section class="chapter__video"[^>]*>([\s\S]*?)<\/section>/) || [])[1];
+  if (c.video) {
+    const v = c.video;
+    if (!vid) problems.push(`${file}: chapters.js gives a video but no chapter__video block is baked`);
+    else {
+      const dv = decode(vid);
+      if (!dv.includes(`<h2 id="chapter-video-title">${v.title}</h2>`)) problems.push(`${file}: baked video title differs from chapters.js`);
+      if (!/<video[^>]*\scontrols[\s>]/.test(vid)) problems.push(`${file}: the video lacks native controls`);
+      if (/<video[^>]*\s(autoplay|loop)[\s>]/.test(vid)) problems.push(`${file}: the video must never autoplay or loop`);
+      if (!/<video[^>]*preload="metadata"/.test(vid)) problems.push(`${file}: the video must preload="metadata"`);
+      if (!/<video[^>]*\splaysinline[\s>]/.test(vid)) problems.push(`${file}: the video lacks playsinline`);
+      if (!vid.includes(`poster="../../${v.poster}"`)) problems.push(`${file}: the video poster is not ${v.poster}`);
+      // Chrome refuses a <track> from a file: origin and logs an error, so the
+      // captions travel with the <source> at runtime, never in the baked shell.
+      if (/<(source|track)\b/.test(vid)) problems.push(`${file}: a <source> or <track> is baked; both come from chapters.js at runtime (D-055)`);
+      if (!v.captions || !v.captions.endsWith(".vtt")) problems.push(`chapters.js: ${c.slug} captions must name a committed .vtt file`);
+      if (!/<details class="chapter__transcript">\s*<summary>Transcript<\/summary>/.test(vid)) problems.push(`${file}: the Transcript disclosure is missing`);
+      v.transcript.forEach((line) => { if (!dv.includes(`<p>${line}</p>`)) problems.push(`${file}: transcript line not baked: "${line.slice(0, 40)}"`); });
+      if (!/^https:\/\//.test(v.url) && !/^PLACEHOLDER/.test(v.url)) problems.push(`chapters.js: ${c.slug} video url must be an https URL or the placeholder`);
+      if (/^https?:\/\//.test(v.poster) || /^https?:\/\//.test(v.captions)) problems.push(`chapters.js: ${c.slug} poster and captions must be committed files, not URLs`);
+      for (const f of [v.poster, v.captions]) if (!existsSync(f)) problems.push(`${f}: missing (named by chapters.js)`);
+      if (existsSync(v.poster) && statSync(v.poster).size > 60 * 1024) problems.push(`${v.poster}: ${statSync(v.poster).size} bytes, over the 60 KB poster limit`);
+      if (existsSync(v.poster) && !v.poster.endsWith(".webp")) problems.push(`${v.poster}: the poster must be WebP`);
+    }
+  } else if (vid) problems.push(`${file}: a chapter__video block is baked but chapters.js says video: null`);
 }
 
 // The journey path is baked into index.html for the same reason (D-039/D-040): the
