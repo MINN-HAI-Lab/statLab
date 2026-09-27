@@ -25,15 +25,15 @@ Status legend: `⬜ not started` · `🔨 in progress` · `🎬 rendered` · `�
 - **V02 `ch02-why-n-minus-1`** — Why sample variance divides by n−1. Chain: deviations from the
   sample mean sum to zero → one deviation is determined by the others → dividing by n
   underestimates on average → n−1 corrects it. Show a tiny n=3 example with actual numbers.
-  - `⬜`
+  - `✅ embedded` · 2026-09-27 · landscape 0.67 MB, vertical 0.38 MB (CRF 23, 31.0 s) · seed 20260927, N(50, 10); x = 29.5, 45.5, 45.8; averages over 20 000 samples 67.2 (÷n) and 100.7 (÷(n−1)) against 100. mp4 not yet on a Release; placeholder URL.
 - **V09 `ch09-what-a-p-value-is-not`** — Three misreadings, each struck out and replaced:
   "probability H₀ is true" ✗; "probability the result is due to chance" ✗; "1 − p = probability
   of the effect" ✗. Then the one correct sentence, built word by word.
-  - `⬜`
+  - `✅ embedded` · 2026-09-27 · landscape 0.56 MB, vertical 0.34 MB (CRF 23, 31.6 s) · true mean 52.5 chosen so the seeded sample gives p = 0.023, "about 2 times in 100"; the first choice, 54.5, gave p = 0.001 and "0 times", now guarded by an assertion. mp4 not yet on a Release; placeholder URL.
 - **V08 `ch08-where-1-96-comes-from`** — 95% ↔ 1.96: shade the middle 95% of the standard
   normal, show the two tails of 2.5%, look up the z, then show the interval formula assemble
   from x̄, z, σ/√n.
-  - `⬜`
+  - `✅ embedded` · 2026-09-27 · landscape 0.59 MB, vertical 0.35 MB (CRF 23, 30.6 s) · z = 1.959963985 by bisection on erfc, against SciPy 1.959963984540054; sample of 20 gives 52.1 ± 4.38. mp4 not yet on a Release; placeholder URL.
 - **V15 `ch15-bayes-from-conditional`** — Derive Bayes from P(A∩B) = P(A|B)P(B) = P(B|A)P(A).
   Then one disease-test number line: prior → likelihood ratio → posterior odds.
   - `⬜`
