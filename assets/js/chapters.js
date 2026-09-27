@@ -56,7 +56,28 @@ window.chapters = [
     "book": "Ch 2",
     "phase": 7,
     "blurb": "Pictures and numbers that summarize the shape, center, and spread of a data set.",
-    "video": null,
+    // One optional short video per chapter (SPEC S2). Only the shell is baked into
+    // the page; site.js turns `url` into a <source> only once it is a real https
+    // address, so this placeholder never becomes a request (D-055).
+    // TODO(maintainer): render the Chapter 2 scene (the pipeline README says how), upload the
+    // CRF-23 landscape mp4 as an asset on a GitHub Release of this repository, and
+    // paste the asset URL here, e.g.
+    //   https://github.com/MINN-HAI-Lab/statLab/releases/download/media-v1/ch02-why-n-minus-1-landscape.crf23.mp4
+    "video": {
+      "title": "Why sample variance divides by n \u2212 1",
+      "url": "PLACEHOLDER_GITHUB_RELEASE_ASSET_URL",
+      "poster": "assets/video/descriptive-statistics/poster.webp",
+      "captions": "assets/video/descriptive-statistics/captions.vtt",
+      "transcript": [
+        "Why sample variance divides by n \u2212 1.",
+        "Three values from one population. Their mean is 40.3.",
+        "Deviations from the sample mean always add up to zero.",
+        "So the third deviation is fixed by the other two. Only two are free.",
+        "The sample mean sits closer to its own data than \u03bc does. Dividing by n underestimates.",
+        "20,000 samples of three from a population with variance 100. Average of each formula.",
+        "n \u2212 1 counts the free deviations. That is the whole correction."
+      ]
+    },
     "sections": [
       {
         "id": "section-1",
@@ -343,7 +364,29 @@ window.chapters = [
     "book": "Ch 9",
     "phase": 13,
     "blurb": "Null hypotheses, error types, and what a p-value really measures.",
-    "video": null,
+    // One optional short video per chapter (SPEC S2). Only the shell is baked into
+    // the page; site.js turns `url` into a <source> only once it is a real https
+    // address, so this placeholder never becomes a request (D-055).
+    // TODO(maintainer): render the Chapter 9 scene (the pipeline README says how), upload the
+    // CRF-23 landscape mp4 as an asset on a GitHub Release of this repository, and
+    // paste the asset URL here, e.g.
+    //   https://github.com/MINN-HAI-Lab/statLab/releases/download/media-v1/ch09-what-a-p-value-is-not-landscape.crf23.mp4
+    "video": {
+      "title": "What a p-value is not",
+      "url": "PLACEHOLDER_GITHUB_RELEASE_ASSET_URL",
+      "poster": "assets/video/hypothesis-testing/poster.webp",
+      "captions": "assets/video/hypothesis-testing/captions.vtt",
+      "transcript": [
+        "What a p-value is not.",
+        "A sample of 25. Its mean is 54.5. Test \u03bc\u2080 = 50 with \u03c3 = 10 known. z = 2.27, p = 0.023.",
+        "p is the probability that H\u2080 is true. No.",
+        "p is the probability the result is due to chance. No.",
+        "1 \u2212 p is the probability of a real effect. No.",
+        "The one correct sentence.",
+        "If H\u2080 were true, a result at least this extreme would occur about 2 times in 100.",
+        "p describes the data, assuming H\u2080. It never describes H\u2080, given the data."
+      ]
+    },
     "sections": [
       {
         "id": "section-1",
