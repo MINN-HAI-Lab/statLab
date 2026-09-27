@@ -1,0 +1,7 @@
+Why sample variance divides by n − 1.
+Three values from one population. Their mean is 40.3.
+Deviations from the sample mean always add up to zero.
+So the third deviation is fixed by the other two. Only two are free.
+The sample mean sits closer to its own data than μ does. Dividing by n underestimates.
+20,000 samples of three from a population with variance 100. Average of each formula.
+n − 1 counts the free deviations. That is the whole correction.

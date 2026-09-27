@@ -1,0 +1,11 @@
+Why the standard error is σ/√n.
+Take n independent draws from one population. Each draw has variance σ².
+Variances of independent draws add. Var(X₁ + ⋯ + Xₙ) = σ² + ⋯ + σ² = nσ².
+The mean is the sum divided by n. Dividing by n divides the variance by n². Var(X̄) = nσ²/n² = σ²/n.
+Take the square root. The spread of the mean is σ over root n. SD(X̄) = σ/√n.
+Here are 2000 sample means at each n, drawn from a flat population. The pile narrows.
+n = 1: SD of means 2.88, σ/√n 2.89.
+n = 4: SD of means 1.45, σ/√n 1.44.
+n = 16: SD of means 0.74, σ/√n 0.72.
+n = 64: SD of means 0.36, σ/√n 0.36.
+Quadruple n and the spread halves. The square root is why.

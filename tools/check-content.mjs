@@ -118,6 +118,15 @@ for (let i = 0; i < chapters.length; i++) {
       if (!/^https:\/\//.test(v.url) && !/^PLACEHOLDER/.test(v.url)) problems.push(`chapters.js: ${c.slug} video url must be an https URL or the placeholder`);
       if (/^https?:\/\//.test(v.poster) || /^https?:\/\//.test(v.captions)) problems.push(`chapters.js: ${c.slug} poster and captions must be committed files, not URLs`);
       for (const f of [v.poster, v.captions]) if (!existsSync(f)) problems.push(`${f}: missing (named by chapters.js)`);
+      // The transcript's source of truth is the committed transcript.txt beside the
+      // captions, written by the scene from its caption calls; the inline array in
+      // chapters.js (what the page bakes, so file:// works) must be it line for line.
+      const txt = v.captions.replace(/captions\.vtt$/, "transcript.txt");
+      if (!existsSync(txt)) problems.push(`${txt}: missing (the scene writes it beside captions.vtt)`);
+      else {
+        const lines = readFileSync(txt, "utf8").split("\n").map((l) => l.trim()).filter(Boolean);
+        if (JSON.stringify(lines) !== JSON.stringify(v.transcript)) problems.push(`${file}: chapters.js transcript differs from ${txt}`);
+      }
       if (existsSync(v.poster) && statSync(v.poster).size > 60 * 1024) problems.push(`${v.poster}: ${statSync(v.poster).size} bytes, over the 60 KB poster limit`);
       if (existsSync(v.poster) && !v.poster.endsWith(".webp")) problems.push(`${v.poster}: the poster must be WebP`);
     }
