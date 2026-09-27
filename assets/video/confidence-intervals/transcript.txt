@@ -1,0 +1,8 @@
+Where 1.96 comes from.
+Shade the middle 95% of the standard normal.
+That leaves 2.5% in each tail.
+The z that cuts off 2.5% is 1.96. Read it off the curve, not a table.
+A 95% interval reaches 1.96 standard errors either side of the sample mean.
+One sample of 20 from a population with σ = 10. Its mean is 52.1.
+52.1 plus or minus 4.38, so 47.7 to 56.4.
+Change 95% and the 1.96 changes with it. The shape of the curve decides, not the data.

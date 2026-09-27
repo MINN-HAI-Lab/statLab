@@ -286,7 +286,29 @@ window.chapters = [
     "book": "Ch 8",
     "phase": 12,
     "blurb": "What a 95% interval promises, and how to build one for a mean or a proportion.",
-    "video": null,
+    // One optional short video per chapter (SPEC S2). Only the shell is baked into
+    // the page; site.js turns `url` into a <source> only once it is a real https
+    // address, so this placeholder never becomes a request (D-055).
+    // TODO(maintainer): render the Chapter 8 scene (the pipeline README says how), upload the
+    // CRF-23 landscape mp4 as an asset on a GitHub Release of this repository, and
+    // paste the asset URL here, e.g.
+    //   https://github.com/MINN-HAI-Lab/statLab/releases/download/media-v1/ch08-where-1-96-comes-from-landscape.crf23.mp4
+    "video": {
+      "title": "Where 1.96 comes from",
+      "url": "PLACEHOLDER_GITHUB_RELEASE_ASSET_URL",
+      "poster": "assets/video/confidence-intervals/poster.webp",
+      "captions": "assets/video/confidence-intervals/captions.vtt",
+      "transcript": [
+        "Where 1.96 comes from.",
+        "Shade the middle 95% of the standard normal.",
+        "That leaves 2.5% in each tail.",
+        "The z that cuts off 2.5% is 1.96. Read it off the curve, not a table.",
+        "A 95% interval reaches 1.96 standard errors either side of the sample mean.",
+        "One sample of 20 from a population with \u03c3 = 10. Its mean is 52.1.",
+        "52.1 plus or minus 4.38, so 47.7 to 56.4.",
+        "Change 95% and the 1.96 changes with it. The shape of the curve decides, not the data."
+      ]
+    },
     "sections": [
       {
         "id": "section-1",
@@ -321,29 +343,7 @@ window.chapters = [
     "book": "Ch 9",
     "phase": 13,
     "blurb": "Null hypotheses, error types, and what a p-value really measures.",
-    // One optional short video per chapter (SPEC S2). Only the shell is baked into
-    // the page; site.js turns `url` into a <source> only once it is a real https
-    // address, so this placeholder never becomes a request (D-055).
-    // TODO(maintainer): render the Chapter 9 scene (the pipeline README says how), upload the
-    // CRF-23 landscape mp4 as an asset on a GitHub Release of this repository, and
-    // paste the asset URL here, e.g.
-    //   https://github.com/MINN-HAI-Lab/statLab/releases/download/media-v1/ch09-what-a-p-value-is-not-landscape.crf23.mp4
-    "video": {
-      "title": "What a p-value is not",
-      "url": "PLACEHOLDER_GITHUB_RELEASE_ASSET_URL",
-      "poster": "assets/video/hypothesis-testing/poster.webp",
-      "captions": "assets/video/hypothesis-testing/captions.vtt",
-      "transcript": [
-        "What a p-value is not.",
-        "A sample of 25. Its mean is 54.5. Test \u03bc\u2080 = 50 with \u03c3 = 10 known. z = 2.27, p = 0.023.",
-        "p is the probability that H\u2080 is true. No.",
-        "p is the probability the result is due to chance. No.",
-        "1 \u2212 p is the probability of a real effect. No.",
-        "The one correct sentence.",
-        "If H\u2080 were true, a result at least this extreme would occur about 2 times in 100.",
-        "p describes the data, assuming H\u2080. It never describes H\u2080, given the data."
-      ]
-    },
+    "video": null,
     "sections": [
       {
         "id": "section-1",
