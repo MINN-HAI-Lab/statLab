@@ -1,0 +1,8 @@
+What a p-value is not.
+A sample of 25. Its mean is 54.5. Test μ₀ = 50 with σ = 10 known. z = 2.27, p = 0.023.
+p is the probability that H₀ is true. No.
+p is the probability the result is due to chance. No.
+1 − p is the probability of a real effect. No.
+The one correct sentence.
+If H₀ were true, a result at least this extreme would occur about 2 times in 100.
+p describes the data, assuming H₀. It never describes H₀, given the data.
