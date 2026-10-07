@@ -68,6 +68,12 @@ Motion exists to show causation (this input changed that mark), never to delight
 - Axes and scales hold still while data accumulates (SPEC D7). Rescale rarely, smoothly.
 - `prefers-reduced-motion` replaces continuous animation with stepped updates. Test it.
 - No hover-lift, no scale-on-hover, no shimmer, no skeleton loaders (nothing loads).
+- **Insight callouts** (D-057) are the one element that appears unbidden, and only because the
+  student just did something: a sentence or two inside the demo panel saying what changed and
+  why, with the live numbers. It fades in over 200 ms (instantly under reduced motion), never
+  moves, never covers a control for long, leaves on its own, on Escape or on Dismiss, and each
+  tip fires once per page load. Nothing is stored. Copy follows Section 4 and the site's sentence
+  rules, at most 20 words a sentence, and `tools/check-prose.mjs` checks it.
 
 ## 7. Self-audit before reporting done
 

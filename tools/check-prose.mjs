@@ -51,5 +51,36 @@ for (const slug of readdirSync("chapters").sort()) {
   }
 }
 console.log(report.join("\n"));
+// Insight callouts (D-057) are site copy too: every tip's text follows the same
+// sentence rules, and tighter — 20 words, the SYLLABUS reading-level figure,
+// because a callout is read in a glance. Placeholders count as one word.
+{
+  const { pathToFileURL } = await import("node:url");
+  const { resolve } = await import("node:path");
+  globalThis.window = { demos: {} };
+  await import(pathToFileURL(resolve("assets/js/insights.js")).href);
+  const rules = globalThis.window.insights && globalThis.window.insights.rules;
+  if (!rules) findings.push("insights.js: no rules registry found");
+  else {
+    let tips = 0;
+    for (const [demo, list] of Object.entries(rules)) list.forEach((r) => {
+      tips++;
+      const t = r.text.replace(/\{\w+\}/g, "0");
+      const where = `insight ${demo}/${r.id}`;
+      if (/§/.test(t)) findings.push(`${where}: the "§" glyph is not used in site copy (D-044)`);
+      if (/;/.test(t)) findings.push(`${where}: semicolon — split the sentence instead (D-046)`);
+      if (/\w: /.test(t)) findings.push(`${where}: colon inside a sentence (D-046)`);
+      if (!/[.!?]$/.test(t.trim())) findings.push(`${where}: does not end with a full stop`);
+      if (/\{|\}/.test(t)) findings.push(`${where}: unbalanced placeholder`);
+      t.split(/(?<=[.!?])\s+/).forEach((sen) => {
+        const n = sen.split(/\s+/).filter(Boolean).length;
+        if (n > 20) findings.push(`${where}: ${n}-word sentence: "${sen.slice(0, 60)}…"`);
+      });
+    });
+    console.log(`insights: ${tips} tips across ${Object.keys(rules).length} demos checked`);
+  }
+}
+
 if (findings.length) { console.log("\nFindings:\n" + findings.join("\n")); if (strict) process.exit(1); }
+
 else console.log("\ncheck-prose: no findings");
