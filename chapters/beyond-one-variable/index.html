@@ -44,6 +44,14 @@
         <p>Every group in the data can slope one way while the pooled data slope the other. That is <strong>Simpson’s paradox</strong>, and nothing about it is a trick of arithmetic. Here the group decides two things at once. It sets where a point sits along \(x\), and how high its cloud sits in \(y\). Push the clouds apart and the pooled line has to run between their centres, which is downhill. Every point inside a cloud still trends uphill.</p>
         <p>Press “Ignore the groups” and the colours vanish along with the information. The pooled line was always there. What changes is whether you can see the reason it lies. A <strong>lurking variable</strong> like this cannot be found in the numbers alone. You have to know it was recorded, and think to condition on it.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any discussion of Simpson’s paradox and confounding.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Ignore the groups</em> fits one line to everything. It can slope against both groups.</li>
+            <li>Slide <em>How far apart the two groups sit</em> to zero and the pooled line agrees with the groups again.</li>
+            <li>Slide <em>Slope inside each group</em> and both clouds tilt together.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="beyond-one-variable__simpsons-paradox"></div>
     </section>
@@ -55,6 +63,14 @@
         <p>\[\hat{y} = b_0 + b_1 x_1 + b_2 x_2\]</p>
         <p>makes \(b_1\) the effect of \(x_1\) <em>holding \(x_2\) fixed</em>, which is a different quantity from the slope \(x_1\) gets on its own. When the two predictors move together, \(x_1\) fitted alone is credited with \(x_2\)’s effect as well as its own. Set the true \(\beta_1\) negative and \(\beta_2\) positive, then turn the correlation up. The lone slope comes out positive while the two-predictor \(b_1\) recovers the truth. Neither answer is a mistake. They answer different questions, and only one of them was asked.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to multiple regression.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>How strongly x₁ and x₂ move together</em> up and the lone fit's x₁ slope drifts from the true β₁.</li>
+            <li>The two-predictor fit recovers both coefficients.</li>
+            <li>Slide the correlation to zero and the two answers agree.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="beyond-one-variable__two-predictors"></div>
     </section>

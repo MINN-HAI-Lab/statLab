@@ -45,6 +45,14 @@
         <p>Pick an ugly parent distribution. Skewed, two-humped and U-shaped all work. Draw a sample of \(n\) values from it and compute their mean. Do it again, and again. The <strong>central limit theorem</strong> says the pile of sample means turns into a normal curve as \(n\) grows. The shape of the parent does not matter. Its centre is the parent mean \(\mu\), and its spread is \(\sigma/\sqrt{n}\).<sup>1</sup></p>
         <p>Start with \(n = 1\), where the pile of “means” is just the parent again. Slide \(n\) to 5, then 30, and keep drawing. The orange curve is not fitted to the data. It is the theorem's prediction, drawn before a single sample is taken. Two humps, a long tail, a U shape. All melt into the same bell. That is why averages of almost anything are normal.</p>
         <p class="muted"><sup>1</sup> The SD of sample means shown is the sample standard deviation, dividing by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Section 7.1.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Pick a parent shape. <em>Draw 1 sample</em> shows its dots and adds one sample mean to the pile.</li>
+            <li><em>Draw 100</em> and the pile of means forms a bell, whatever the parent looked like.</li>
+            <li>Slide <em>Sample size, n</em> up and the bell narrows.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-means"></div>
     </section>
@@ -56,6 +64,14 @@
         <p>\[\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}},\]</p>
         <p>so it shrinks with the <em>square root</em> of the sample size. Four times as much data buys only half the spread, and a hundred times as much buys a tenth. Lock a parent and press “Sweep all n”. Each dot is the standard deviation of two thousand simulated sample means at one value of \(n\), and the curve is \(\sigma/\sqrt{n}\). The dots sit on the curve for every parent, because the formula does not care about the shape, only about \(\sigma\). The lower chart shows the pile of means at the chosen \(n\) tightening around \(\mu\).</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 7.1, 7.3.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Sample size, n</em> and press <em>Simulate at this n</em> to see the spread of means at that size.</li>
+            <li><em>Sweep all n</em> plots the simulated SD at twelve sizes along the σ/√n curve.</li>
+            <li>Pick another parent. The dots still follow the curve.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__standard-error"></div>
     </section>
@@ -67,6 +83,14 @@
         <p>\[\text{mean} = n\mu, \qquad \text{SD} = \sigma\sqrt{n}.\]</p>
         <p>The sum's spread <em>grows</em> with \(n\), while the mean's spread shrinks, and both facts come from the same \(\sqrt{n}\). Roll ten dice and add them up, many times. Single rolls are flat from 1 to 6, yet the totals pile into a bell around 35. Slide \(n\) up and the axis widens to follow \(n\mu \pm 5\sigma\sqrt{n}\), but the bell keeps its shape. This is the theorem behind why measurement errors, which are sums of many small nudges, are so often normal.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 7.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Draw 100</em> piles sums into a bell around nμ with SD σ√n.</li>
+            <li>Slide <em>Number of draws added, n</em> up and the axis widens to follow the sum's growing spread.</li>
+            <li>Pick another parent and the bell keeps its shape.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-sums"></div>
     </section>

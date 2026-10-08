@@ -45,6 +45,14 @@
         <p>Flip a coin once and you cannot say what it will show. Flip it a thousand times and you can say, quite precisely, what fraction will be heads. <strong>Probability</strong> is that long-run fraction. Suppose a coin lands heads with probability \(p\). After \(n\) flips the <strong>relative frequency</strong> of heads, \(\hat{p} = \dfrac{\text{heads}}{n}\), settles toward \(p\) as \(n\) grows. This is the <strong>law of large numbers</strong>.</p>
         <p>Set \(p\) with the slider and flip. The running proportion swings widely in the first ten or twenty flips, then calms down and hugs the dashed line. It never lands exactly on \(p\) and stays there. It only wanders less and less. A short run of heads is not evidence of a biased coin. A long run of many flips is.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 3.1.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Probability of heads, p</em> and the dashed line moves to the new p.</li>
+            <li><em>Flip 1</em> adds one flip. <em>Flip 100</em> adds a hundred and the running proportion settles.</li>
+            <li><em>Auto-flip</em> keeps flipping until you press it again.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="probability-topics__coin-flip"></div>
     </section>
@@ -55,6 +63,14 @@
         <p>The rectangle is the <strong>sample space</strong>. Every dot is one possible outcome, and each dot is equally likely. An <strong>event</strong> is a region of it, like circle A. The <strong>intersection</strong> “A and B” is where the circles overlap. The <strong>union</strong> “A or B” is everything inside either circle. The <strong>complement</strong> of A is everything outside it. Counting dots gives \(P(A \cup B) = P(A) + P(B) - P(A \cap B)\), because dots in the overlap would otherwise be counted twice.</p>
         <p>Drag the circles apart until no dot is in both. Now A and B are <strong>mutually exclusive</strong>, \(P(A \cap B) = 0\), and the union is just the sum. That is not the same as <strong>independent</strong>, which means \(P(A \cap B) = P(A)\,P(B)\). Compare the two readouts as you move the circles. Overlapping circles can be close to independent, while separated ones never are.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 3.2, 3.3, 3.5.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag circle A or B. The overlap changes P(A and B) and the readouts follow.</li>
+            <li>Pull the circles apart until no dot is in both, and P(A or B) equals P(A) + P(B).</li>
+            <li>Slide <em>Number of points, n</em> or press <em>New points</em> for a fresh sample space.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="probability-topics__events"></div>
     </section>
@@ -66,6 +82,14 @@
         <p>\[P(A \mid B) = \frac{P(A \cap B)}{P(B)} = \frac{n(A \text{ and } B)}{n(B)}.\]</p>
         <p>Press “Show only studied”. The other branch fades, and the sample space shrinks to the studied row of the <strong>contingency table</strong>. The conditional probability is just an ordinary probability inside that smaller world. Slide the two “passed” probabilities until they match. Studying then tells you nothing about passing, and the events are independent.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 3.4, 3.5.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Drop 1</em> sends one student down the tree. <em>Drop 100</em> sends a hundred and fills the table.</li>
+            <li>Slide the three probabilities to change where the branches lead.</li>
+            <li><em>Show only studied</em> fades the other branch, so the studied row becomes the whole sample space.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="probability-topics__conditional"></div>
     </section>

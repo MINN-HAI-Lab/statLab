@@ -118,6 +118,7 @@ Concepts the book does not cover but the course direction requires. Same quality
 - Sample variance: divide by n−1; call it "sample variance" and footnote why.
 - Notation: capital letters for random variables, lowercase for realizations; P(·) for probability, E[·], Var(·).
 - Reading level: plain English, sentences ≤ 20 words where possible, no idioms.
+- Every section's text column ends with a short "Try it" list after the Reading line, one bullet per control saying what it does to the picture, three bullets or so, naming controls by their on-screen labels (D-059). It is not counted toward the 50–150 words, and `tools/check-prose.mjs` holds its bullets to the sentence rules.
 - Core Concepts text sections cite the book as: OpenStax *Introductory Statistics*, Section x.y (free at openstax.org); Advanced Concepts sections cite Blitzstein & Hwang (probabilitybook.net) or *Computational and Inferential Thinking* (inferentialthinking.com) as appropriate.
 - Sentences carry their own weight. A colon or semicolon inside a sentence is nearly always a sentence that wants splitting, so section text uses neither, and `tools/check-prose.mjs` reports any that appear (D-046). A colon is still right for a genuine label, such as the "Reading:" line or a chart legend that reads "Orange curve: ...".
 - The "§" glyph is never used in site copy. Cite sections in words: "Section 3.1", "Sections 11.3 to 11.5" (D-044). This file writes them as `[Sec x.y]`; `tools/check-content.mjs` fails any page that prints the glyph.

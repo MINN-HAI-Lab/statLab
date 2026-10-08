@@ -49,6 +49,14 @@
         <p>\[b = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}, \qquad a = \bar{y} - b\bar{x},\]</p>
         <p>so it always passes through the point of means \((\bar{x}, \bar{y})\). Move points and watch the line follow. Then switch modes and try to beat it. Your orange squares can match the blue ones, never undercut them.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.1 to 12.3.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>In <em>Move points</em>, drag a point and the best line and its squares update.</li>
+            <li>In <em>Your line vs best line</em>, drag the two handles and compare your total of squares with the minimum.</li>
+            <li>The squares are drawn to scale. Their total is what least squares minimises.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__least-squares"></div>
     </section>
@@ -60,6 +68,14 @@
         <p>\[r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}},\]</p>
         <p>always between \(-1\) and \(1\). Points above-right or below-left of the mean cross push \(r\) up, while the other two quadrants pull it down. Its square, the <strong>coefficient of determination</strong> \(r^2\), is the share of the variation in \(y\) that the line explains. Three cautions. The two “strong” presets have the same \(r\) with very different slopes, because \(r\) measures tightness rather than steepness. The curved preset follows a perfect pattern yet gives \(r \approx 0\), because \(r\) sees only straight-line association. And no value of \(r\) says that \(x\) causes \(y\).</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.2, 12.4.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Press a preset and r, r² and the slope update for that cloud.</li>
+            <li><em>Strong, steep</em> and <em>Strong, shallow</em> share the same r. <em>Curved, r ≈ 0</em> has no straight-line trend.</li>
+            <li>Filled dots pull r up and hollow dots pull it down.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__correlation"></div>
     </section>
@@ -69,6 +85,14 @@
         <h2 id="section-3-title">12.3 The line is an estimate</h2>
         <p>The line you fit comes from one sample, and another sample would give another line. The grey cloud is a whole <strong>population</strong> of \((x, y)\) pairs with its own line, drawn dashed in orange. Each draw picks \(n\) of those points, fits them, and leaves the fitted line behind faintly. After a few dozen draws the lines form a band. Its width is the <strong>sampling variability</strong> of the slope, the same idea as the sampling distribution of a mean in Chapter 7. The spread of the slopes shrinks roughly like \(1/\sqrt{n}\), so raising \(n\) tightens the band around the population line. A slope printed to three decimals is still an estimate with a margin of error.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 12.4.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Draw a sample</em> fits a line to n points from the population and leaves it as a faint trace.</li>
+            <li><em>Draw 25</em> and the traces form a band around the population line.</li>
+            <li>Slide <em>Sample size, n</em> up and the band tightens. <em>New population</em> starts over.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__line-estimate"></div>
     </section>
@@ -78,6 +102,14 @@
         <h2 id="section-4-title">12.4 Prediction and outliers</h2>
         <p>A fitted line predicts \(\hat{y} = a + bx\) for any \(x\) you like, but the data only vouch for the range they cover. Inside that range the prediction is an <strong>interpolation</strong>. Outside it is an <strong>extrapolation</strong>, shaded here as a caution zone, where the relationship may bend, level off, or stop making sense. Slide the prediction point past the last observed \(x\) and the status line changes its tone. The orange point is an <strong>outlier</strong> waiting to happen. Near the other points it barely matters. Dragged far to the right it gains <strong>leverage</strong>. One point tilts the whole line and drags \(r\) with it. Compare the solid line with the dashed one fitted without it, and always look for such points before trusting a slope.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.5, 12.6.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag the diamond and compare the solid fit with it against the dashed fit without.</li>
+            <li><em>Send the new point far right</em> and it drags the slope. Far points have leverage.</li>
+            <li>Slide <em>Predict y at x</em> outside the data's range and the prediction is flagged as extrapolation.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__prediction-outliers"></div>
     </section>

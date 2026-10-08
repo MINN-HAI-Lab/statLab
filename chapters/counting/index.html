@@ -45,6 +45,14 @@
         <p>\[n_1 \times n_2 \times \cdots \times n_k.\]</p>
         <p>The tree shows why. Adding a stage with \(n\) options does not add \(n\) paths. It replaces every path that already existed with \(n\) copies of itself. Three shirts and two pairs of trousers give six half-outfits, and two pairs of shoes turn each of those into two, so twelve. Change a count and watch the last column grow by a factor, never by an amount. Most counting problems are this rule applied carefully, and the harder ones only look different because the stages are less obvious.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any discrete mathematics introduction on the multiplication principle.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Pick a count for each stage and the tree's last column multiplies.</li>
+            <li><em>Trace one outfit</em> lights one root-to-leaf path.</li>
+            <li><em>Add a stage</em> or <em>Remove a stage</em> to change how many choices multiply.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="counting__multiplication-rule"></div>
     </section>
@@ -56,6 +64,14 @@
         <p>\[P(n, k) = \frac{n!}{(n-k)!}, \qquad C(n, k) = \frac{n!}{k!\,(n-k)!}.\]</p>
         <p>The two differ by exactly \(k!\), the number of orders any one selection can be written in. Press “Order matters” and every row in the list fans out into \(k!\) rows, which is that division running backwards. The list is real. Count the rows and you get the formula's answer, until it grows too long to print.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any discrete mathematics introduction on permutations and combinations.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Pick n and k and the list shows every choice, counted by C(n, k).</li>
+            <li>Press <em>Order matters</em> and each row fans into k! orders, counted by P(n, k).</li>
+            <li>Past 120 rows the list is cut, but the count stays exact.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="counting__permutations-combinations"></div>
     </section>

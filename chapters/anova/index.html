@@ -45,6 +45,14 @@
         <p>\[F = \frac{MS_{\text{between}}}{MS_{\text{within}}}, \qquad MS_{\text{between}} = \frac{\sum n_j (\bar{x}_j - \bar{x})^2}{k - 1}, \qquad MS_{\text{within}} = \frac{\sum (x_{ij} - \bar{x}_j)^2}{n - k}.\]</p>
         <p>The top measures how far the group means sit from the <strong>grand mean</strong>. The bottom measures how far the points sit from their own group's mean. Drag the means apart and the top bar grows while the bottom stays put, so \(F\) climbs. Widen the groups instead and the bottom bar grows, so the same gaps stop being impressive. Neither quantity means anything alone.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 13.1, 13.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag a group's mean and MS between changes while MS within does not.</li>
+            <li>Slide <em>Spread within each group, s</em> and MS within changes instead.</li>
+            <li>F is their ratio. <em>Spread the means apart</em> and F rises.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="anova__anova-idea"></div>
     </section>
@@ -54,6 +62,14 @@
         <h2 id="section-2-title">13.2 The F distribution and the decision</h2>
         <p>When every group really does come from the same distribution, \(F\) still varies from study to study. Its values follow the <strong>F distribution</strong> with \(k - 1\) and \(n - k\) degrees of freedom.<sup>1</sup> Leave the gap at zero and run study after study. The bars fill the orange curve, and about one study in twenty lands beyond the critical value even though nothing separates the groups. That is the 5 % significance level in action. Give the means a real gap and the whole pile slides right, past the line, more often as \(n\) grows. The test is one-tailed by construction, because only a large \(F\) is evidence against equal means.</p>
         <p class="muted"><sup>1</sup> The F distribution is right-skewed and never negative, being a ratio of two variances. Reading: OpenStax <em>Introductory Statistics</em>, Sections 13.2, 13.3.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Run one study</em> draws fresh data and marks its F against the curve.</li>
+            <li>Set the gap to zero and press <em>Run 200</em>. About 5% land past the critical value.</li>
+            <li>Raise the gap or <em>Observations per group, n</em> and more studies cross it. That share is the power.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="anova__f-distribution"></div>
     </section>

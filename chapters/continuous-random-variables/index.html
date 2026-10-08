@@ -45,6 +45,14 @@
         <p>\[P(a \le X \le b) = \int_a^b f(x)\,dx = F(b) - F(a),\]</p>
         <p>where \(F\) is the cumulative distribution function. The whole area is 1. Drag the two handles and watch the shaded area and the probability move together. Then press “Shrink interval to a point”: the area of a line is zero, so \(P(X = x) = 0\) for every single value. Draw some values and the bars settle onto the curve, and that is what a density is, the shape a histogram approaches. Switch to the <strong>exponential</strong> and see the same rules on a curve that is not flat.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 5.1, 5.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag the two handles, or slide <em>Lower end a</em> and <em>Upper end b</em>. The shaded area is the probability of landing between them.</li>
+            <li><em>Shrink interval to a point</em> and the probability goes to zero.</li>
+            <li><em>Draw 100</em> and the share of draws inside the interval approaches the shaded area.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="continuous-random-variables__density-area"></div>
     </section>
@@ -55,6 +63,14 @@
         <p>Suppose arrivals happen at random with an average <strong>rate</strong> \(\lambda\) per minute. Then the wait between one arrival and the next has the <strong>exponential distribution</strong>, \(f(w) = \lambda e^{-\lambda w}\), with mean \(1/\lambda\). Short waits are common and long waits are rare, which the histogram shows as soon as a few dozen arrivals have come in.</p>
         <p>The exponential has a strange property. It is <strong>memoryless</strong>. Slide “already waited” to two minutes. The dashed curve for the wait still ahead of you is the original curve, just moved along. Formally, \(P(W > t + s \mid W > t) = P(W > s)\). The readouts compare the two, in theory and in the data. Waiting has bought you nothing, because the next arrival is as far away as it was when you started. Buses run on schedules. Radioactive atoms do not.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 5.3.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Arrival rate λ</em> up and arrivals come faster, so the mean wait falls.</li>
+            <li>Slide <em>Already waited t</em> and the conditional density shifts without changing shape. That is memorylessness.</li>
+            <li><em>100 arrivals</em> fills the waiting-time histogram.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="continuous-random-variables__exponential"></div>
     </section>

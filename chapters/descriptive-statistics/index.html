@@ -46,6 +46,14 @@
         <p>A <strong>histogram</strong> sorts data into equal-width intervals called <strong>bins</strong> and draws a bar for each, as tall as the number of values inside. It is the quickest way to see the <strong>shape</strong> of a data set. The bars show where values pile up, where they thin out, and whether there is one hump or two.</p>
         <p>The 80 commute times here never change. Drag the bin-width slider and watch the picture change anyway. Very narrow bins show every bump and look ragged. Wide bins look smooth but can hide the two groups of commuters entirely. Somewhere in between, the story is clearest. The <strong>frequency polygon</strong> joins the bar tops with a line, which makes comparing two histograms easier. When you read a histogram, always ask what bin width was used.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.1, 2.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Bin width</em> narrower to see every bump, wider to smooth them away.</li>
+            <li>Press <em>Frequency polygon</em> to join the bar tops with a line.</li>
+            <li>The 80 commute times never change. Only the bins do.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__histogram"></div>
     </section>
@@ -56,6 +64,14 @@
         <p>Three numbers describe the “middle” of data, and they answer different questions. The <strong>mean</strong> \(\bar{x} = \frac{1}{n}\sum x_i\) is the balance point. If the dots were weights on a plank, the triangle is where it would balance. The <strong>median</strong> is the splitter, with half the dots on each side. The <strong>mode</strong> is the most common value, if any value repeats.</p>
         <p>Drag one dot far to the right, or press the button. The mean chases it, because a far-away weight tips the plank. The median barely moves, because it only counts how many dots are on each side, not how far away they are. Values like this one are called <strong>outliers</strong>, and the median is <strong>resistant</strong> to them. For incomes and house prices, the median is usually the honest “typical” number.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.3, 2.5.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag any point along the lane and the mean, median and mode update.</li>
+            <li><em>Push one point far out</em> and the mean follows it while the median stays put.</li>
+            <li><em>Reset</em> returns the nine points.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__center"></div>
     </section>
@@ -66,6 +82,14 @@
         <p>The <strong>quartiles</strong> cut sorted data into four equal parts. A quarter of the values lie below \(Q_1\), half below the median, and three quarters below \(Q_3\).<sup>1</sup> A <strong>box plot</strong> draws a box from \(Q_1\) to \(Q_3\), a line at the median, and whiskers out to the smallest and largest values. The box width, \(Q_3 - Q_1\), is the <strong>interquartile range</strong>.</p>
         <p>Slide the skew control. With the slider in the middle the data are symmetric and the mean sits on the median. Push it right and a tail of large values grows. The upper whisker stretches, and the mean is dragged above the median. That is a <strong>right-skewed</strong> distribution. Push it left for the mirror image. The gap between mean and median is a quick test for skew.</p>
         <p class="muted"><sup>1</sup> Quartiles on this site use the Weibull rule, position \((n+1)p\) in the sorted data. Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.4, 2.6.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Skew</em> right and a tail of large values grows, pulling the mean above the median.</li>
+            <li>Slide it left for the mirror image.</li>
+            <li><em>New draw</em> takes a fresh sample with the same skew.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__boxplot-skew"></div>
     </section>
@@ -77,6 +101,14 @@
         <p>\[s = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n - 1}}.\]</p>
         <p>Taking the square root brings the number back to the original units, so \(s\) reads as a typical distance from the mean. Drag the dots apart and the squares grow fast. A point twice as far contributes four times as much. Press “Bunch up” and \(s\) shrinks. The mean does not care about spread. The standard deviation cares about nothing else.</p>
         <p class="muted"><sup>2</sup> The sample variance divides by \(n - 1\), not \(n\), because the mean was estimated from the same data. Reading: OpenStax <em>Introductory Statistics</em>, Section 2.7.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag a point and its deviation stick, the variance and the SD update.</li>
+            <li><em>Spread out</em> and <em>Bunch up</em> move all the points at once.</li>
+            <li><em>Show squares</em> draws each squared deviation as a square. Their total is the sum of squares.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__spread"></div>
     </section>

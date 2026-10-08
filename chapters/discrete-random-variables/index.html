@@ -46,6 +46,14 @@
         <p>\[\mu = E[X] = \sum x \, P(x),\]</p>
         <p>and it is what the ordinary average of the outcomes settles toward after many repetitions. Roll the fair die and watch the sample mean wander, then calm down near 3.5. Now drag the weight of face 6 up. The probabilities change, the table recomputes \(\mu\), and the running mean settles somewhere new. The expected value need not be a possible outcome, and no die ever shows 3.5. It is a long-run average, not a prediction of the next roll.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 4.1, 4.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide a face's weight and the probabilities renormalise, so E[X] moves.</li>
+            <li><em>Roll 100</em> piles real rolls under the theory bars and the sample mean approaches E[X].</li>
+            <li><em>Auto-roll</em> keeps rolling until you press it again.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="discrete-random-variables__expectation"></div>
     </section>
@@ -57,6 +65,14 @@
         <p>\[\sigma^2 = \sum (x - \mu)^2 \, P(x), \qquad \sigma = \sqrt{\sigma^2}.\]</p>
         <p>Each stick in the top chart is a distance \(x - \mu\), and the bottom chart shows how much each face contributes to \(\sigma^2\). Faces far from \(\mu\) contribute a lot even when they are unlikely. Roll the die and the sample variance \(s^2\) of the outcomes<sup>1</sup> drifts toward \(\sigma^2\). Push the weights of faces 1 and 6 up and the rest down. Now \(\mu\) stays near 3.5 while \(\sigma^2\) grows.</p>
         <p class="muted"><sup>1</sup> The sample variance divides by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Section 4.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide weight toward the end faces and Var(X) grows. Faces far from E[X] contribute most.</li>
+            <li><em>Roll 100</em> and the sample variance converges on Var(X).</li>
+            <li>The lower chart shows each face's share of the variance.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="discrete-random-variables__rv-variance"></div>
     </section>
@@ -67,6 +83,14 @@
         <p>Some situations come up so often that their distributions have names. The <strong>binomial</strong> counts successes in \(n\) independent trials that share the same chance \(p\), and its probabilities are \(P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}\). The <strong>geometric</strong> counts trials until the first success, which gives \(P(X = k) = (1-p)^{k-1} p\). The <strong>hypergeometric</strong> counts successes when drawing without replacement, so each draw changes the odds. The <strong>Poisson</strong> counts rare events at an average rate \(\lambda\), with \(P(X = k) = \lambda^k e^{-\lambda} / k!\).</p>
         <p>Pick a distribution, read its one-line scenario, and move the sliders to see the shape respond. Then draw. The dark bars of real draws pile up under the light bars of theory, and the sample mean approaches \(E[X]\). The skill being built here is recognition. Given a story, which distribution is it?</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 4.3 to 4.6.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Pick <em>Binomial</em>, <em>Geometric</em>, <em>Hypergeometric</em> or <em>Poisson</em>, then move its sliders to reshape the light theory bars.</li>
+            <li><em>Draw 100</em> piles dark bars of real draws under them.</li>
+            <li>The sample mean and variance converge on E[X] and Var(X).</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="discrete-random-variables__discrete-distributions"></div>
     </section>

@@ -46,6 +46,14 @@
         <p>\[P(D \mid +) = \frac{P(+ \mid D)\,P(D)}{P(+ \mid D)\,P(D) + P(+ \mid \text{no } D)\,P(\text{no } D)}.\]</p>
         <p>Count the thousand dots. Ten have the disease and about ten of those test positive. The other 990 are healthy, and 5 % of them test positive too, which is fifty people. So sixty test positive and only ten are ill. The answer is one in six, not 99 %. The <strong>prevalence</strong> is doing the work. A small error rate applied to a huge group beats a large catch rate applied to a tiny one. Drag the prevalence up and the same test becomes trustworthy.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to conditional probability and base rates.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>People who have it, per 100</em> down and most positives become false ones.</li>
+            <li><em>Show only the positives</em> keeps the people who tested positive. Their share who have it is the posterior.</li>
+            <li>Slide <em>Specificity</em> up and a positive result means more.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="bayesian-inference__bayes-theorem"></div>
     </section>
@@ -57,6 +65,14 @@
         <p>\[L(p) = \binom{n}{k} p^{k} (1-p)^{n-k}.\]</p>
         <p>Same formula, different variable. The flips stay on screen while the slider moves, because the data are the one thing you are not free to change. The curve peaks at \(\hat{p} = k/n\), the <strong>maximum likelihood estimate</strong>. A likelihood is not a probability for \(p\), and the curve does not enclose an area of one. Only the ratios mean anything. A p that is ten times less likely explains your flips ten times worse.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to maximum likelihood estimation.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Candidate p</em> and the marker moves along the curve. The flips stay fixed.</li>
+            <li><em>Snap to the best p</em> jumps to k/n, the maximum likelihood estimate.</li>
+            <li><em>New flips</em> redraws the data, and the curve with it. Slide <em>Flips observed, n</em> up and the curve narrows.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="bayesian-inference__likelihood"></div>
     </section>
@@ -68,6 +84,14 @@
         <p>\[\text{posterior} \propto \text{prior} \times \text{likelihood}.\]</p>
         <p>Take a <strong>Beta prior</strong> with shapes \(a\) and \(b\) and Bernoulli data. The multiplication then has a closed form. The <strong>posterior</strong> is \(\text{Beta}(a + k, b + n - k)\) for \(k\) successes in \(n\) trials. Every observation adds one to a shape, so the prior behaves like data you already had. Beta(2, 2) is worth about two flips and is overturned quickly. Beta(20, 20) is worth forty and holds its ground. Watch the solid curve leave the dashed one and climb toward the true \(p\), narrowing as it goes.</p>
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to Bayesian updating with conjugate priors.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Observe one</em> flips the hidden coin once and moves one prior shape by one.</li>
+            <li>Slide <em>Prior shape a</em> or <em>b</em> to make the prior stronger, and the same data move it less.</li>
+            <li><em>Observe 10</em> pulls the posterior toward the coin's true p.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="bayesian-inference__prior-posterior"></div>
     </section>

@@ -46,6 +46,14 @@
         <p>\[t = \frac{\bar{x}_A - \bar{x}_B}{\sqrt{s_A^2/n_A + s_B^2/n_B}},\]</p>
         <p>and asks how often a \(t\) this large would appear if the populations were really equal.<sup>1</sup> Drag the two means together and sample. The differences pile up around zero and most p-values are large. Pull the means apart and the pile shifts, but with \(n = 15\) many samples still fail to reach 0.05, because two overlapping populations produce overlapping samples. Raise \(n\) and the same gap becomes unmistakable. Overlap in the curves and significance in the test are different things.</p>
         <p class="muted"><sup>1</sup> This is Welch's version, which does not assume equal spreads. Its degrees of freedom come from the Welch–Satterthwaite formula. \(s\) divides by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Sections 10.1, 10.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag either group's mean and the true difference changes.</li>
+            <li><em>Sample both groups</em> runs Welch's test on fresh samples. <em>Repeat 100 times</em> piles the differences.</li>
+            <li>With equal means about 5% reject. Slide <em>Sample size per group, n</em> up and real gaps become detectable.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="two-sample-tests__two-means"></div>
     </section>
@@ -57,6 +65,14 @@
         <p>\[z = \frac{\hat{p}_A - \hat{p}_B}{\sqrt{\hat{p}_c (1 - \hat{p}_c)\left(\frac{1}{n_A} + \frac{1}{n_B}\right)}}.\]</p>
         <p>Run the test a hundred times with 200 visitors per version and look at the pile of p-values. The three-point gap is real, yet most runs miss it. Slide \(n\) to 2 000 and the pile crowds toward zero. Small real differences are detectable, but only by large experiments. That is why online tests run for weeks.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 10.3.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide the two sign-up rates and press <em>Run the test</em> on a fresh pair of samples.</li>
+            <li><em>Repeat 100 times</em> and the share rejected is the power at this n.</li>
+            <li>Slide <em>Visitors per version, n</em> into the thousands and even a small gap gives a large z.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="two-sample-tests__two-proportions"></div>
     </section>
@@ -67,6 +83,14 @@
         <p>Twelve students take a test, get a week of coaching, and take it again. Students differ from each other far more than coaching changes any one of them. Treating the before and after scores as two unrelated groups buries a real improvement under that between-student spread.</p>
         <p>The fix is to test the <strong>differences</strong>, one per subject, so \(d_i = \text{after}_i - \text{before}_i\). A <strong>paired t-test</strong> is just a one-sample t-test on those differences, \(t = \bar{d} / (s_d / \sqrt{n})\), and it never sees the between-student spread at all. Press “Treat as pairs”. The lines join each student to their own second score. The standard deviation collapses from the spread between students to the spread of the changes, and the p-value drops, for exactly the same numbers. Whenever data come in natural pairs, pair them.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 10.4.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Switch between <em>Treat as two independent groups</em> and <em>Treat as pairs</em> to see both p-values for the same data.</li>
+            <li>Pairs remove the between-subject spread, so the paired p-value is usually smaller.</li>
+            <li>Slide <em>True improvement per subject</em> to zero and about 5% of redraws reject.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="two-sample-tests__paired"></div>
     </section>

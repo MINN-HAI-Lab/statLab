@@ -45,6 +45,14 @@
         <p>A hypothesis test starts with a claim to doubt, the <strong>null hypothesis</strong> \(H_0\). Here it claims the mean is 50. The <strong>alternative</strong> \(H_1\) is what we would conclude instead. We draw a sample, and if its mean lands past a <strong>decision cutoff</strong> we reject \(H_0\). Two things can go wrong. Rejecting a true \(H_0\) is a <strong>Type I error</strong>, and its probability is \(\alpha\), the orange tail. Failing to reject when the effect is real is a <strong>Type II error</strong>, probability \(\beta\), the blue tail. The test's <strong>power</strong> is \(1 - \beta\).</p>
         <p>Drag the cutoff. Lowering \(\alpha\) always raises \(\beta\). The two errors trade off, and choosing \(\alpha = 0.05\) is a convention rather than a law. Only two things shrink both tails at once. A larger sample narrows both curves, and a larger real effect pulls them apart.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 9.1, 9.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Drag the cutoff and α and β trade places. Lower one and you raise the other.</li>
+            <li>The <em>Cutoff for α</em> buttons place it for a chosen false-alarm rate.</li>
+            <li>Slide <em>Sample size, n</em> or <em>True effect</em> up and the curves separate, so power rises.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="hypothesis-testing__error-types"></div>
     </section>
@@ -56,6 +64,14 @@
         <p>\[p = 2\,P\!\left(Z \ge |z|\right), \qquad z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}.\]</p>
         <p>A small p-value says the data would be surprising under \(H_0\). It does <em>not</em> say how likely \(H_0\) is. Run a hundred tests with \(H_0\) true and look at the pile of p-values. It is flat. Small p-values are exactly as common as large ones, and one test in twenty crosses 0.05 by chance alone. Now make \(H_0\) false. The pile crowds toward zero, and the share below 0.05 is the power of the test.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 9.3, 9.4.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Draw a sample</em> and the shaded tails are its p-value.</li>
+            <li>Choose <em>H₀ is true</em> and <em>Run 100 tests</em>. About five in a hundred fall below 0.05.</li>
+            <li>Choose <em>H₀ is false</em> and the share below 0.05 is the power. Slide n or the effect to change it.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="hypothesis-testing__p-value"></div>
     </section>
@@ -66,6 +82,14 @@
         <p>Real tests rarely know \(\sigma\), so they use \(s\)<sup>1</sup> and the t distribution. The steps never change. State \(H_0\) and \(H_1\). Draw the sample. Compute the <strong>test statistic</strong> \(t = (\bar{x} - \mu_0)/(s/\sqrt{n})\) with \(df = n - 1\). Find the p-value, compare it with \(\alpha\), and decide. The panel runs every step on a fresh sample each time you press the button.</p>
         <p>Read the decision line carefully. “Fail to reject” means the data are compatible with \(H_0\), not that \(H_0\) is true. A small sample fails to reject almost everything. Set the true mean to 55 and run a hundred tests. Many fail to reject, and each of those is a missed real difference. Set it back to 50 and about \(\alpha\) of the tests reject anyway. Neither is a flaw in the method. It is what \(\alpha\) and \(\beta\) mean.</p>
         <p class="muted"><sup>1</sup> \(s\) divides by \(n - 1\), as everywhere on this site. Reading: OpenStax <em>Introductory Statistics</em>, Section 9.5.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Run one test</em> walks the five steps and gives a verdict the test itself cannot see.</li>
+            <li>Set <em>True population mean</em> to 50 and <em>Run 100 tests</em> to watch the Type I rate settle near α.</li>
+            <li>Move it away from 50 and the rejection share becomes the power. The <em>α</em> buttons move the cutoff.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="hypothesis-testing__full-test"></div>
     </section>

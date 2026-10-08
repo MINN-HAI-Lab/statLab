@@ -46,6 +46,14 @@
         <p>\[\bar{x} \pm z^{*}\,\frac{\sigma}{\sqrt{n}},\]</p>
         <p>where \(z^{*}\) cuts off the chosen tail area, so \(z^{*} = 1.96\) for 95 %. The <strong>confidence level</strong> is a promise about the method, not about one interval. Draw fifty samples. Each interval either contains \(\mu\) or it does not, and no interval knows which. The orange ones missed. In the long run about 95 % of them capture \(\mu\). Raise the level and the intervals widen. Raise \(n\) and they shrink. Confidence is bought with width or with data.</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.1.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Draw 50</em> stacks fifty intervals. The orange dashed ones miss μ.</li>
+            <li>Slide <em>Confidence level</em> up and every interval widens. Slide <em>Sample size, n</em> up and they narrow.</li>
+            <li>The capture rate settles toward the level only over many intervals.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="confidence-intervals__ci-meaning"></div>
     </section>
@@ -56,6 +64,14 @@
         <p>In practice \(\sigma\) is unknown, so we estimate it with the sample standard deviation \(s\). That estimate is itself noisy, especially for small samples, and the noise costs certainty. William Gosset worked out the price in 1908. Replace the normal with the <strong>t distribution</strong>, whose <strong>degrees of freedom</strong> \(df = n - 1\) set how heavy its tails are. The interval becomes \(\bar{x} \pm t^{*}\, s/\sqrt{n}\).</p>
         <p>With \(df = 4\) the shaded tails are far fatter than the normal's, and \(t^{*}\) is 2.78 instead of 1.96. Slide \(df\) up and the t curve melts into the normal. By 30 the difference is small. The lower panel takes one real sample and builds both intervals. The t-interval is usually wider. That width is honest, because it admits we had to guess \(\sigma\).</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.2.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li>Slide <em>Degrees of freedom</em> down and the t curve's tails thicken, so t* moves away from 1.96.</li>
+            <li>Slide it up past 30 and the t curve melts into the normal.</li>
+            <li><em>New sample</em> draws n = df + 1 values and builds both intervals.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="confidence-intervals__t-distribution"></div>
     </section>
@@ -67,6 +83,14 @@
         <p>\[\hat{p} \pm z^{*}\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.\]</p>
         <p>Poll a hundred voters over and over. The intervals wobble around the true \(p\), and about 95 % of them capture it, exactly as in 8.1. Now drop \(n\) to 10 and push \(p\) toward 0.05. The capture rate falls short of the promise, because the normal approximation needs both \(n p\) and \(n(1-p)\) to be at least 5. Real polls quote a “margin of error” of about three points, which is this formula with \(n \approx 1000\).</p>
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.3.</p>
+        <div class="section__howto">
+          <p class="section__howto-title">Try it</p>
+          <ul>
+            <li><em>Poll 50 times</em> stacks fifty intervals for p and counts the captures.</li>
+            <li>Slide <em>Voters per poll, n</em> down, or <em>True support p</em> toward an edge. Once n·p drops below 5 the capture rate falls short.</li>
+            <li>Slide <em>Confidence level</em> and every interval widens or narrows.</li>
+          </ul>
+        </div>
       </div>
       <div class="section__demo ui-panel" data-demo="confidence-intervals__proportion-ci"></div>
     </section>

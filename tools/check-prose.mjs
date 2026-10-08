@@ -51,5 +51,28 @@ for (const slug of readdirSync("chapters").sort()) {
   }
 }
 console.log(report.join("\n"));
+// "Try it" blocks (D-059) sit after the Reading line, so the word count above
+// ignores them by construction, but they are site copy and follow the same
+// sentence rules, at the SYLLABUS reading-level figure of 20 words.
+{
+  let bullets = 0;
+  for (const slug of readdirSync("chapters").sort()) {
+    const html = readFileSync(join("chapters", slug, "index.html"), "utf8");
+    for (const [, body] of html.matchAll(/<div class="section__howto">([\s\S]*?)<\/div>/g)) {
+      for (const [, li] of body.matchAll(/<li>([\s\S]*?)<\/li>/g)) {
+        bullets++;
+        const t = li.replace(/<[^>]+>/g, "").replace(/&[a-z]+;/g, " ").replace(/\s+/g, " ").trim();
+        const where = `${slug} try-it: "${t.slice(0, 50)}…"`;
+        if (/§/.test(t)) findings.push(`${where}: the "§" glyph is not used in site copy (D-044)`);
+        if (/;/.test(t)) findings.push(`${where}: semicolon — split the sentence instead (D-046)`);
+        if (/\w: /.test(t)) findings.push(`${where}: colon inside a sentence (D-046)`);
+        if (!/[.!?]$/.test(t)) findings.push(`${where}: does not end with a full stop`);
+        t.split(/(?<=[.!?])\s+/).forEach((sen) => { const n = sen.split(/\s+/).filter(Boolean).length; if (n > 20) findings.push(`${where}: ${n}-word sentence`); });
+      }
+    }
+  }
+  console.log(`try-it: ${bullets} bullets checked`);
+}
+
 if (findings.length) { console.log("\nFindings:\n" + findings.join("\n")); if (strict) process.exit(1); }
 else console.log("\ncheck-prose: no findings");
