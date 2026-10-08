@@ -410,45 +410,6 @@ main.landing, main.chapter { max-width: 72rem; }
 .chapter__transcript summary { cursor: pointer; color: var(--ink); font-weight: 600; }
 .chapter__transcript p { margin: var(--space-1) 0 0; }
 
-/* ---- Insight callouts (D-057) --------------------------------------------
-   A short cause-and-effect note that appears inside the demo panel when an
-   interaction changes the picture, then leaves on its own. Surface, --line
-   border, one accent edge as the single signal, no shadow. It overlays the
-   panel's top-right corner for a few seconds and is dismissible, so it never
-   shifts layout (D-039) and never hides a control for long. */
-.section__demo { position: relative; }
-.ui-insight {
-  position: absolute;
-  top: var(--space-2);
-  right: var(--space-2);
-  z-index: 2;
-  max-width: min(36ch, calc(100% - 2 * var(--space-2)));
-  padding: var(--space-1) var(--space-2);
-  background: var(--surface);
-  color: var(--ink);
-  border: var(--border) solid var(--line);
-  border-left: var(--border-strong) solid var(--accent);
-  border-radius: var(--radius);
-  font-size: var(--fs-0);
-  line-height: 1.5;
-  opacity: 0;
-  transition: opacity 200ms ease-out;
-}
-.ui-insight.is-open { opacity: 1; }
-.ui-insight__text { margin: 0 0 var(--space-1); }
-.ui-insight__dismiss {
-  min-height: var(--touch);
-  padding: 0 var(--space-1);
-  margin-left: calc(-1 * var(--space-1));
-  background: none;
-  border: 0;
-  color: var(--accent-strong);
-  font: inherit;
-  font-weight: 600;
-  cursor: pointer;
-}
-@media (prefers-reduced-motion: reduce) { .ui-insight { transition: none; } }
-
 /* ---- Math (SPEC D8) --------------------------------------------------
    KaTeX output inherits the text colour; nothing else to style. If KaTeX never
    loads, site.js adds `no-katex` to <body> and the raw \( … \) source stays
