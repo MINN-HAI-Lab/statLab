@@ -47,11 +47,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 5.1, 5.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag the two handles, or slide <em>Lower end a</em> and <em>Upper end b</em>. The shaded area is the probability of landing between them.</li>
-            <li><em>Shrink interval to a point</em> and the probability goes to zero.</li>
-            <li><em>Draw 100</em> and the share of draws inside the interval approaches the shaded area.</li>
-          </ul>
+          <ol>
+            <li><em>Uniform</em> is selected. The interval runs from 2 to 6 and the shaded area is its probability.</li>
+            <li>Drag either handle, or slide <em>Lower end a</em> and <em>Upper end b</em>. The area readout follows.</li>
+            <li>Press <em>Shrink interval to a point</em>. The probability reads 0. A single value has no area.</li>
+            <li>Widen it again and press <em>Draw 100</em>. <em>Share of draws inside</em> approaches the area.</li>
+            <li>Pick <em>Exponential</em>. The same rule holds under a curve that is no longer flat.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="continuous-random-variables__density-area"></div>
@@ -65,11 +67,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 5.3.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Arrival rate λ</em> up and arrivals come faster, so the mean wait falls.</li>
-            <li>Slide <em>Already waited t</em> and the conditional density shifts without changing shape. That is memorylessness.</li>
-            <li><em>100 arrivals</em> fills the waiting-time histogram.</li>
-          </ul>
+          <ol>
+            <li><em>Arrival rate λ</em> starts at 1 per minute, so <em>Mean wait 1/λ</em> is 1 minute.</li>
+            <li>Press <em>Next arrival</em> a few times. Each wait lands on the timeline and in the histogram.</li>
+            <li>Press <em>100 arrivals</em>. <em>Mean wait (sample)</em> settles near 1/λ.</li>
+            <li>Slide <em>Already waited t</em> to 2. The conditional curve shifts but keeps its shape, and the two probability readouts stay equal. That is memorylessness.</li>
+            <li>Slide λ to 3. Arrivals crowd the timeline and the mean wait drops to a third of a minute.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="continuous-random-variables__exponential"></div>

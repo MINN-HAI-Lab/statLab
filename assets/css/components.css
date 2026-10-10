@@ -367,13 +367,13 @@ main.landing, main.chapter { max-width: 72rem; }
 }
 .section__text { max-width: var(--measure); }
 .section__text h2 { margin-top: 0; }
-/* "Try it" (D-059): what each control does to the picture, as a short list at the
-   foot of the section text, after the Reading line. Quiet by design, the same
+/* "Try it" (D-059, steps per D-060): what each control does to the picture, as a
+   numbered list at the foot of the section text, after the Reading line. Quiet by design, the same
    size and ink as the citation, so it reads as part of the explanation and not
    as a second panel competing with the demo. */
 .section__howto { margin-top: var(--space-2); font-size: var(--fs-0); color: var(--ink-soft); }
 .section__howto-title { margin: 0 0 var(--space-1); font-weight: 600; color: var(--ink); }
-.section__howto ul { margin: 0; padding-left: 1.2em; }
+.section__howto ol, .section__howto ul { margin: 0; padding-left: 1.4em; }
 .section__howto li { margin: 0 0 var(--space-1); line-height: 1.5; }
 .section__howto em { font-style: normal; color: var(--ink); }
 

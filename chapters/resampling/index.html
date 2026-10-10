@@ -47,11 +47,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to bootstrap resampling.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Resample once</em> draws n values from the sample with replacement. Picks stack above each value.</li>
-            <li><em>Resample 200</em> piles the resample means. Their SD is the bootstrap standard error.</li>
-            <li>Compare the percentile interval with the t interval. <em>New sample</em> starts over.</li>
-          </ul>
+          <ol>
+            <li>You have one sample of 10 values, shown along the strip.</li>
+            <li>Press <em>Resample once</em>. Ten picks are drawn with replacement and stacked above their values. Some repeat, some are missed.</li>
+            <li>Press <em>Resample 200</em>. The resample means pile into the lower histogram.</li>
+            <li>Compare <em>Bootstrap standard error</em> with <em>Formula standard error</em>, and the two intervals below.</li>
+            <li>Slide <em>Size of the one sample you have, n</em> to 40 and press <em>New sample</em>. Both standard errors shrink.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="resampling__bootstrap"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to permutation tests.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Shuffle the labels once</em> reassigns the group labels and records the new gap. The values never move.</li>
-            <li><em>Shuffle 500</em> piles shuffled gaps. The marked bars reach the observed gap, and their share is p.</li>
-            <li>Slide <em>True difference between the groups</em> to zero and the observed gap looks like any shuffled one.</li>
-          </ul>
+          <ol>
+            <li>Two groups of 12 with a true difference of 6. <em>Observed difference</em> is the gap in their means.</li>
+            <li>Press <em>Shuffle the labels once</em>. The labels swap, the values stay, and the new gap drops into the histogram.</li>
+            <li>Press <em>Shuffle 500</em>. The marked bars are gaps as large as the observed one. Their share is <em>Permutation p-value</em>.</li>
+            <li>Compare it with <em>Welch p-value</em>. Two routes to one answer.</li>
+            <li>Slide <em>True difference between the groups</em> to 0 and press <em>New data</em>. Now the observed gap looks like any shuffled one.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="resampling__permutation-test"></div>

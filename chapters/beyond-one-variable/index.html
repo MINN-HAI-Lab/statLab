@@ -46,11 +46,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any discussion of Simpson’s paradox and confounding.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Ignore the groups</em> fits one line to everything. It can slope against both groups.</li>
-            <li>Slide <em>How far apart the two groups sit</em> to zero and the pooled line agrees with the groups again.</li>
-            <li>Slide <em>Slope inside each group</em> and both clouds tilt together.</li>
-          </ul>
+          <ol>
+            <li>Two groups, filled and hollow. <em>Slope in group A</em> and <em>Slope in group B</em> are both positive.</li>
+            <li>Press <em>Ignore the groups</em>. One line fits everything, and <em>Slope ignoring groups</em> is negative.</li>
+            <li>Slide <em>How far apart the two groups sit</em> to 0. The pooled slope now matches the groups.</li>
+            <li>Slide it back to 8. The paradox returns, because the lurking variable pushes one group up and right.</li>
+            <li>Slide <em>Slope inside each group</em> negative. Both clouds tilt together and the pooled line follows them.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="beyond-one-variable__simpsons-paradox"></div>
@@ -65,11 +67,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to multiple regression.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>How strongly x₁ and x₂ move together</em> up and the lone fit's x₁ slope drifts from the true β₁.</li>
-            <li>The two-predictor fit recovers both coefficients.</li>
-            <li>Slide the correlation to zero and the two answers agree.</li>
-          </ul>
+          <ol>
+            <li>The true effects are β₁ = −0.5 and β₂ = 1.5, and the two predictors correlate at 0.85.</li>
+            <li>Read <em>x₁ alone</em> against <em>True β₁</em>. The lone slope is credited with far more than the truth.</li>
+            <li>Read <em>x₁ with x₂ in</em>. The two-predictor fit recovers the true −0.5.</li>
+            <li>Slide <em>How strongly x₁ and x₂ move together</em> to 0 and press <em>New data</em>. Now the two answers agree.</li>
+            <li>Slide <em>True effect of x₂, β₂</em> to 0. With nothing to confound, x₁ alone is honest again.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="beyond-one-variable__two-predictors"></div>

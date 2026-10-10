@@ -47,11 +47,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 9.1, 9.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag the cutoff and α and β trade places. Lower one and you raise the other.</li>
-            <li>The <em>Cutoff for α</em> buttons place it for a chosen false-alarm rate.</li>
-            <li>Slide <em>Sample size, n</em> or <em>True effect</em> up and the curves separate, so power rises.</li>
-          </ul>
+          <ol>
+            <li>The left curve is H₀ and the dashed right curve is the real effect of 5. The cutoff sits between them.</li>
+            <li>Drag the cutoff right, or focus it and use the arrow keys. <em>α</em> falls and <em>β</em> rises.</li>
+            <li>Press <em>Cutoff for α = 5 %</em>. The cutoff lands where the H₀ tail beyond it is exactly 0.05.</li>
+            <li>Slide <em>Sample size, n</em> to 60. Both curves narrow, so they overlap less and <em>Power</em> rises.</li>
+            <li>Slide <em>True effect</em> to 1. The curves nearly coincide and power collapses toward α.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="hypothesis-testing__error-types"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 9.3, 9.4.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Draw a sample</em> and the shaded tails are its p-value.</li>
-            <li>Choose <em>H₀ is true</em> and <em>Run 100 tests</em>. About five in a hundred fall below 0.05.</li>
-            <li>Choose <em>H₀ is false</em> and the share below 0.05 is the power. Slide n or the effect to change it.</li>
-          </ul>
+          <ol>
+            <li><em>H₀ is true</em> is selected, so samples come from μ = 50. <em>Sample size, n</em> is 25.</li>
+            <li>Press <em>Draw a sample</em>. The shaded tails beyond x̄ are its <em>p-value</em>.</li>
+            <li>Press <em>Run 100 tests</em> a few times. <em>Share with p < 0.05</em> settles near 5%. Those are false alarms.</li>
+            <li>Press <em>H₀ is false</em> and run again. The share below 0.05 is now the power.</li>
+            <li>Slide <em>Sample size, n</em> up or the effect up and rerun. Power rises with both.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="hypothesis-testing__p-value"></div>
@@ -84,11 +88,13 @@
         <p class="muted"><sup>1</sup> \(s\) divides by \(n - 1\), as everywhere on this site. Reading: OpenStax <em>Introductory Statistics</em>, Section 9.5.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Run one test</em> walks the five steps and gives a verdict the test itself cannot see.</li>
-            <li>Set <em>True population mean</em> to 50 and <em>Run 100 tests</em> to watch the Type I rate settle near α.</li>
-            <li>Move it away from 50 and the rejection share becomes the power. The <em>α</em> buttons move the cutoff.</li>
-          </ul>
+          <ol>
+            <li><em>True population mean</em> is 50, the same as μ₀. The test never sees it.</li>
+            <li>Press <em>Run one test</em>. The five steps fill in, ending in a verdict and whether it was right.</li>
+            <li>Press <em>Run 100 tests</em> twice. <em>Rejection rate</em> settles near α, the Type I rate.</li>
+            <li>Slide the true mean to 55 and rerun. The rejection rate is now the power.</li>
+            <li>Press <em>α = 0.01</em>. The cutoff moves out, fewer tests reject, and both rates fall.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="hypothesis-testing__full-test"></div>

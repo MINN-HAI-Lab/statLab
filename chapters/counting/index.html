@@ -47,11 +47,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any discrete mathematics introduction on the multiplication principle.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Pick a count for each stage and the tree's last column multiplies.</li>
-            <li><em>Trace one outfit</em> lights one root-to-leaf path.</li>
-            <li><em>Add a stage</em> or <em>Remove a stage</em> to change how many choices multiply.</li>
-          </ul>
+          <ol>
+            <li>Three stages with 3, 2 and 2 options. <em>Different outfits</em> reads 12, which is 3 × 2 × 2.</li>
+            <li>Press <em>4</em> under <em>Shirts to choose from</em>. The last column grows to 16, not 13.</li>
+            <li>Press <em>Trace one outfit</em>. One path lights up from the root to one leaf.</li>
+            <li>Press <em>Remove a stage</em>. The tree loses a column and the total divides.</li>
+            <li>Press <em>Add a stage</em> to bring it back. Three stages is the most the tree draws.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="counting__multiplication-rule"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any discrete mathematics introduction on permutations and combinations.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Pick n and k and the list shows every choice, counted by C(n, k).</li>
-            <li>Press <em>Order matters</em> and each row fans into k! orders, counted by P(n, k).</li>
-            <li>Past 120 rows the list is cut, but the count stays exact.</li>
-          </ul>
+          <ol>
+            <li><em>Items to choose from, n</em> is 4 and <em>Items chosen, k</em> is 2. The list shows all 6 choices.</li>
+            <li>Press <em>Order matters</em>. Each choice fans into 2 orders and the list grows to 12.</li>
+            <li>Compare <em>Combinations C(n, k)</em>, <em>Orders per choice, k!</em> and <em>Permutations P(n, k)</em>. The first two multiply to the third.</li>
+            <li>Press <em>8</em> for n and <em>4</em> for k. The list is cut at 120 rows but the counts stay exact.</li>
+            <li>Lower n and the k buttons past it disappear. You cannot choose more items than you have.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="counting__permutations-combinations"></div>

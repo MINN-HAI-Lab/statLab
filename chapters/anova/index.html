@@ -47,11 +47,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 13.1, 13.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag a group's mean and MS between changes while MS within does not.</li>
-            <li>Slide <em>Spread within each group, s</em> and MS within changes instead.</li>
-            <li>F is their ratio. <em>Spread the means apart</em> and F rises.</li>
-          </ul>
+          <ol>
+            <li>Three groups sit in three lanes. Each handle is that group's mean.</li>
+            <li>Drag a handle, or focus it and use the arrow keys. <em>Between groups, MS</em> changes and <em>Within groups, MS</em> does not.</li>
+            <li>Press <em>Spread the means apart</em>. <em>F</em> rises and the <em>p-value</em> falls.</li>
+            <li>Slide <em>Spread within each group, s</em> to 5. Now within-group MS rises and F falls, with the means untouched.</li>
+            <li>Press <em>Pull the means together</em>. F drops toward 1. The lower chart compares the two mean squares directly.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="anova__anova-idea"></div>
@@ -64,11 +66,13 @@
         <p class="muted"><sup>1</sup> The F distribution is right-skewed and never negative, being a ratio of two variances. Reading: OpenStax <em>Introductory Statistics</em>, Sections 13.2, 13.3.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Run one study</em> draws fresh data and marks its F against the curve.</li>
-            <li>Set the gap to zero and press <em>Run 200</em>. About 5% land past the critical value.</li>
-            <li>Raise the gap or <em>Observations per group, n</em> and more studies cross it. That share is the power.</li>
-          </ul>
+          <ol>
+            <li><em>True gap between neighbouring means</em> is 0, so all three groups share a mean.</li>
+            <li>Press <em>Run one study</em>. Fresh data are drawn and <em>This study's F</em> is marked on the curve.</li>
+            <li>Press <em>Run 200</em>. The F values pile under the curve and about 5% pass <em>Critical F at 5 %</em>.</li>
+            <li>Slide the gap to 2 and press <em>Run 200</em> again. Most studies now pass the critical value. <em>Rejected H₀</em> over <em>Studies</em> is the power.</li>
+            <li>Slide <em>Observations per group, n</em> to 30. The critical F falls and power rises further.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="anova__f-distribution"></div>

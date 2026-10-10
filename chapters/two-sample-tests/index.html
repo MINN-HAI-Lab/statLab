@@ -48,11 +48,13 @@
         <p class="muted"><sup>1</sup> This is Welch's version, which does not assume equal spreads. Its degrees of freedom come from the Welch–Satterthwaite formula. \(s\) divides by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Sections 10.1, 10.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag either group's mean and the true difference changes.</li>
-            <li><em>Sample both groups</em> runs Welch's test on fresh samples. <em>Repeat 100 times</em> piles the differences.</li>
-            <li>With equal means about 5% reject. Slide <em>Sample size per group, n</em> up and real gaps become detectable.</li>
-          </ul>
+          <ol>
+            <li>Two curves show the groups. Drag either curve's mean marker to set the true difference.</li>
+            <li>Press <em>Sample both groups</em>. Fresh samples are drawn and Welch's test gives a <em>p-value</em>.</li>
+            <li>Put the means together and press <em>Repeat 100 times</em>. About 5% reject by chance.</li>
+            <li>Pull the means 5 apart and repeat. <em>Share with p < 0.05</em> is now the power.</li>
+            <li>Slide <em>Sample size per group, n</em> to 60 and repeat. The pile of differences narrows and power rises.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="two-sample-tests__two-means"></div>
@@ -67,11 +69,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 10.3.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide the two sign-up rates and press <em>Run the test</em> on a fresh pair of samples.</li>
-            <li><em>Repeat 100 times</em> and the share rejected is the power at this n.</li>
-            <li>Slide <em>Visitors per version, n</em> into the thousands and even a small gap gives a large z.</li>
-          </ul>
+          <ol>
+            <li>Version A signs up 10% of visitors and version B 13%. Each gets 200 visitors.</li>
+            <li>Press <em>Run the test</em>. Two fresh counts appear and the pooled z gives a <em>p-value</em>.</li>
+            <li>Press <em>Repeat 100 times</em>. At n = 200 most tests miss the 3-point gap.</li>
+            <li>Slide <em>Visitors per version, n</em> to 2000 and repeat. Now most tests find it.</li>
+            <li>Set both rates equal and repeat. The share rejecting falls to about 5%.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="two-sample-tests__two-proportions"></div>
@@ -85,11 +89,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 10.4.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Switch between <em>Treat as two independent groups</em> and <em>Treat as pairs</em> to see both p-values for the same data.</li>
-            <li>Pairs remove the between-subject spread, so the paired p-value is usually smaller.</li>
-            <li>Slide <em>True improvement per subject</em> to zero and about 5% of redraws reject.</li>
-          </ul>
+          <ol>
+            <li>Twelve subjects are measured before and after, with a true improvement of 3.</li>
+            <li><em>Treat as two independent groups</em> is selected. Read the <em>p-value</em>.</li>
+            <li>Press <em>Treat as pairs</em>. The same data now give a smaller p-value, because <em>SD between subjects</em> no longer counts as noise.</li>
+            <li>Press <em>New subjects</em> several times. The paired p is smaller most of the time.</li>
+            <li>Slide <em>True improvement per subject</em> to 0. Now about 5% of redraws reject, either way.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="two-sample-tests__paired"></div>

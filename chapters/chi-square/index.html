@@ -47,11 +47,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 11.1, 11.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide a <em>Claimed weight</em> and the expected counts change. The die itself stays fair.</li>
-            <li><em>Roll 120 times and test</em> compares observed with expected and sums the contributions into χ².</li>
-            <li><em>Repeat 100 times</em> piles χ² values under the curve. Slide <em>Rolls per test, n</em> down until an expected count falls below 5.</li>
-          </ul>
+          <ol>
+            <li>All six claimed weights are 1, so the claim is a fair die. The die really is fair.</li>
+            <li>Press <em>Roll 120 times and test</em>. Observed counts stand beside expected ones, and their contributions sum to <em>χ²</em>.</li>
+            <li>Press <em>Repeat 100 times</em>. <em>Share with p < 0.05</em> settles near 5%, the false-alarm rate.</li>
+            <li>Slide <em>Claimed weight of face 6</em> to 4. The claim is now wrong and χ² grows on each test.</li>
+            <li>Slide <em>Rolls per test, n</em> down to 30. A warning appears once an expected count falls below 5.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="chi-square__goodness-of-fit"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 11.3 to 11.5.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Association strength</em> to zero and the two row profiles match.</li>
-            <li>Slide it up and the rows part, χ² climbs and p falls.</li>
-            <li><em>Repeat 100 times</em> to see how often a survey rejects at this strength and n.</li>
-          </ul>
+          <ol>
+            <li><em>Association strength</em> starts at 0, so the two row profiles match.</li>
+            <li>Press <em>Survey 200 people</em>. A table fills and χ² measures how far it strays from independence.</li>
+            <li>Press <em>Repeat 100 times</em>. About 5% of surveys reject by chance.</li>
+            <li>Slide the association to 0.5 and survey again. The row profiles part, χ² climbs and p falls.</li>
+            <li>Slide <em>People surveyed, n</em> to 1000. The same association now gives a much larger χ².</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="chi-square__independence"></div>

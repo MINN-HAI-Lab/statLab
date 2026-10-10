@@ -48,11 +48,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.1.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Draw 50</em> stacks fifty intervals. The orange dashed ones miss μ.</li>
-            <li>Slide <em>Confidence level</em> up and every interval widens. Slide <em>Sample size, n</em> up and they narrow.</li>
-            <li>The capture rate settles toward the level only over many intervals.</li>
-          </ul>
+          <ol>
+            <li><em>Confidence level</em> is 95% and <em>Sample size, n</em> is 20. Ten intervals are already drawn.</li>
+            <li>Press <em>Draw 1 sample</em>. A new interval appears at the top. Orange dashed ones miss μ.</li>
+            <li>Press <em>Draw 50</em> several times. <em>Capture rate</em> settles toward <em>Nominal</em>.</li>
+            <li>Slide the level to 80%. The intervals narrow and more of them miss.</li>
+            <li>Slide n to 100. <em>Margin of error</em> shrinks, so the intervals narrow without missing more.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="confidence-intervals__ci-meaning"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Degrees of freedom</em> down and the t curve's tails thicken, so t* moves away from 1.96.</li>
-            <li>Slide it up past 30 and the t curve melts into the normal.</li>
-            <li><em>New sample</em> draws n = df + 1 values and builds both intervals.</li>
-          </ul>
+          <ol>
+            <li><em>Degrees of freedom, df</em> starts at 4. The solid t curve sits under the dashed normal with fatter tails.</li>
+            <li>Read <em>t*</em> against <em>z*</em>. At df = 4 they are 2.78 and 1.96.</li>
+            <li>Slide df down to 1. The tails swell and t* jumps past 12.</li>
+            <li>Slide df up to 60. The t curve melts into the normal and t* approaches 1.96.</li>
+            <li>Press <em>New sample</em>. The lower panel builds a z-interval and a t-interval from one sample of df + 1 values. The t one is usually wider.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="confidence-intervals__t-distribution"></div>
@@ -85,11 +89,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 8.3.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Poll 50 times</em> stacks fifty intervals for p and counts the captures.</li>
-            <li>Slide <em>Voters per poll, n</em> down, or <em>True support p</em> toward an edge. Once n·p drops below 5 the capture rate falls short.</li>
-            <li>Slide <em>Confidence level</em> and every interval widens or narrows.</li>
-          </ul>
+          <ol>
+            <li><em>True support p</em> is 0.40 and each poll asks 100 voters.</li>
+            <li>Press <em>Poll 100 voters</em>. The poll's p̂ and its interval appear at the top.</li>
+            <li>Press <em>Poll 50 times</em> a few times. <em>Capture rate</em> settles near <em>Nominal</em>.</li>
+            <li>Slide <em>Voters per poll, n</em> down to 10 and poll again. A warning appears and the capture rate falls short.</li>
+            <li>Slide p to 0.05 for the same effect. The normal approximation needs n·p and n·(1 − p) of at least 5.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="confidence-intervals__proportion-ci"></div>

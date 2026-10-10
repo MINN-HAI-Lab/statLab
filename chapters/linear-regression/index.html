@@ -51,11 +51,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.1 to 12.3.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>In <em>Move points</em>, drag a point and the best line and its squares update.</li>
-            <li>In <em>Your line vs best line</em>, drag the two handles and compare your total of squares with the minimum.</li>
-            <li>The squares are drawn to scale. Their total is what least squares minimises.</li>
-          </ul>
+          <ol>
+            <li><em>Move points</em> is selected. Drag any of the nine points and the best line refits.</li>
+            <li>Each residual is drawn as a real square. <em>Best SSE</em> is their total area.</li>
+            <li>Press <em>Your line vs best line</em>. Two handles appear on a second line that you control.</li>
+            <li>Drag the handles, or focus one and use the arrow keys. <em>Your SSE</em> changes and <em>Yours above best by</em> says how far you are from the minimum.</li>
+            <li>Try to beat the best line. You cannot, which is what least squares means.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__least-squares"></div>
@@ -70,11 +72,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.2, 12.4.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Press a preset and r, r² and the slope update for that cloud.</li>
-            <li><em>Strong, steep</em> and <em>Strong, shallow</em> share the same r. <em>Curved, r ≈ 0</em> has no straight-line trend.</li>
-            <li>Filled dots pull r up and hollow dots pull it down.</li>
-          </ul>
+          <ol>
+            <li><em>Strong, steep</em> is selected. Read <em>r</em>, <em>r²</em> and <em>Slope b</em>.</li>
+            <li>Press <em>Strong, shallow</em>. The slope changes but r does not. Correlation ignores the scale.</li>
+            <li>Press <em>Weak</em>, then <em>None</em>, then <em>Negative</em>. Watch r move from near 0 to below 0.</li>
+            <li>Press <em>Curved, r ≈ 0</em>. The dots clearly follow a curve, yet r is near 0. r measures straight lines only.</li>
+            <li>Filled dots pull r up and hollow dots pull it down. The cross marks the two means.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__correlation"></div>
@@ -87,11 +91,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 12.4.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Draw a sample</em> fits a line to n points from the population and leaves it as a faint trace.</li>
-            <li><em>Draw 25</em> and the traces form a band around the population line.</li>
-            <li>Slide <em>Sample size, n</em> up and the band tightens. <em>New population</em> starts over.</li>
-          </ul>
+          <ol>
+            <li>The 400 dots are the population and the dark line is its true fit. <em>Sample size, n</em> is 15.</li>
+            <li>Press <em>Draw a sample</em>. Fifteen dots are picked, fitted, and their line stays as a faint trace.</li>
+            <li>Press <em>Draw 25</em>. The traces form a band. <em>SD of the slopes</em> measures its width.</li>
+            <li>Slide n to 100 and press <em>Draw 25</em> again. The band hugs the true line.</li>
+            <li><em>New population</em> starts over. <em>Reset</em> clears the traces but keeps the population.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__line-estimate"></div>
@@ -104,11 +110,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 12.5, 12.6.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag the diamond and compare the solid fit with it against the dashed fit without.</li>
-            <li><em>Send the new point far right</em> and it drags the slope. Far points have leverage.</li>
-            <li>Slide <em>Predict y at x</em> outside the data's range and the prediction is flagged as extrapolation.</li>
-          </ul>
+          <ol>
+            <li>The diamond is a new point. The solid line includes it and the dashed line leaves it out.</li>
+            <li>Drag the diamond, or focus it and use the arrow keys. <em>Slope with the new point</em> changes while <em>Slope without it</em> stays.</li>
+            <li>Press <em>Send the new point far right</em>. One far point swings the solid line. That is leverage.</li>
+            <li>Press <em>Bring it back</em>. Slide <em>Predict y at x</em> across the data and read <em>Predicted y</em>.</li>
+            <li>Slide x past the data's range. The shaded zone says the prediction is an extrapolation, so trust it less.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="linear-regression__prediction-outliers"></div>

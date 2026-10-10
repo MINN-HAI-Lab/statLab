@@ -48,11 +48,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.1, 2.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Bin width</em> narrower to see every bump, wider to smooth them away.</li>
-            <li>Press <em>Frequency polygon</em> to join the bar tops with a line.</li>
-            <li>The 80 commute times never change. Only the bins do.</li>
-          </ul>
+          <ol>
+            <li>The 80 commute times are fixed. <em>Bin width</em> starts at 5 minutes.</li>
+            <li>Slide it down to 1. Every bump shows and <em>Bins</em> climbs. Some bumps are real and some are noise.</li>
+            <li>Slide it up to 15. The picture smooths into a few wide bars that can hide two groups of commuters.</li>
+            <li>Find the width where the shape is clearest, somewhere in between.</li>
+            <li>Press <em>Frequency polygon</em> to join the bar tops with a line, which is easier to compare across histograms.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__histogram"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.3, 2.5.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag any point along the lane and the mean, median and mode update.</li>
-            <li><em>Push one point far out</em> and the mean follows it while the median stays put.</li>
+          <ol>
+            <li>Nine points sit on the lane. <em>Mean</em>, <em>Median</em> and <em>Mode</em> describe them.</li>
+            <li>Drag any point left or right, or focus it and use the arrow keys. All three readouts update.</li>
+            <li>Press <em>Push one point far out</em>. The mean follows the outlier while the median barely moves.</li>
+            <li>Drag two points onto the same value to make a mode.</li>
             <li><em>Reset</em> returns the nine points.</li>
-          </ul>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__center"></div>
@@ -84,11 +88,13 @@
         <p class="muted"><sup>1</sup> Quartiles on this site use the Weibull rule, position \((n+1)p\) in the sorted data. Reading: OpenStax <em>Introductory Statistics</em>, Sections 2.4, 2.6.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Skew</em> right and a tail of large values grows, pulling the mean above the median.</li>
-            <li>Slide it left for the mirror image.</li>
-            <li><em>New draw</em> takes a fresh sample with the same skew.</li>
-          </ul>
+          <ol>
+            <li><em>Skew</em> starts at 0 and the data are symmetric. <em>Mean − median</em> is near zero.</li>
+            <li>Slide Skew right toward 1. A tail of large values grows and the upper whisker stretches.</li>
+            <li>Watch <em>Mean</em> climb above <em>Median</em>. The tail pulls the mean, not the median.</li>
+            <li>Slide left toward −1 for the mirror image, with the mean below the median.</li>
+            <li><em>New draw</em> takes a fresh sample at the same skew, so the same shape appears with different values.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__boxplot-skew"></div>
@@ -103,11 +109,13 @@
         <p class="muted"><sup>2</sup> The sample variance divides by \(n - 1\), not \(n\), because the mean was estimated from the same data. Reading: OpenStax <em>Introductory Statistics</em>, Section 2.7.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Drag a point and its deviation stick, the variance and the SD update.</li>
-            <li><em>Spread out</em> and <em>Bunch up</em> move all the points at once.</li>
-            <li><em>Show squares</em> draws each squared deviation as a square. Their total is the sum of squares.</li>
-          </ul>
+          <ol>
+            <li>Eight points sit on the lane, each with a stick to the mean.</li>
+            <li>Drag one point away from the mean. Its stick lengthens and <em>Sample SD</em> rises.</li>
+            <li>Press <em>Show squares</em>. Each squared deviation becomes a square. <em>Sum of squared deviations</em> is their total area.</li>
+            <li>Press <em>Spread out</em> and then <em>Bunch up</em>. The squares grow and shrink faster than the sticks.</li>
+            <li>Bunch the points onto one value and the SD reaches zero.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="descriptive-statistics__spread"></div>

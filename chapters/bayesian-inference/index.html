@@ -48,11 +48,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to conditional probability and base rates.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>People who have it, per 100</em> down and most positives become false ones.</li>
-            <li><em>Show only the positives</em> keeps the people who tested positive. Their share who have it is the posterior.</li>
-            <li>Slide <em>Specificity</em> up and a positive result means more.</li>
-          </ul>
+          <ol>
+            <li>1 in 100 has the condition. The test catches 99% of cases and clears 95% of the healthy.</li>
+            <li>The thousand dots are laid out in four blocks. Read <em>Positives per 1 000</em> and <em>…of whom really have it</em>.</li>
+            <li>Press <em>Show only the positives</em>. Only those people remain, and their share with the condition is <em>P(has it | tested positive)</em>.</li>
+            <li>Slide <em>People who have it, per 100</em> down to 0.1. Almost every positive is now a false one.</li>
+            <li>Slide <em>Specificity</em> to 100. False positives vanish and a positive result becomes trustworthy.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="bayesian-inference__bayes-theorem"></div>
@@ -67,11 +69,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to maximum likelihood estimation.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Candidate p</em> and the marker moves along the curve. The flips stay fixed.</li>
-            <li><em>Snap to the best p</em> jumps to k/n, the maximum likelihood estimate.</li>
-            <li><em>New flips</em> redraws the data, and the curve with it. Slide <em>Flips observed, n</em> up and the curve narrows.</li>
-          </ul>
+          <ol>
+            <li>Ten flips are shown as filled and hollow dots. They stay fixed while you move <em>Candidate p</em>.</li>
+            <li>Slide p from 0.50 toward <em>Best-supported p</em>. The marker climbs the curve to its peak.</li>
+            <li>Read <em>Times worse than the best</em> as you slide away from the peak. Only such ratios mean anything.</li>
+            <li>Press <em>Snap to the best p</em>. The marker jumps to k/n, the maximum likelihood estimate.</li>
+            <li>Press <em>New flips</em> for new data, then slide <em>Flips observed, n</em> to 60. The curve narrows with more data.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="bayesian-inference__likelihood"></div>
@@ -86,11 +90,13 @@
         <p class="muted">Reading: this section is beyond the OpenStax text. See any introduction to Bayesian updating with conjugate priors.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Observe one</em> flips the hidden coin once and moves one prior shape by one.</li>
-            <li>Slide <em>Prior shape a</em> or <em>b</em> to make the prior stronger, and the same data move it less.</li>
-            <li><em>Observe 10</em> pulls the posterior toward the coin's true p.</li>
-          </ul>
+          <ol>
+            <li>The prior is Beta(2, 2), the dashed grey curve. <em>Prior mean</em> reads 0.5.</li>
+            <li>Press <em>Observe one</em>. One flip of the hidden coin moves a or b by exactly one and the solid posterior shifts.</li>
+            <li>Press <em>Observe 10</em> a few times. <em>Posterior mean</em> climbs toward <em>The coin's true p</em>, which is 0.7.</li>
+            <li>Press <em>Reset</em>, slide <em>Prior shape a</em> and <em>b</em> both to 20, then observe again. The posterior moves much less.</li>
+            <li>A strong prior takes more data to overturn. The <em>Posterior</em> readout names the shape parameters.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="bayesian-inference__prior-posterior"></div>

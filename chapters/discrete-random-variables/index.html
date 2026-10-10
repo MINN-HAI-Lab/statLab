@@ -48,11 +48,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 4.1, 4.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide a face's weight and the probabilities renormalise, so E[X] moves.</li>
-            <li><em>Roll 100</em> piles real rolls under the theory bars and the sample mean approaches E[X].</li>
-            <li><em>Auto-roll</em> keeps rolling until you press it again.</li>
-          </ul>
+          <ol>
+            <li>All six faces start with weight 1, a fair die. <em>Expected value μ</em> reads 3.5.</li>
+            <li>Slide <em>Weight of face 6</em> to 10. The light bars renormalise and μ moves toward 6.</li>
+            <li>Press <em>Roll 100</em> a few times. Dark bars pile under the light ones.</li>
+            <li>Watch <em>Sample mean</em> close in on <em>Expected value μ</em> as <em>Rolls</em> grows.</li>
+            <li>Slide a weight to 0 to remove a face. One face must always stay possible.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="discrete-random-variables__expectation"></div>
@@ -67,11 +69,13 @@
         <p class="muted"><sup>1</sup> The sample variance divides by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Section 4.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide weight toward the end faces and Var(X) grows. Faces far from E[X] contribute most.</li>
-            <li><em>Roll 100</em> and the sample variance converges on Var(X).</li>
-            <li>The lower chart shows each face's share of the variance.</li>
-          </ul>
+          <ol>
+            <li>A fair die to begin with. <em>Variance σ²</em> reads 2.92.</li>
+            <li>Slide <em>Weight of face 1</em> and <em>Weight of face 6</em> to 10. The variance climbs, because the far faces are now likely.</li>
+            <li>The lower chart shows each face's contribution. The ends contribute most.</li>
+            <li>Slide only <em>Weight of face 3</em> and <em>Weight of face 4</em> to 10. The variance falls toward zero.</li>
+            <li>Press <em>Roll 100</em> several times. <em>Sample variance s²</em> converges on σ².</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="discrete-random-variables__rv-variance"></div>
@@ -85,11 +89,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 4.3 to 4.6.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Pick <em>Binomial</em>, <em>Geometric</em>, <em>Hypergeometric</em> or <em>Poisson</em>, then move its sliders to reshape the light theory bars.</li>
-            <li><em>Draw 100</em> piles dark bars of real draws under them.</li>
-            <li>The sample mean and variance converge on E[X] and Var(X).</li>
-          </ul>
+          <ol>
+            <li><em>Binomial</em> is selected, with <em>Trials n</em> at 10 and <em>Success chance p</em> at 0.3. The light bars are P(X = k).</li>
+            <li>Slide p to 0.8. The bars shift right and <em>E[X]</em> rises to 8.</li>
+            <li>Press <em>Draw 100</em> a few times. Dark bars of real draws fill in under the light ones.</li>
+            <li>Compare <em>Sample mean</em> with <em>E[X]</em> and <em>Sample variance</em> with <em>Var(X)</em>.</li>
+            <li>Pick <em>Geometric</em>, <em>Hypergeometric</em> or <em>Poisson</em>. Each brings its own sliders and its own story line.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="discrete-random-variables__discrete-distributions"></div>

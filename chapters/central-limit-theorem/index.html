@@ -47,11 +47,13 @@
         <p class="muted"><sup>1</sup> The SD of sample means shown is the sample standard deviation, dividing by \(n - 1\). Reading: OpenStax <em>Introductory Statistics</em>, Section 7.1.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Pick a parent shape. <em>Draw 1 sample</em> shows its dots and adds one sample mean to the pile.</li>
-            <li><em>Draw 100</em> and the pile of means forms a bell, whatever the parent looked like.</li>
-            <li>Slide <em>Sample size, n</em> up and the bell narrows.</li>
-          </ul>
+          <ol>
+            <li><em>Skewed</em> is the parent and <em>Sample size, n</em> is 5.</li>
+            <li>Press <em>Draw 1 sample</em>. Five dots appear and their mean drops into the lower histogram.</li>
+            <li>Press <em>Draw 100</em> several times. The means pile into a bell, even though the parent is lopsided.</li>
+            <li>Compare <em>SD of sample means</em> with <em>σ/√n</em>. They agree.</li>
+            <li>Slide n to 30, press <em>Reset</em>, and draw again. The bell is narrower. Try <em>U-shaped</em> or <em>Die</em> for other parents.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-means"></div>
@@ -66,11 +68,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Sections 7.1, 7.3.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li>Slide <em>Sample size, n</em> and press <em>Simulate at this n</em> to see the spread of means at that size.</li>
-            <li><em>Sweep all n</em> plots the simulated SD at twelve sizes along the σ/√n curve.</li>
-            <li>Pick another parent. The dots still follow the curve.</li>
-          </ul>
+          <ol>
+            <li><em>Flat</em> is the parent and <em>Sample size, n</em> is 4.</li>
+            <li>Press <em>Simulate at this n</em>. 2000 sample means are drawn and their SD becomes a dot on the chart.</li>
+            <li>Compare <em>SD of 2000 sample means</em> with <em>Standard error σ/√n</em>.</li>
+            <li>Press <em>Sweep all n</em>. Twelve dots appear along the σ/√n curve, from n = 1 to 100.</li>
+            <li>Pick <em>Skewed</em> or <em>Two humps</em> and sweep again. The dots still follow the curve, because only σ matters.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__standard-error"></div>
@@ -85,11 +89,13 @@
         <p class="muted">Reading: OpenStax <em>Introductory Statistics</em>, Section 7.2.</p>
         <div class="section__howto">
           <p class="section__howto-title">Try it</p>
-          <ul>
-            <li><em>Draw 100</em> piles sums into a bell around nμ with SD σ√n.</li>
-            <li>Slide <em>Number of draws added, n</em> up and the axis widens to follow the sum's growing spread.</li>
-            <li>Pick another parent and the bell keeps its shape.</li>
-          </ul>
+          <ol>
+            <li><em>Die</em> is the parent and <em>Number of draws added, n</em> is 10, so each sum is ten dice.</li>
+            <li>Press <em>Draw 1 sum</em> a few times. Single sums land near 35.</li>
+            <li>Press <em>Draw 100</em> several times. The sums form a bell around <em>nμ</em>.</li>
+            <li>Compare <em>SD of sums</em> with <em>σ√n</em>. They agree.</li>
+            <li>Slide n to 50. The axis widens, because a sum's spread grows with √n while a mean's shrinks.</li>
+          </ol>
         </div>
       </div>
       <div class="section__demo ui-panel" data-demo="central-limit-theorem__clt-sums"></div>
